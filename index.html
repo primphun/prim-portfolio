@@ -1,0 +1,444 @@
+<title>Prim Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap">
+<style>
+/* Layout: single-column Swiss grid. Hairline rules divide sections, a type-only hero carries the name, red is the only colour. */
+:root {
+  --bg: #F3F4F2;
+  --fg: #121315;
+  --muted: #5A5D62;
+  --rule: #121315;
+  --rule-soft: #BFC1BC;
+  --fill: #E4E5E1;
+  --accent: #D4281C;
+  --on-accent: #FFFFFF;
+  --sans: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --gutter: clamp(16px, 4.4cqw, 64px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121315; --fg: #F3F4F2; --muted: #A3A6AB; --rule: #F3F4F2; --rule-soft: #3B3D41; --fill: #1E1F22; --accent: #FF5A4D; --on-accent: #121315; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121315; --fg: #F3F4F2; --muted: #A3A6AB; --rule: #F3F4F2; --rule-soft: #3B3D41; --fill: #1E1F22; --accent: #FF5A4D; --on-accent: #121315; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--sans); font-size: 17px; line-height: 1.5; font-weight: 400;
+  padding-left: max(0px, env(safe-area-inset-left, 0px));
+  padding-right: max(0px, env(safe-area-inset-right, 0px));
+}
+.page { container-type: inline-size; width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.mono { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 400; }
+.muted { color: var(--muted); }
+.pad { padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px)); }
+section[id] { scroll-margin-top: 64px; }
+.dot { color: var(--accent); }
+
+/* top bar */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 21; }
+.bar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px;
+}
+.bar .word { font-weight: 700; font-size: 20px; letter-spacing: -0.02em; text-decoration: none; }
+.bar .coords { flex: 1; text-align: center; color: var(--muted); }
+.bar nav { display: flex; gap: 4px; }
+.bar nav a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; padding: 0 10px; font-size: 15px; font-weight: 500; }
+.bar nav a:hover { color: var(--accent); }
+@media (max-width: 760px) { .bar .coords { display: none; } .bar nav a { padding: 0 8px; font-size: 14px; } }
+
+/* hero */
+.hero { padding-top: 24px; }
+.hero .meta { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.hero h1 {
+  margin: 0; font-weight: 600; letter-spacing: -0.055em; line-height: 0.88;
+  font-size: clamp(44px, 12.5cqw, 190px); padding: 4cqw 0 4cqw; margin-left: -0.04em;
+}
+.statement { border-top: 1px solid var(--rule); padding-top: 32px; padding-bottom: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.statement p.lead { margin: 0; font-size: clamp(26px, 3.6cqw, 52px); line-height: 1.12; letter-spacing: -0.025em; font-weight: 500; text-wrap: balance; grid-column: 1 / -1; max-width: 22em; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border: 1px solid var(--fg); border-radius: 0; text-decoration: none; font-weight: 600; font-size: 15px; background: transparent; color: var(--fg); cursor: pointer; font-family: var(--sans); }
+.btn.fill { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.btn:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+.avail { display: flex; align-items: center; gap: 10px; align-self: center; justify-self: end; }
+.avail::before { content: ""; width: 8px; height: 8px; background: var(--accent); flex: none; }
+.roles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; border-top: 1px solid var(--rule-soft); padding: 14px 0 0; grid-column: 1 / -1; }
+@media (max-width: 760px) { .statement, .roles { grid-template-columns: 1fr; } .avail { justify-self: start; } .roles > :last-child { margin-top: 8px; } }
+
+/* section head */
+.head { border-top: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-top: 14px; padding-bottom: 28px; flex-wrap: wrap; }
+.head h2 { margin: 0; font-size: clamp(32px, 5cqw, 72px); font-weight: 600; letter-spacing: -0.04em; line-height: 1; }
+
+/* work */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 32px; }
+.chip { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; min-height: 44px; padding: 0 16px; border: 1px solid var(--fg); border-radius: 0; background: transparent; color: var(--fg); cursor: pointer; }
+.chip:hover { background: var(--fill); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); gap: 56px var(--gutter); padding-bottom: 96px; }
+.card { min-width: 0; }
+.slider { position: relative; aspect-ratio: 4 / 3; background: var(--fill); }
+.track { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.track::-webkit-scrollbar { display: none; }
+.slide { flex: 0 0 100%; height: 100%; scroll-snap-align: start; background: var(--fill); }
+.slide img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.slide img.tall { object-fit: contain; object-position: center; }
+.nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border: 1px solid var(--fg); border-radius: 0; background: var(--bg); color: var(--fg); font-family: var(--mono); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.nav:hover { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.nav:disabled { opacity: 0; pointer-events: none; }
+.nav.prev { left: 12px; } .nav.next { right: 12px; }
+.pp { position: absolute; left: 12px; bottom: 12px; min-height: 32px; padding: 0 10px; border: 1px solid var(--fg); border-radius: 0; background: var(--bg); color: var(--fg); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; cursor: pointer; }
+.pp:hover { background: var(--fill); }
+.counter { position: absolute; right: 12px; bottom: 12px; background: var(--bg); padding: 4px 8px; }
+.card .img { aspect-ratio: 4 / 3; background: var(--fill); position: relative; overflow: hidden; }
+.card .img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card .img .big { font-size: clamp(80px, 14cqw, 200px); font-weight: 600; letter-spacing: -0.06em; line-height: 0.8; color: var(--fg); opacity: 0.9; align-self: flex-end; }
+.card .img svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.card .img .mono { position: relative; }
+.card hr { border: 0; border-top: 1px solid var(--rule); margin: 16px 0 12px; }
+.card .row { display: grid; grid-template-columns: 48px 1fr; gap: 8px; }
+.card h3 { margin: 0; font-size: clamp(22px, 2.4cqw, 32px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 600; }
+.card p { margin: 8px 0 12px; color: var(--muted); font-size: 16px; max-width: 34em; }
+.card[hidden] { display: none; }
+
+/* practice rows */
+.list { padding-bottom: 96px; }
+.item { border-top: 1px solid var(--rule-soft); display: grid; grid-template-columns: 1fr 1fr; gap: 16px 32px; padding: 20px 0; align-items: baseline; }
+.item:first-child { border-top: 1px solid var(--rule); }
+.item h3 { margin: 0; font-size: clamp(26px, 3.6cqw, 52px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.05; }
+.item p { margin: 0; color: var(--muted); max-width: 30em; }
+.small .item h3 { font-size: clamp(20px, 2.2cqw, 28px); letter-spacing: -0.02em; }
+.small .item { padding: 14px 0; }
+.small { padding-bottom: 96px; }
+.tl { text-decoration: none; }
+.tl:hover { color: var(--accent); }
+.tl span { font-family: var(--mono); font-size: 0.6em; }
+.more { grid-column: 1 / -1; justify-self: start; min-height: 44px; padding: 0 16px; border: 1px solid var(--fg); border-radius: 0; background: transparent; color: var(--fg); cursor: pointer; display: inline-flex; gap: 10px; align-items: center; }
+.more:hover { background: var(--fill); }
+.more[aria-expanded="true"] { background: var(--fg); color: var(--bg); }
+.strip[hidden] { display: none; }
+.strip { grid-column: 1 / -1; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x proximity; padding: 8px 0 12px; scrollbar-width: thin; }
+.strip img { height: clamp(180px, 22cqw, 300px); width: auto; flex: none; scroll-snap-align: start; background: var(--fill); display: block; }
+.sub { padding-bottom: 12px; }
+@media (max-width: 760px) { .item { grid-template-columns: 1fr; gap: 6px; } }
+
+/* about */
+.about { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px var(--gutter); padding-bottom: 96px; }
+.portrait { aspect-ratio: 3 / 4; background: var(--fill); max-width: 100%; overflow: hidden; }
+.portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
+.about p.bio { margin: 0 0 32px; font-size: clamp(20px, 2.2cqw, 30px); line-height: 1.25; letter-spacing: -0.015em; font-weight: 400; max-width: 26em; }
+.kv { display: grid; grid-template-columns: 140px 1fr; gap: 0 16px; border-top: 1px solid var(--rule); margin: 0; }
+.kv dt, .kv dd { padding: 12px 0; border-bottom: 1px solid var(--rule-soft); margin: 0; }
+.kv dt { color: var(--muted); padding-top: 15px; }
+.todo { color: var(--accent); }
+.certbtn { margin-top: 24px; gap: 12px; justify-content: space-between; min-width: 220px; }
+.certs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 24px; margin-top: 24px; }
+.certs[hidden] { display: none; }
+.cert { margin: 0; min-width: 0; }
+.certimg { display: block; width: 100%; aspect-ratio: 4 / 3; background: var(--fill); border: 1px solid var(--rule-soft); border-radius: 0; padding: 0; cursor: zoom-in; overflow: hidden; }
+.certimg img { width: 100%; height: 100%; object-fit: contain; display: block; background: #fff; }
+.certimg:hover { border-color: var(--fg); }
+dialog#lb { border: 1px solid var(--fg); background: var(--bg); color: var(--fg); padding: 16px; width: min(1100px, 94vw); max-height: 94vh; border-radius: 0; }
+dialog#lb::backdrop { background: rgba(0,0,0,.7); }
+dialog#lb img { display: block; width: 100%; max-height: 78vh; object-fit: contain; background: #fff; }
+dialog#lb .lbbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 12px; }
+.cert figcaption { display: flex; flex-direction: column; gap: 2px; border-top: 1px solid var(--rule); margin-top: 12px; padding-top: 10px; font-size: 16px; }
+@media (max-width: 760px) { .about { grid-template-columns: 1fr; } .portrait { max-width: 360px; } .kv { grid-template-columns: 100px 1fr; } }
+
+/* contact */
+.contact h2 { margin: 0; font-weight: 600; letter-spacing: -0.065em; line-height: 0.85; font-size: clamp(64px, 17cqw, 260px); padding: 0 0 4cqw; margin-left: -0.03em; }
+.links { border-top: 1px solid var(--rule); padding-bottom: 80px; }
+.links a, .links .li { display: grid; grid-template-columns: 160px 1fr auto; gap: 16px; align-items: center; min-height: 64px; padding: 10px 0; border-bottom: 1px solid var(--rule-soft); text-decoration: none; font-size: clamp(18px, 2cqw, 26px); letter-spacing: -0.01em; font-weight: 500; }
+.links a:hover { color: var(--accent); }
+.links .arrow { font-family: var(--mono); }
+.email { user-select: all; }
+@media (max-width: 760px) { .links a, .links .li { grid-template-columns: 1fr auto; } .links .mono { grid-column: 1 / -1; margin-bottom: -8px; } }
+
+footer { border-top: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 16px; padding-bottom: 32px; }
+footer a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+footer a:hover { color: var(--accent); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+<div class="page">
+  <header class="bar pad">
+    <a class="word" href="#top">Prim<span class="dot">.</span></a>
+    <span class="coords mono">Bangkok · 13.76° N, 100.50° E</span>
+    <nav aria-label="Sections">
+      <a href="#work">Work</a><a href="#practice">Practice</a><a href="#about">About</a><a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero pad" aria-label="Introduction">
+      <div class="meta mono muted"><span>Portfolio 2026</span><span>Multidisciplinary designer</span></div>
+      <h1>Prim Phunnapa<br>Supakijsilp<span class="dot">.</span></h1>
+    </section>
+
+    <section class="statement pad">
+      <p class="lead">I'm a UX/UI designer who also creates brand identities, publications and illustrations, and makes videos about the work.</p>
+      <div class="cta">
+        <a class="btn fill" href="#work">See selected work</a>
+        <a class="btn" href="#contact">Get in touch</a>
+      </div>
+      <div class="avail mono">Open to freelance projects and new roles</div>
+      <div class="roles mono muted">
+        <span>UX/UI Designer, IBM Digital Talent for Business</span>
+        <span>Founder, phunnie.studio</span>
+      </div>
+    </section>
+
+    <section id="work" aria-labelledby="work-h">
+      <div class="head pad"><h2 id="work-h">Selected work</h2><span class="mono muted" id="count">8 projects · Selected</span></div>
+      <div class="pad">
+        <div class="chips" role="group" aria-label="Filter projects" id="chips"></div>
+        <div class="grid" id="grid"></div>
+      </div>
+    </section>
+
+    <section id="practice" aria-labelledby="practice-h">
+      <div class="head pad"><h2 id="practice-h">Practice</h2><span class="mono muted">What you can hire me for</span></div>
+      <div class="pad list">
+        <div class="item"><h3>Interface design</h3><p>Websites, member portals and product screens, designed with a human-centred, lean approach.</p></div>
+        <div class="item"><h3>Brand identity</h3><p>Identities built from the brand's story first, then name, mark, colour and voice.</p></div>
+        <div class="item"><h3>Speculative and concept design</h3><p>Research-led ideas for services, objects and social systems, taken as far as a prototype.</p></div>
+        <div class="item"><h3>Illustration</h3><p>Hand-drawn and digital illustration for editorial, products, games and events.</p></div>
+        <div class="item"><h3>Publication and print</h3><p>Books, pop-ups, cards and printed campaigns, from layout to production.</p></div>
+      </div>
+      <div class="head pad" style="border-top-color:var(--rule-soft)"><h2 style="font-size:clamp(24px,3cqw,40px)">Beyond design</h2></div>
+      <div class="pad small">
+        <div class="item"><h3><a class="tl" href="https://www.instagram.com/phunnie.studio/" target="_blank" rel="noopener">Live portrait illustration <span aria-hidden="true">↗</span></a></h3><p>Portraits and doodles drawn on the spot at events.</p>
+          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip1" data-n="3">Show photos (3) <span aria-hidden="true">+</span></button>
+          <div class="strip" id="strip1" tabindex="0" hidden aria-label="Live portrait illustration photos"><img src="images/beyond/live-1.jpg" alt="Live portrait illustration at an event, 1 of 3" loading="lazy"><img src="images/beyond/live-2.jpg" alt="Live portrait illustration at an event, 2 of 3" loading="lazy"><img src="images/beyond/live-3.jpg" alt="Live portrait illustration at an event, 3 of 3" loading="lazy"></div></div>
+        <div class="item"><h3><a class="tl" href="https://youtube.com/@primphun" target="_blank" rel="noopener">YouTube channel <span aria-hidden="true">↗</span></a></h3><p>Thai-language art vlogs, travel and storytelling.</p>
+          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip2" data-n="4">Show photos (4) <span aria-hidden="true">+</span></button>
+          <div class="strip" id="strip2" tabindex="0" hidden aria-label="YouTube channel photos"><img src="images/beyond/yt-1.jpg" alt="Frame from the YouTube channel, 1 of 4" loading="lazy"><img src="images/beyond/yt-2.jpg" alt="Frame from the YouTube channel, 2 of 4" loading="lazy"><img src="images/beyond/yt-3.jpg" alt="Frame from the YouTube channel, 3 of 4" loading="lazy"><img src="images/beyond/yt-4.jpg" alt="Frame from the YouTube channel, 4 of 4" loading="lazy"></div></div>
+        <div class="item"><h3><a class="tl" href="https://drive.google.com/drive/u/4/folders/1c8fskxa-eBVMLGldd6-tgOmlA636GQVG" target="_blank" rel="noopener">Freelance modeling <span aria-hidden="true">↗</span></a></h3><p>Fashion, editorial and commercial projects.</p>
+          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip3" data-n="8">Show photos (8) <span aria-hidden="true">+</span></button>
+          <div class="strip" id="strip3" tabindex="0" hidden aria-label="Freelance modeling photos"><img src="images/beyond/model-1.jpg" alt="Freelance modeling photo, 1 of 8" loading="lazy"><img src="images/beyond/model-2.jpg" alt="Freelance modeling photo, 2 of 8" loading="lazy"><img src="images/beyond/model-3.jpg" alt="Freelance modeling photo, 3 of 8" loading="lazy"><img src="images/beyond/model-4.jpg" alt="Freelance modeling photo, 4 of 8" loading="lazy"><img src="images/beyond/model-5.jpg" alt="Freelance modeling photo, 5 of 8" loading="lazy"><img src="images/beyond/model-6.jpg" alt="Freelance modeling photo, 6 of 8" loading="lazy"><img src="images/beyond/model-7.jpg" alt="Freelance modeling photo, 7 of 8" loading="lazy"><img src="images/beyond/model-8.jpg" alt="Freelance modeling photo, 8 of 8" loading="lazy"></div></div>
+        <div class="item"><h3><a class="tl" href="https://youtu.be/h474BanaQks" target="_blank" rel="noopener">Artist, TH 52 Arena <span aria-hidden="true">↗</span></a></h3><p>Competitor on TH 52 Arena, a survival show on ONE31.</p>
+          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip4" data-n="6">Show photos (6) <span aria-hidden="true">+</span></button>
+          <div class="strip" id="strip4" tabindex="0" hidden aria-label="Artist, TH 52 Arena photos"><img src="images/beyond/th52-1.jpg" alt="TH 52 Arena, 1 of 6" loading="lazy"><img src="images/beyond/th52-2.jpg" alt="TH 52 Arena, 2 of 6" loading="lazy"><img src="images/beyond/th52-3.jpg" alt="TH 52 Arena, 3 of 6" loading="lazy"><img src="images/beyond/th52-4.jpg" alt="TH 52 Arena, 4 of 6" loading="lazy"><img src="images/beyond/th52-5.jpg" alt="TH 52 Arena, 5 of 6" loading="lazy"><img src="images/beyond/th52-6.jpg" alt="TH 52 Arena, 6 of 6" loading="lazy"></div></div>
+      </div>
+    </section>
+
+    <section id="about" aria-labelledby="about-h">
+      <div class="head pad"><h2 id="about-h">About</h2><span class="mono muted">Bangkok</span></div>
+      <div class="pad about">
+        <div class="portrait"><img src="images/portrait.jpg" alt="Prim smiling, sitting cross-legged on a grey studio floor in a white top and blue jeans" loading="lazy"></div>
+        <div>
+          <p class="bio">I'm a UX/UI designer at IBM Digital Talent for Business, and I run phunnie.studio on the side. My work moves between screens, brand identities, publications and illustration.</p>
+          <dl class="kv">
+            <dt class="mono">Now</dt><dd>UX/UI Designer at IBM Digital Talent for Business, since April 2024</dd>
+            <dt class="mono">Studio</dt><dd>phunnie.studio, illustration since 2020, including live portraits at events</dd>
+            <dt class="mono">Education</dt><dd>MA Design for Change, University of Edinburgh (GPA 4.0)<br>BA Communication Design, Chulalongkorn University (First Class Honours)</dd>
+            <dt class="mono">Certified</dt><dd>NN/g UX Certified</dd>
+            <dt class="mono">Based in</dt><dd>Bangkok, Thailand</dd>
+          </dl>
+          <button class="btn certbtn" type="button" id="certbtn" aria-expanded="false" aria-controls="certs">View certificates (14) <span aria-hidden="true" id="certicon">+</span></button>
+          <div class="certs" id="certs" hidden>
+            <figure class="cert">
+              <button class="certimg" type="button" data-src="images/certs/nng.jpg" data-cap="Certificate in User Experience, Nielsen Norman Group · 31 Mar 2026"><img src="images/certs/nng.jpg" alt="Certificate: Certificate in User Experience, Nielsen Norman Group" loading="lazy"></button>
+              <figcaption><strong>Certificate in User Experience</strong><span class="mono muted">Nielsen Norman Group · 31 Mar 2026</span></figcaption>
+            </figure>
+            <figure class="cert">
+              <button class="certimg" type="button" data-src="images/certs/ai.jpg" data-cap="Google AI Essentials, Google, Coursera · 16 Apr 2026"><img src="images/certs/ai.jpg" alt="Certificate: Google AI Essentials, Google, Coursera" loading="lazy"></button>
+              <figcaption><strong>Google AI Essentials</strong><span class="mono muted">Google, Coursera · 16 Apr 2026</span></figcaption>
+            </figure>
+            <figure class="cert">
+              <button class="certimg" type="button" data-src="images/certs/ibm.jpg" data-cap="Enterprise Design Thinking, Co-Creator, IBM"><img src="images/certs/ibm.jpg" alt="Certificate: Enterprise Design Thinking, Co-Creator, IBM" loading="lazy"></button>
+              <figcaption><strong>Enterprise Design Thinking, Co-Creator</strong><span class="mono muted">IBM</span></figcaption>
+            </figure>
+            <figure class="cert">
+              <button class="certimg" type="button" data-src="images/certs/gstart.jpg" data-cap="Start the UX Design Process: Empathize, Define, and Ideate, Google, Coursera · 7 Jul 2021"><img src="images/certs/gstart.jpg" alt="Certificate: Start the UX Design Process: Empathize, Define, and Ideate, Google, Coursera" loading="lazy"></button>
+              <figcaption><strong>Start the UX Design Process: Empathize, Define, and Ideate</strong><span class="mono muted">Google, Coursera · 7 Jul 2021</span></figcaption>
+            </figure>
+            <figure class="cert">
+              <button class="certimg" type="button" data-src="images/certs/gfound.jpg" data-cap="Foundations of User Experience (UX) Design, Google, Coursera · 16 Jun 2021"><img src="images/certs/gfound.jpg" alt="Certificate: Foundations of User Experience (UX) Design, Google, Coursera" loading="lazy"></button>
+              <figcaption><strong>Foundations of User Experience (UX) Design</strong><span class="mono muted">Google, Coursera · 16 Jun 2021</span></figcaption>
+            </figure>
+            <figure class="cert">
+              <button class="certimg" type="button" data-src="images/certs/tedx.jpg" data-cap="Certificate of Participation, UI Designer, TEDxYouth@PathumWan · 30 Sep 2021"><img src="images/certs/tedx.jpg" alt="Certificate: Certificate of Participation, UI Designer, TEDxYouth@PathumWan" loading="lazy"></button>
+              <figcaption><strong>Certificate of Participation, UI Designer</strong><span class="mono muted">TEDxYouth@PathumWan · 30 Sep 2021</span></figcaption>
+            </figure>
+            <figure class="cert">
+              <button class="certimg" type="button" data-src="images/certs/synz.jpg" data-cap="Certificate of Attendance, SynZ class, SynZ Academy · 26 Apr 2025"><img src="images/certs/synz.jpg" alt="Certificate: Certificate of Attendance, SynZ class, SynZ Academy" loading="lazy"></button>
+              <figcaption><strong>Certificate of Attendance, SynZ class</strong><span class="mono muted">SynZ Academy · 26 Apr 2025</span></figcaption>
+            </figure>
+            <figure class="cert">
+              <button class="certimg" type="button" data-src="images/certs/hm-innov.jpg" data-cap="Innovation and Creativity, Harvard ManageMentor · 25 Apr 2024"><img src="images/certs/hm-innov.jpg" alt="Certificate: Innovation and Creativity, Harvard ManageMentor" loading="lazy"></button>
+              <figcaption><strong>Innovation and Creativity</strong><span class="mono muted">Harvard ManageMentor · 25 Apr 2024</span></figcaption>
+            </figure>
+            <figure class="cert">
+              <button class="certimg" type="button" data-src="images/certs/hm-strat.jpg" data-cap="Strategic Thinking, Harvard ManageMentor · 24 Apr 2024"><img src="images/certs/hm-strat.jpg" alt="Certificate: Strategic Thinking, Harvard ManageMentor" loading="lazy"></button>
+              <figcaption><strong>Strategic Thinking</strong><span class="mono muted">Harvard ManageMentor · 24 Apr 2024</span></figcaption>
+            </figure>
+            <figure class="cert">
+              <button class="certimg" type="button" data-src="images/certs/hm-mkt.jpg" data-cap="Marketing Essentials, Harvard ManageMentor · 24 Apr 2024"><img src="images/certs/hm-mkt.jpg" alt="Certificate: Marketing Essentials, Harvard ManageMentor" loading="lazy"></button>
+              <figcaption><strong>Marketing Essentials</strong><span class="mono muted">Harvard ManageMentor · 24 Apr 2024</span></figcaption>
+            </figure>
+            <figure class="cert">
+              <button class="certimg" type="button" data-src="images/certs/hm-persuade.jpg" data-cap="Persuading Others, Harvard ManageMentor · 23 Apr 2024"><img src="images/certs/hm-persuade.jpg" alt="Certificate: Persuading Others, Harvard ManageMentor" loading="lazy"></button>
+              <figcaption><strong>Persuading Others</strong><span class="mono muted">Harvard ManageMentor · 23 Apr 2024</span></figcaption>
+            </figure>
+            <figure class="cert">
+              <button class="certimg" type="button" data-src="images/certs/cmu.jpg" data-cap="Counselling Psychology for Beginners, Chiang Mai University, CMU MOOC"><img src="images/certs/cmu.jpg" alt="Certificate: Counselling Psychology for Beginners, Chiang Mai University, CMU MOOC" loading="lazy"></button>
+              <figcaption><strong>Counselling Psychology for Beginners</strong><span class="mono muted">Chiang Mai University, CMU MOOC</span></figcaption>
+            </figure>
+            <figure class="cert">
+              <button class="certimg" type="button" data-src="images/certs/nips-stock.jpg" data-cap="Winner, Stock Report contest, Institute of Intelligent Investors (NIP-S) · 27 Dec 2020"><img src="images/certs/nips-stock.jpg" alt="Certificate: Winner, Stock Report contest, Institute of Intelligent Investors (NIP-S)" loading="lazy"></button>
+              <figcaption><strong>Winner, Stock Report contest</strong><span class="mono muted">Institute of Intelligent Investors (NIP-S) · 27 Dec 2020</span></figcaption>
+            </figure>
+            <figure class="cert">
+              <button class="certimg" type="button" data-src="images/certs/nips-train.jpg" data-cap="Young Investors for Society, batch 34, Institute of Intelligent Investors (NIP-S) · 19–27 Dec 2020"><img src="images/certs/nips-train.jpg" alt="Certificate: Young Investors for Society, batch 34, Institute of Intelligent Investors (NIP-S)" loading="lazy"></button>
+              <figcaption><strong>Young Investors for Society, batch 34</strong><span class="mono muted">Institute of Intelligent Investors (NIP-S) · 19–27 Dec 2020</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact" aria-labelledby="contact-h">
+      <div class="head pad"><span class="mono muted">Contact</span><span class="mono muted">Freelance and full-time</span></div>
+      <div class="pad"><h2 id="contact-h">Work with me<span class="dot">.</span></h2></div>
+      <div class="pad">
+        <div class="links">
+          <a href="mailto:primphunnapa@gmail.com"><span class="mono muted">Email</span><span class="email">primphunnapa@gmail.com</span><span class="arrow" aria-hidden="true">→</span></a>
+          <a href="https://www.instagram.com/phunnie.studio/" target="_blank" rel="noopener"><span class="mono muted">Instagram</span><span>@phunnie.studio</span><span class="arrow" aria-hidden="true">↗</span></a>
+          <a href="https://youtube.com/@primphun" target="_blank" rel="noopener"><span class="mono muted">YouTube</span><span>@primphun</span><span class="arrow" aria-hidden="true">↗</span></a>
+          <a href="https://www.linkedin.com/in/primphunnapa/" target="_blank" rel="noopener"><span class="mono muted">LinkedIn</span><span>in/primphunnapa</span><span class="arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <dialog id="lb" aria-label="Certificate"><img id="lbimg" alt=""><div class="lbbar"><span class="mono muted" id="lbcap"></span><button class="btn" type="button" id="lbclose">Close</button></div></dialog>
+
+  <footer class="pad mono muted">
+    <span>© 2020–2026 Phunnapa S. · Bangkok</span>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+</div>
+
+<script>
+const projects = [
+  { n: "01", t: "School of X", y: "2021–2022", c: "A website and Member's Portal for a design community, made with a human-centred, lean approach.", tags: ["Interface", "Illustration"], img: "Phone screens", file: "sox", count: 6 },
+  { n: "02", t: "The Minister of Loneliness", y: "2023", c: "Speculative design on loneliness among UK youth aged 16 to 24, with a social currency called LOOVE, an Instagram campaign and a publication. (MA dissertation, University of Edinburgh.)", tags: ["Concept", "Illustration"], img: "Pill illustration", file: "loneliness", count: 6 },
+  { n: "03", t: "Story-Led Brand Identity", y: "2024–2026", c: "Five identities, Flora, Peucha, Thantara, Kaikraft and Fello, each built from the brand's story before any visual took shape.", tags: ["Brand"], img: "Brand boards", file: "brand", count: 5 },
+  { n: "04", t: "AquaRealm", y: "2021", c: "A portable fish tank for people living with depression, with three settings: Rainwash, Rockery and Reverie.", tags: ["Concept", "Objects"], img: "Fish tank", file: "aqua", count: 5 },
+  { n: "05", t: "Sustainable Ideas for Bored People", y: "2023", c: "A card game that gets kids playing outdoors and challenges them to live with less.", tags: ["Concept", "Illustration"], img: "Card game", file: "cards", count: 5 },
+  { n: "06", t: "Knock Knock Supernova", y: "2020", c: "An installation for the Planetaria exhibition at The National Gallery. Tap the glass sphere and it projects moving supernova patterns.", tags: ["Objects"], img: "Projected supernova", file: "supernova", count: 3 },
+  { n: "07", t: "Disney Land of Journey", y: "2020", c: "A hand-drawn pop-up bedtime storybook based on five of the seven Disney parks.", tags: ["Print", "Illustration"], img: "Storybook cover", file: "disney", count: 5 },
+  { n: "08", t: "Building Motif", y: "2019", c: "Black and white photographs of line, shape and pattern in architecture, with light and shadow across the facades.", tags: ["Photography"], img: "Balconies photograph", file: "motif", count: 7 }
+];
+const filters = ["All", "Interface", "Brand", "Concept", "Print", "Objects", "Illustration", "Photography"];
+const grid = document.getElementById("grid"), chips = document.getElementById("chips"), count = document.getElementById("count");
+
+grid.innerHTML = projects.map((p, i) => {
+  // a different hairline composition per card, so the placeholders do not all look alike
+  return `<article class="card" data-tags="${p.tags.join(",")}">
+    <div class="slider" role="group" aria-roledescription="carousel" aria-label="${p.t} photos">
+      <div class="track" tabindex="0">${Array.from({length:p.count},(_,k)=>`<div class="slide"><img src="images/${p.file}-${k+1}.jpg" alt="${p.img}, image ${k+1} of ${p.count}" loading="${i<1&&k<1?"eager":"lazy"}"></div>`).join("")}</div>
+      <button class="nav prev" type="button" aria-label="Previous image">←</button>
+      <button class="nav next" type="button" aria-label="Next image">→</button>
+      <button class="pp mono" type="button" aria-label="Pause automatic scrolling" aria-pressed="false">Pause</button>
+      <span class="counter mono">1 / ${p.count}</span>
+    </div>
+    <hr>
+    <div class="row">
+      <span class="mono muted">${p.n}</span>
+      <div><h3>${p.t}</h3><p>${p.c}</p><span class="mono muted">${p.tags.join(", ")} · ${p.y}</span></div>
+    </div>
+  </article>`;
+}).join("");
+
+function sync(sl){
+  const t=sl.querySelector(".track"), n=t.children.length, i=Math.round(t.scrollLeft/t.clientWidth);
+  sl.querySelector(".counter").textContent=`${i+1} / ${n}`;
+  sl.querySelector(".prev").disabled=i===0; sl.querySelector(".next").disabled=i===n-1;
+}
+grid.querySelectorAll(".slider").forEach(sl=>{
+  const t=sl.querySelector(".track");
+  t.addEventListener("scroll",()=>sync(sl),{passive:true});
+  t.addEventListener("keydown",e=>{ if(e.key==="ArrowRight") t.scrollBy({left:t.clientWidth,behavior:"smooth"}); if(e.key==="ArrowLeft") t.scrollBy({left:-t.clientWidth,behavior:"smooth"}); });
+  sl.querySelector(".prev").onclick=()=>t.scrollBy({left:-t.clientWidth,behavior:"smooth"});
+  sl.querySelector(".next").onclick=()=>t.scrollBy({left:t.clientWidth,behavior:"smooth"});
+  sl.querySelectorAll("img").forEach(im=>{ const f=()=>{ im.classList.toggle("tall", im.naturalHeight>im.naturalWidth*1.05 && im.naturalHeight<im.naturalWidth*1.7); }; im.complete?f():im.addEventListener("load",f); });
+  sync(sl);
+});
+
+// automatic scrolling: pauses on hover, focus, touch, when off screen, or when the viewer presses Pause
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+grid.querySelectorAll(".slider").forEach((sl, k) => {
+  const t = sl.querySelector(".track"), pp = sl.querySelector(".pp");
+  if (reduce) { pp.hidden = true; return; }
+  let held = false, userPaused = false, visible = false, timer = null;
+  const tick = () => {
+    if (held || userPaused || !visible || t.children.length < 2) return;
+    const i = Math.round(t.scrollLeft / t.clientWidth);
+    t.scrollTo({ left: i >= t.children.length - 1 ? 0 : (i + 1) * t.clientWidth, behavior: "smooth" });
+  };
+  const start = () => { if (!timer) timer = setInterval(tick, 4200 + k * 350); };
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; }, { threshold: 0.4 }).observe(sl);
+  const hold = v => () => { held = v; };
+  sl.addEventListener("mouseenter", hold(true)); sl.addEventListener("mouseleave", hold(false));
+  sl.addEventListener("focusin", hold(true)); sl.addEventListener("focusout", hold(false));
+  sl.addEventListener("touchstart", hold(true), { passive: true });
+  sl.addEventListener("touchend", () => setTimeout(() => { held = false; }, 6000), { passive: true });
+  pp.addEventListener("click", () => {
+    userPaused = !userPaused;
+    pp.textContent = userPaused ? "Play" : "Pause";
+    pp.setAttribute("aria-pressed", userPaused);
+    pp.setAttribute("aria-label", userPaused ? "Resume automatic scrolling" : "Pause automatic scrolling");
+  });
+  start();
+});
+
+const certbtn = document.getElementById("certbtn"), certs = document.getElementById("certs");
+certbtn.addEventListener("click", () => {
+  const open = certs.hidden;
+  certs.hidden = !open;
+  certbtn.setAttribute("aria-expanded", open);
+  document.getElementById("certicon").textContent = open ? "−" : "+";
+});
+
+const lb = document.getElementById("lb");
+certs.addEventListener("click", e => {
+  const b = e.target.closest(".certimg"); if (!b) return;
+  document.getElementById("lbimg").src = b.dataset.src;
+  document.getElementById("lbimg").alt = b.dataset.cap;
+  document.getElementById("lbcap").textContent = b.dataset.cap;
+  lb.showModal();
+});
+document.getElementById("lbclose").onclick = () => lb.close();
+lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
+
+document.querySelectorAll(".more").forEach(b => b.addEventListener("click", () => {
+  const strip = document.getElementById(b.getAttribute("aria-controls")), open = strip.hidden;
+  strip.hidden = !open;
+  b.setAttribute("aria-expanded", open);
+  b.innerHTML = open ? 'Hide photos <span aria-hidden="true">−</span>' : `Show photos (${b.dataset.n}) <span aria-hidden="true">+</span>`;
+}));
+
+chips.innerHTML = filters.map((f, i) => `<button class="chip" type="button" aria-pressed="${i === 0}" data-f="${f}">${f}</button>`).join("");
+chips.addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if (!b) return;
+  const f = b.dataset.f;
+  chips.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === b));
+  let shown = 0;
+  grid.querySelectorAll(".card").forEach(card => {
+    const ok = f === "All" || card.dataset.tags.split(",").includes(f);
+    card.hidden = !ok; if (ok) shown++;
+  });
+  count.textContent = `${shown} project${shown === 1 ? "" : "s"} · Selected`;
+});
+</script>

@@ -409,7 +409,8 @@ const projects = [
   { n: "07", m: ["Team of 3 design students"], t: "Knock Knock Supernova", y: "2020", c: "An installation for the Planetaria exhibition at The National Gallery. Tap the glass sphere and it projects moving supernova patterns.", tags: ["Objects"], img: "Projected supernova", file: "supernova", count: 3 },
   { n: "08", m: ["Solo"], t: "Disney Land of Journey", y: "2020", c: "A hand-drawn pop-up bedtime storybook based on five of the seven Disney parks.", tags: ["Print", "Illustration"], img: "Storybook cover", file: "disney", count: 5 }
 ];
-const filters = ["All", "Interface", "Brand", "Concept", "Print", "Objects", "Illustration", "Photography"];
+// A filter only appears when at least two projects use it, so it never lists an empty or one-card category.
+const filters = ["All", ...["Interface", "Brand", "Concept", "Print", "Objects", "Illustration", "Photography"].filter(t => projects.filter(p => p.tags.includes(t)).length >= 2)];
 const grid = document.getElementById("grid"), chips = document.getElementById("chips"), count = document.getElementById("count");
 
 grid.innerHTML = projects.map((p, i) => {

@@ -1,6 +1,6 @@
 <title>Prim Portfolio</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23D4281C'/%3E%3Cpath d='M11.5 25V7.5h8a4.75 4.75 0 0 1 0 9.5h-8' fill='none' stroke='%23fff' stroke-width='4.5'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cstyle%3Epath%7Bstroke:%23121315%7D@media (prefers-color-scheme:dark)%7Bpath%7Bstroke:%23F3F4F2%7D%7D%3C/style%3E%3Cpath d='M16 3V29M4.74 9.5L27.26 22.5M4.74 22.5L27.26 9.5' fill='none' stroke-width='4.5'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap">
@@ -53,7 +53,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px;
 }
 .bar .word { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; }
-.bar .pb { width: 34px; height: 34px; flex: none; display: inline-flex; align-items: center; justify-content: center; background: var(--accent); color: var(--on-accent); font-weight: 700; font-size: 21px; line-height: 1; letter-spacing: 0; padding-bottom: 1px; }
+.bar .pb { width: 34px; height: 34px; flex: none; display: inline-flex; align-items: center; justify-content: center; color: var(--fg); }
+.bar .pb svg { width: 100%; height: 100%; display: block; }
 .bar .wn { display: flex; flex-direction: column; font-weight: 700; font-size: 13px; line-height: 1; letter-spacing: -0.02em; }
 .bar .coords { flex: 1; text-align: center; color: var(--muted); }
 .bar nav { display: flex; gap: 4px; }
@@ -213,7 +214,7 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
 
 <div class="page">
   <header class="bar pad">
-    <a class="word" href="#top" aria-label="Prim Phunnapa Supakijsilp, back to top"><span class="pb" aria-hidden="true">P</span><span class="wn" aria-hidden="true"><span>Phunnapa</span><span>Supakijsilp</span></span></a>
+    <a class="word" href="#top" aria-label="Prim Phunnapa Supakijsilp, back to top"><span class="pb" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="4.5"><path d="M16 3V29M4.74 9.5L27.26 22.5M4.74 22.5L27.26 9.5"/></svg></span><span class="wn" aria-hidden="true"><span>Phunnapa</span><span>Supakijsilp</span></span></a>
     <span class="coords mono">Bangkok · 13.76° N, 100.50° E</span>
     <nav aria-label="Sections">
       <a href="#work">Work</a><a href="#practice">Practice</a><a href="#about">About</a><a href="#contact">Contact</a>

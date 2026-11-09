@@ -438,7 +438,7 @@ grid.querySelectorAll(".slider").forEach((sl, k) => {
     const i = Math.round(t.scrollLeft / t.clientWidth);
     t.scrollTo({ left: i >= t.children.length - 1 ? 0 : (i + 1) * t.clientWidth, behavior: "smooth" });
   };
-  const start = () => { if (!timer) timer = setInterval(tick, 4200 + k * 350); };
+  const start = () => { if (!timer) timer = setInterval(tick, 2400 + k * 200); };
   new IntersectionObserver(es => { visible = es[0].isIntersecting; }, { threshold: 0.4 }).observe(sl);
   const hold = v => () => { held = v; };
   sl.addEventListener("mouseenter", hold(true)); sl.addEventListener("mouseleave", hold(false));

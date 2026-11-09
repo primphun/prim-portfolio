@@ -185,6 +185,10 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
 #stamps .s-x::before, #stamps .s-x::after { left: -4px; top: 8px; width: 28px; height: 4px; }
 #stamps .s-x::before { transform: rotate(45deg); }
 #stamps .s-x::after { transform: rotate(-45deg); }
+#stamps .s-ast { background: linear-gradient(currentColor, currentColor) center / 4px 100% no-repeat; }
+#stamps .s-ast::before, #stamps .s-ast::after { left: 0; top: 8px; width: 20px; height: 4px; }
+#stamps .s-ast::before { transform: rotate(30deg); }
+#stamps .s-ast::after { transform: rotate(-30deg); }
 #stamps .s-sq { background: currentColor; }
 #stamps .s-ring { border: 4px solid currentColor; border-radius: 50%; }
 @media (prefers-reduced-motion: no-preference) { #stamps .s { animation: pop .28s cubic-bezier(.2,1.4,.4,1); } }
@@ -471,7 +475,7 @@ chips.addEventListener("click", e => {
 (() => {
   if (!matchMedia("(pointer: fine) and (hover: hover)").matches) return;
   const root = document.documentElement, cur = document.getElementById("cur"), layer = document.getElementById("stamps");
-  const shapes = ["plus", "x", "sq", "ring"], MAX = 150;
+  const shapes = ["plus", "x", "ast", "sq", "ring"], MAX = 150;
   const modalOpen = () => !!document.querySelector("dialog[open]");
   addEventListener("pointermove", e => {
     if (e.pointerType === "touch") return;

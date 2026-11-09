@@ -178,8 +178,16 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
 #cur::before { left: -13px; top: -1px; width: 26px; height: 2px; }
 #cur::after { left: -1px; top: -13px; width: 2px; height: 26px; }
 #stamps { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 5; }
-#stamps span { position: absolute; font: 500 34px/1 var(--mono); color: var(--accent); }
-@media (prefers-reduced-motion: no-preference) { #stamps span { animation: pop .28s cubic-bezier(.2,1.4,.4,1); } }
+#stamps .s { position: absolute; width: 24px; height: 24px; color: var(--accent); }
+#stamps .s::before, #stamps .s::after { content: ""; position: absolute; background: currentColor; }
+#stamps .s-plus::before { left: 0; top: 11px; width: 24px; height: 2px; }
+#stamps .s-plus::after { left: 11px; top: 0; width: 2px; height: 24px; }
+#stamps .s-x::before, #stamps .s-x::after { left: -5px; top: 11px; width: 34px; height: 2px; }
+#stamps .s-x::before { transform: rotate(45deg); }
+#stamps .s-x::after { transform: rotate(-45deg); }
+#stamps .s-sq { background: currentColor; }
+#stamps .s-ring { border: 2px solid currentColor; border-radius: 50%; }
+@media (prefers-reduced-motion: no-preference) { #stamps .s { animation: pop .28s cubic-bezier(.2,1.4,.4,1); } }
 @keyframes pop { from { scale: 0.2; opacity: 0; } }
 </style>
 
@@ -463,7 +471,7 @@ chips.addEventListener("click", e => {
 (() => {
   if (!matchMedia("(pointer: fine) and (hover: hover)").matches) return;
   const root = document.documentElement, cur = document.getElementById("cur"), layer = document.getElementById("stamps");
-  const glyphs = ["+", "×", "■", "○"], MAX = 150;
+  const shapes = ["plus", "x", "sq", "ring"], MAX = 150;
   const modalOpen = () => !!document.querySelector("dialog[open]");
   addEventListener("pointermove", e => {
     if (e.pointerType === "touch") return;
@@ -476,7 +484,7 @@ chips.addEventListener("click", e => {
   addEventListener("pointerdown", e => {
     if (e.pointerType === "touch" || e.button !== 0 || modalOpen()) return;
     const r = layer.getBoundingClientRect(), s = document.createElement("span");
-    s.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
+    s.className = "s s-" + shapes[Math.floor(Math.random() * shapes.length)];
     s.style.left = (e.clientX - r.left) + "px"; s.style.top = (e.clientY - r.top) + "px";
     s.style.transform = `translate(-50%, -50%) rotate(${Math.round((Math.random() - 0.5) * 50)}deg)`;
     layer.appendChild(s);

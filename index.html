@@ -120,6 +120,13 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .small .item h3 { font-size: clamp(20px, 2.2cqw, 28px); letter-spacing: -0.02em; }
 .small .item { padding: 14px 0; }
 .small { padding-bottom: 96px; }
+.quiet { padding-bottom: 64px; }
+.quiet .item h3 { font-size: clamp(18px, 1.8cqw, 22px); }
+.quiet .item p { font-size: 15px; }
+.quiet .more { border-color: var(--rule-soft); color: var(--muted); }
+.quiet .more:hover { color: var(--fg); border-color: var(--fg); }
+.quiet .more[aria-expanded="true"] { color: var(--bg); border-color: var(--fg); }
+#beyond .head h2 { font-size: clamp(22px, 2.4cqw, 32px); }
 .tl { text-decoration: none; }
 .tl:hover { color: var(--accent); }
 .tl span { font-family: var(--mono); font-size: 0.6em; }
@@ -137,9 +144,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .portrait { aspect-ratio: 3 / 4; background: var(--fill); max-width: 100%; overflow: hidden; }
 .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
 .about p.bio { margin: 0 0 32px; font-size: clamp(20px, 2.2cqw, 30px); line-height: 1.25; letter-spacing: -0.015em; font-weight: 400; max-width: 26em; }
-.kv { display: grid; grid-template-columns: 140px 1fr; gap: 0 16px; border-top: 1px solid var(--rule); margin: 0; }
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 0 16px; border-top: 1px solid var(--rule); margin: 0; }
 .kv dt, .kv dd { padding: 12px 0; border-bottom: 1px solid var(--rule-soft); margin: 0; }
 .kv dt { color: var(--muted); padding-top: 15px; }
+.kvh { margin: 0 0 10px; font-weight: 400; }
+.kvh2 { margin-top: 32px; }
+.kv dd b { font-weight: 600; }
 .todo { color: var(--accent); }
 .certbtn { margin-top: 24px; gap: 12px; justify-content: space-between; min-width: 220px; }
 .certs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 24px; margin-top: 24px; }
@@ -217,6 +227,7 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
       <div class="cta">
         <a class="btn fill" href="#work">See selected work</a>
         <a class="btn" href="#contact">Get in touch</a>
+        <a class="btn" href="Phunnapa-CV.pdf" download>Download CV</a>
       </div>
       <div class="avail mono">Open to freelance projects and new roles</div>
       <div class="roles mono muted">
@@ -242,21 +253,6 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
         <div class="item"><h3>Illustration</h3><p>Hand-drawn and digital illustration for editorial, products, games and events.</p></div>
         <div class="item"><h3>Publication and print</h3><p>Books, pop-ups, cards and printed campaigns, from layout to production.</p></div>
       </div>
-      <div class="head pad" style="border-top-color:var(--rule-soft)"><h2 style="font-size:clamp(24px,3cqw,40px)">Beyond design</h2></div>
-      <div class="pad small">
-        <div class="item"><h3><a class="tl" href="https://www.instagram.com/phunnie.studio/" target="_blank" rel="noopener">Live portrait illustration <span aria-hidden="true">↗</span></a></h3><p>Portraits and doodles drawn on the spot at events.</p>
-          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip1" data-n="3">Show photos (3) <span aria-hidden="true">+</span></button>
-          <div class="strip" id="strip1" tabindex="0" hidden aria-label="Live portrait illustration photos"><img src="images/beyond/live-1.jpg" alt="Live portrait illustration at an event, 1 of 3" loading="lazy"><img src="images/beyond/live-2.jpg" alt="Live portrait illustration at an event, 2 of 3" loading="lazy"><img src="images/beyond/live-3.jpg" alt="Live portrait illustration at an event, 3 of 3" loading="lazy"></div></div>
-        <div class="item"><h3><a class="tl" href="https://youtube.com/@primphun" target="_blank" rel="noopener">YouTube channel <span aria-hidden="true">↗</span></a></h3><p>Thai-language art vlogs, travel and storytelling.</p>
-          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip2" data-n="4">Show photos (4) <span aria-hidden="true">+</span></button>
-          <div class="strip" id="strip2" tabindex="0" hidden aria-label="YouTube channel photos"><img src="images/beyond/yt-1.jpg" alt="Frame from the YouTube channel, 1 of 4" loading="lazy"><img src="images/beyond/yt-2.jpg" alt="Frame from the YouTube channel, 2 of 4" loading="lazy"><img src="images/beyond/yt-3.jpg" alt="Frame from the YouTube channel, 3 of 4" loading="lazy"><img src="images/beyond/yt-4.jpg" alt="Frame from the YouTube channel, 4 of 4" loading="lazy"></div></div>
-        <div class="item"><h3><a class="tl" href="https://drive.google.com/drive/u/4/folders/1c8fskxa-eBVMLGldd6-tgOmlA636GQVG" target="_blank" rel="noopener">Freelance modeling <span aria-hidden="true">↗</span></a></h3><p>Fashion, editorial and commercial projects.</p>
-          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip3" data-n="8">Show photos (8) <span aria-hidden="true">+</span></button>
-          <div class="strip" id="strip3" tabindex="0" hidden aria-label="Freelance modeling photos"><img src="images/beyond/model-1.jpg" alt="Freelance modeling photo, 1 of 8" loading="lazy"><img src="images/beyond/model-2.jpg" alt="Freelance modeling photo, 2 of 8" loading="lazy"><img src="images/beyond/model-3.jpg" alt="Freelance modeling photo, 3 of 8" loading="lazy"><img src="images/beyond/model-4.jpg" alt="Freelance modeling photo, 4 of 8" loading="lazy"><img src="images/beyond/model-5.jpg" alt="Freelance modeling photo, 5 of 8" loading="lazy"><img src="images/beyond/model-6.jpg" alt="Freelance modeling photo, 6 of 8" loading="lazy"><img src="images/beyond/model-7.jpg" alt="Freelance modeling photo, 7 of 8" loading="lazy"><img src="images/beyond/model-8.jpg" alt="Freelance modeling photo, 8 of 8" loading="lazy"></div></div>
-        <div class="item"><h3><a class="tl" href="https://youtu.be/h474BanaQks" target="_blank" rel="noopener">Artist, TH 52 Arena <span aria-hidden="true">↗</span></a></h3><p>Competitor on TH 52 Arena, a survival show on ONE31.</p>
-          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip4" data-n="6">Show photos (6) <span aria-hidden="true">+</span></button>
-          <div class="strip" id="strip4" tabindex="0" hidden aria-label="Artist, TH 52 Arena photos"><img src="images/beyond/th52-1.jpg" alt="TH 52 Arena, 1 of 6" loading="lazy"><img src="images/beyond/th52-2.jpg" alt="TH 52 Arena, 2 of 6" loading="lazy"><img src="images/beyond/th52-3.jpg" alt="TH 52 Arena, 3 of 6" loading="lazy"><img src="images/beyond/th52-4.jpg" alt="TH 52 Arena, 4 of 6" loading="lazy"><img src="images/beyond/th52-5.jpg" alt="TH 52 Arena, 5 of 6" loading="lazy"><img src="images/beyond/th52-6.jpg" alt="TH 52 Arena, 6 of 6" loading="lazy"></div></div>
-      </div>
     </section>
 
     <section id="about" aria-labelledby="about-h">
@@ -265,8 +261,15 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
         <div class="portrait"><img src="images/portrait.jpg" alt="Prim smiling, sitting cross-legged on a grey studio floor in a white top and blue jeans" loading="lazy"></div>
         <div>
           <p class="bio">I'm a UX/UI designer at IBM Digital Talent for Business, and I run phunnie.studio on the side. My work moves between screens, brand identities, publications and illustration.</p>
+          <h3 class="mono muted kvh">Experience</h3>
           <dl class="kv">
-            <dt class="mono">Now</dt><dd>UX/UI Designer at IBM Digital Talent for Business, since April 2024</dd>
+            <dt class="mono">Apr 2024 – Now</dt><dd><b>IBM Digital Talent for Business</b><br>UI Designer · Full-time, Bangkok</dd>
+            <dt class="mono">Nov 2023 – Jan 2024</dt><dd><b>Now To Vow</b><br>UI Designer · Internship, London</dd>
+            <dt class="mono">Jun 2021 – May 2022</dt><dd><b>Greydient Lab</b><br>Associate Designer · Full-time</dd>
+            <dt class="mono">Jun – Jul 2020</dt><dd><b>Wongnai.com</b><br>Creative · Internship</dd>
+          </dl>
+          <h3 class="mono muted kvh kvh2">Profile</h3>
+          <dl class="kv">
             <dt class="mono">Studio</dt><dd>phunnie.studio, illustration since 2020, including live portraits at events</dd>
             <dt class="mono">Education</dt><dd>MA Design for Change, University of Edinburgh (GPA 4.0)<br>BA Communication Design, Chulalongkorn University (First Class Honours)</dd>
             <dt class="mono">Certified</dt><dd>NN/g UX Certified</dd>
@@ -335,12 +338,31 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
       </div>
     </section>
 
+    <section id="beyond" aria-labelledby="beyond-h">
+      <div class="head pad"><h2 id="beyond-h">Beyond design</h2><span class="mono muted">What else I do</span></div>
+      <div class="pad small quiet">
+        <div class="item"><h3><a class="tl" href="https://www.instagram.com/phunnie.studio/" target="_blank" rel="noopener">Live portrait illustration <span aria-hidden="true">↗</span></a></h3><p>Portraits and doodles drawn on the spot at events.</p>
+          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip1" data-n="3">Show photos (3) <span aria-hidden="true">+</span></button>
+          <div class="strip" id="strip1" tabindex="0" hidden aria-label="Live portrait illustration photos"><img src="images/beyond/live-1.jpg" alt="Live portrait illustration at an event, 1 of 3" loading="lazy"><img src="images/beyond/live-2.jpg" alt="Live portrait illustration at an event, 2 of 3" loading="lazy"><img src="images/beyond/live-3.jpg" alt="Live portrait illustration at an event, 3 of 3" loading="lazy"></div></div>
+        <div class="item"><h3><a class="tl" href="https://youtube.com/@primphun" target="_blank" rel="noopener">YouTube channel <span aria-hidden="true">↗</span></a></h3><p>Thai-language art vlogs, travel and storytelling.</p>
+          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip2" data-n="4">Show photos (4) <span aria-hidden="true">+</span></button>
+          <div class="strip" id="strip2" tabindex="0" hidden aria-label="YouTube channel photos"><img src="images/beyond/yt-1.jpg" alt="Frame from the YouTube channel, 1 of 4" loading="lazy"><img src="images/beyond/yt-2.jpg" alt="Frame from the YouTube channel, 2 of 4" loading="lazy"><img src="images/beyond/yt-3.jpg" alt="Frame from the YouTube channel, 3 of 4" loading="lazy"><img src="images/beyond/yt-4.jpg" alt="Frame from the YouTube channel, 4 of 4" loading="lazy"></div></div>
+        <div class="item"><h3><a class="tl" href="https://drive.google.com/drive/u/4/folders/1c8fskxa-eBVMLGldd6-tgOmlA636GQVG" target="_blank" rel="noopener">Freelance modeling <span aria-hidden="true">↗</span></a></h3><p>Fashion, editorial and commercial projects.</p>
+          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip3" data-n="8">Show photos (8) <span aria-hidden="true">+</span></button>
+          <div class="strip" id="strip3" tabindex="0" hidden aria-label="Freelance modeling photos"><img src="images/beyond/model-1.jpg" alt="Freelance modeling photo, 1 of 8" loading="lazy"><img src="images/beyond/model-2.jpg" alt="Freelance modeling photo, 2 of 8" loading="lazy"><img src="images/beyond/model-3.jpg" alt="Freelance modeling photo, 3 of 8" loading="lazy"><img src="images/beyond/model-4.jpg" alt="Freelance modeling photo, 4 of 8" loading="lazy"><img src="images/beyond/model-5.jpg" alt="Freelance modeling photo, 5 of 8" loading="lazy"><img src="images/beyond/model-6.jpg" alt="Freelance modeling photo, 6 of 8" loading="lazy"><img src="images/beyond/model-7.jpg" alt="Freelance modeling photo, 7 of 8" loading="lazy"><img src="images/beyond/model-8.jpg" alt="Freelance modeling photo, 8 of 8" loading="lazy"></div></div>
+        <div class="item"><h3><a class="tl" href="https://youtu.be/h474BanaQks" target="_blank" rel="noopener">Artist, TH 52 Arena <span aria-hidden="true">↗</span></a></h3><p>Competitor on TH 52 Arena, a survival show on ONE31.</p>
+          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip4" data-n="6">Show photos (6) <span aria-hidden="true">+</span></button>
+          <div class="strip" id="strip4" tabindex="0" hidden aria-label="Artist, TH 52 Arena photos"><img src="images/beyond/th52-1.jpg" alt="TH 52 Arena, 1 of 6" loading="lazy"><img src="images/beyond/th52-2.jpg" alt="TH 52 Arena, 2 of 6" loading="lazy"><img src="images/beyond/th52-3.jpg" alt="TH 52 Arena, 3 of 6" loading="lazy"><img src="images/beyond/th52-4.jpg" alt="TH 52 Arena, 4 of 6" loading="lazy"><img src="images/beyond/th52-5.jpg" alt="TH 52 Arena, 5 of 6" loading="lazy"><img src="images/beyond/th52-6.jpg" alt="TH 52 Arena, 6 of 6" loading="lazy"></div></div>
+      </div>
+    </section>
+
     <section id="contact" class="contact" aria-labelledby="contact-h">
       <div class="head pad"><span class="mono muted">Contact</span><span class="mono muted">Freelance and full-time</span></div>
       <div class="pad"><h2 id="contact-h">Work with me<span class="dot">.</span></h2></div>
       <div class="pad">
         <div class="links">
           <a href="mailto:primphunnapa@gmail.com"><span class="mono muted">Email</span><span class="email">primphunnapa@gmail.com</span><span class="arrow" aria-hidden="true">→</span></a>
+          <a href="Phunnapa-CV.pdf" download><span class="mono muted">CV</span><span>Download PDF</span><span class="arrow" aria-hidden="true">↓</span></a>
           <a href="https://www.instagram.com/phunnie.studio/" target="_blank" rel="noopener"><span class="mono muted">Instagram</span><span>@phunnie.studio</span><span class="arrow" aria-hidden="true">↗</span></a>
           <a href="https://youtube.com/@primphun" target="_blank" rel="noopener"><span class="mono muted">YouTube</span><span>@primphun</span><span class="arrow" aria-hidden="true">↗</span></a>
           <a href="https://www.linkedin.com/in/primphunnapa/" target="_blank" rel="noopener"><span class="mono muted">LinkedIn</span><span>in/primphunnapa</span><span class="arrow" aria-hidden="true">↗</span></a>

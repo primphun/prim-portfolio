@@ -168,6 +168,19 @@ footer { border-top: 1px solid var(--rule); display: flex; justify-content: spac
 footer a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
 footer a:hover { color: var(--accent); }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* stamp cursor: a red crosshair; each click leaves a mark on the page */
+.page { position: relative; }
+html.stamp-on, html.stamp-on * { cursor: none !important; }
+#cur { position: fixed; left: 0; top: 0; z-index: 1000; pointer-events: none; opacity: 0; will-change: transform; }
+#cur.on { opacity: 1; }
+#cur::before, #cur::after { content: ""; position: absolute; background: var(--accent); }
+#cur::before { left: -13px; top: -1px; width: 26px; height: 2px; }
+#cur::after { left: -1px; top: -13px; width: 2px; height: 26px; }
+#stamps { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 5; }
+#stamps span { position: absolute; font: 500 34px/1 var(--mono); color: var(--accent); }
+@media (prefers-reduced-motion: no-preference) { #stamps span { animation: pop .28s cubic-bezier(.2,1.4,.4,1); } }
+@keyframes pop { from { scale: 0.2; opacity: 0; } }
 </style>
 
 <div class="page">
@@ -327,7 +340,9 @@ footer a:hover { color: var(--accent); }
     <span>© 2020–2026 Phunnapa S. · Bangkok</span>
     <a href="#top">Back to top ↑</a>
   </footer>
+  <div id="stamps" aria-hidden="true"></div>
 </div>
+<div id="cur" aria-hidden="true"></div>
 
 <script>
 const projects = [
@@ -441,4 +456,31 @@ chips.addEventListener("click", e => {
   });
   count.textContent = `${shown} project${shown === 1 ? "" : "s"} · Selected`;
 });
+</script>
+
+<script>
+/* Stamp cursor. Only for a mouse or trackpad; touch and keyboard users are unaffected. */
+(() => {
+  if (!matchMedia("(pointer: fine) and (hover: hover)").matches) return;
+  const root = document.documentElement, cur = document.getElementById("cur"), layer = document.getElementById("stamps");
+  const glyphs = ["+", "×", "■", "○"], MAX = 150;
+  const modalOpen = () => !!document.querySelector("dialog[open]");
+  addEventListener("pointermove", e => {
+    if (e.pointerType === "touch") return;
+    const off = modalOpen();
+    root.classList.toggle("stamp-on", !off);
+    cur.classList.toggle("on", !off);
+    cur.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+  }, { passive: true });
+  root.addEventListener("pointerleave", () => cur.classList.remove("on"));
+  addEventListener("pointerdown", e => {
+    if (e.pointerType === "touch" || e.button !== 0 || modalOpen()) return;
+    const r = layer.getBoundingClientRect(), s = document.createElement("span");
+    s.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
+    s.style.left = (e.clientX - r.left) + "px"; s.style.top = (e.clientY - r.top) + "px";
+    s.style.transform = `translate(-50%, -50%) rotate(${Math.round((Math.random() - 0.5) * 50)}deg)`;
+    layer.appendChild(s);
+    while (layer.children.length > MAX) layer.removeChild(layer.firstChild);
+  });
+})();
 </script>

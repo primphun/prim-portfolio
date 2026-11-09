@@ -409,7 +409,7 @@ const projects = [
   { n: "05", m: ["BA thesis","Solo"], t: "AquaRealm", y: "2021", c: "A portable fish tank for people living with depression, with three settings: Rainwash, Rockery and Reverie.", tags: ["Concept", "Objects"], img: "Fish tank", file: "aqua", count: 5 },
   { n: "06", m: ["Solo"], t: "mysterymystory", y: "BA project", c: "Three boxes for children, one for each fear: blood, medicine and vegetables, each with missions to play through.", tags: ["Objects", "Print"], img: "Mystery boxes", file: "mystory", count: 3 },
   { n: "07", m: ["Team of 3 design students"], t: "Knock Knock Supernova", y: "2020", c: "An installation for the Planetaria exhibition at The National Gallery. Tap the glass sphere and it projects moving supernova patterns.", tags: ["Objects"], img: "Projected supernova", file: "supernova", count: 3 },
-  { n: "08", m: ["Solo"], t: "Disney Land of Journey", y: "2020", c: "A hand-drawn pop-up bedtime storybook based on five of the seven Disney parks.", tags: ["Print", "Illustration"], img: "Storybook cover", file: "disney", count: 5 }
+  { n: "08", t: "Illustration", y: "Three series", c: "Round Carrot & Friends, the hand-drawn pop-up storybook Disney Land of Journey, and a series of teddy bear portraits.", tags: ["Illustration", "Print"], img: "Illustration", file: "illus", count: 8 }
 ];
 // A filter only appears when at least two projects use it, so it never lists an empty or one-card category.
 const filters = ["All", ...["Interface", "Brand", "Concept", "Print", "Objects", "Illustration", "Photography"].filter(t => projects.filter(p => p.tags.includes(t)).length >= 2)];

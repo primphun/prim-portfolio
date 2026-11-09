@@ -186,7 +186,7 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
 #stamps .s-ast::before, #stamps .s-ast::after { left: 0; top: 8px; width: 20px; height: 4px; }
 #stamps .s-ast::before { transform: rotate(30deg); }
 #stamps .s-ast::after { transform: rotate(-30deg); }
-#stamps .s-sq { background: currentColor; }
+#stamps .s-sq { background: linear-gradient(currentColor, currentColor) center / 14px 14px no-repeat; }
 #stamps .s-ring { border: 4px solid currentColor; border-radius: 50%; }
 @media (prefers-reduced-motion: no-preference) { #stamps .s { animation: pop .28s cubic-bezier(.2,1.4,.4,1); } }
 @keyframes pop { from { scale: 0.2; opacity: 0; } }

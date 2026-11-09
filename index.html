@@ -147,16 +147,14 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .kv { display: grid; grid-template-columns: 170px 1fr; gap: 0 16px; border-top: 1px solid var(--rule); margin: 0; }
 .kv dt, .kv dd { padding: 12px 0; border-bottom: 1px solid var(--rule-soft); margin: 0; }
 .kv dt { color: var(--muted); padding-top: 15px; }
+.about > div { min-width: 0; }
 .kvh { margin: 0 0 10px; font-weight: 400; }
 .meta { display: block; margin-top: 8px; }
 .kvh2 { margin-top: 32px; }
 .kv dd b { font-weight: 600; }
 .todo { color: var(--accent); }
-.certbtn { margin-top: 24px; gap: 12px; justify-content: space-between; min-width: 220px; }
-.certs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 24px; margin-top: 24px; }
-.certs[hidden] { display: none; }
-@media (min-width: 761px) { #certs-top { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; } #certs-top .cert figcaption { font-size: 14px; } }
-.cert { margin: 0; min-width: 0; }
+.certs { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x proximity; padding: 4px 0 16px; margin-top: 8px; scrollbar-width: thin; }
+.cert { margin: 0; flex: none; width: min(260px, 72vw); scroll-snap-align: start; }
 .certimg { display: block; width: 100%; aspect-ratio: 4 / 3; background: var(--fill); border: 1px solid var(--rule-soft); border-radius: 0; padding: 0; cursor: zoom-in; overflow: hidden; }
 .certimg img { width: 100%; height: 100%; object-fit: contain; display: block; background: #fff; }
 .certimg:hover { border-color: var(--fg); }
@@ -225,7 +223,7 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
     </section>
 
     <section class="statement pad">
-      <p class="lead">I'm a multidisciplinary designer. Day to day I design interfaces at IBM. I also create brand identities, publications and illustrations, and make videos about the work.</p>
+      <p class="lead">I'm a multidisciplinary designer. Day to day I design interfaces at IBM Digital Talent for Business. I also create brand identities, publications and illustrations, and make videos about the work.</p>
       <div class="cta">
         <a class="btn fill" href="#work">See selected work</a>
         <a class="btn" href="#contact">Get in touch</a>
@@ -277,8 +275,8 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
             <dt class="mono">Certified</dt><dd>NN/g UX Certified</dd>
             <dt class="mono">Based in</dt><dd>Bangkok, Thailand</dd>
           </dl>
-          <h3 class="mono muted kvh kvh2">Certificates</h3>
-          <div class="certs" id="certs-top">
+          <h3 class="mono muted kvh kvh2">Certificates (14)</h3>
+          <div class="certs" id="certs" tabindex="0" aria-label="Certificates, scroll sideways">
             <figure class="cert">
               <button class="certimg" type="button" data-src="images/certs/nng.jpg" data-cap="Certificate in User Experience, Nielsen Norman Group · 31 Mar 2026 · Credential ID 2002849"><img src="images/certs/nng.jpg" alt="Certificate: Certificate in User Experience, Nielsen Norman Group" loading="lazy"></button>
               <figcaption><strong>Certificate in User Experience</strong><span class="mono muted">Nielsen Norman Group · 31 Mar 2026 · Credential ID 2002849</span></figcaption>
@@ -291,9 +289,6 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
               <button class="certimg" type="button" data-src="images/certs/ibm.jpg" data-cap="Enterprise Design Thinking, Co-Creator, IBM"><img src="images/certs/ibm.jpg" alt="Certificate: Enterprise Design Thinking, Co-Creator, IBM" loading="lazy"></button>
               <figcaption><strong>Enterprise Design Thinking, Co-Creator</strong><span class="mono muted">IBM</span></figcaption>
             </figure>
-          </div>
-          <button class="btn certbtn" type="button" id="certbtn" aria-expanded="false" aria-controls="certs">More certificates (11) <span aria-hidden="true" id="certicon">+</span></button>
-          <div class="certs" id="certs" hidden>
             <figure class="cert">
               <button class="certimg" type="button" data-src="images/certs/gstart.jpg" data-cap="Start the UX Design Process: Empathize, Define, and Ideate, Google, Coursera · 7 Jul 2021"><img src="images/certs/gstart.jpg" alt="Certificate: Start the UX Design Process: Empathize, Define, and Ideate, Google, Coursera" loading="lazy"></button>
               <figcaption><strong>Start the UX Design Process: Empathize, Define, and Ideate</strong><span class="mono muted">Google, Coursera · 7 Jul 2021</span></figcaption>
@@ -387,14 +382,14 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
 
 <script>
 const projects = [
-  { n: "01", t: "School of X", y: "2021–2022", c: "A website and Member's Portal for a design community, made with a human-centred, lean approach.", m: "Launched · Used by the Singapore government", tags: ["Interface", "Illustration"], img: "Phone screens", file: "sox", count: 6 },
-  { n: "02", t: "The Minister of Loneliness", y: "2023", c: "Speculative design on loneliness among UK youth aged 16 to 24, with a social currency called LOOVE, an Instagram campaign and a publication. (MA dissertation, University of Edinburgh.)", tags: ["Concept", "Illustration"], img: "Pill illustration", file: "loneliness", count: 6 },
-  { n: "03", t: "Story-Led Brand Identity", y: "2024–2026", c: "Five identities, Flora, Peucha, Thantara, Kaikraft and Fello, each built from the brand's story before any visual took shape.", m: "Real clients · Ongoing", tags: ["Brand"], img: "Brand boards", file: "brand", count: 5 },
-  { n: "04", t: "AquaRealm", y: "2021", c: "A portable fish tank for people living with depression, with three settings: Rainwash, Rockery and Reverie.", tags: ["Concept", "Objects"], img: "Fish tank", file: "aqua", count: 5 },
-  { n: "05", t: "Sustainable Ideas for Bored People", y: "2023", c: "A card game that gets kids playing outdoors and challenges them to live with less.", tags: ["Concept", "Illustration"], img: "Card game", file: "cards", count: 5 },
-  { n: "06", t: "Knock Knock Supernova", y: "2020", c: "An installation for the Planetaria exhibition at The National Gallery. Tap the glass sphere and it projects moving supernova patterns.", m: "Team of 3 design students", tags: ["Objects"], img: "Projected supernova", file: "supernova", count: 3 },
-  { n: "07", t: "Disney Land of Journey", y: "2020", c: "A hand-drawn pop-up bedtime storybook based on five of the seven Disney parks.", tags: ["Print", "Illustration"], img: "Storybook cover", file: "disney", count: 5 },
-  { n: "08", t: "Building Motif", y: "2019", c: "Black and white photographs of line, shape and pattern in architecture, with light and shadow across the facades.", tags: ["Photography"], img: "Balconies photograph", file: "motif", count: 7 }
+  { n: "01", m: ["Launched · Used by the Singapore government","Team of 2 designers"], t: "School of X", y: "2021–2022", c: "A website and Member's Portal for a design community, made with a human-centred, lean approach.", tags: ["Interface", "Illustration"], img: "Phone screens", file: "sox", count: 6 },
+  { n: "02", m: ["Solo"], t: "The Minister of Loneliness", y: "2023", c: "Speculative design on loneliness among UK youth aged 16 to 24, with a social currency called LOOVE, an Instagram campaign and a publication. (MA dissertation, University of Edinburgh.)", tags: ["Concept", "Illustration"], img: "Pill illustration", file: "loneliness", count: 6 },
+  { n: "03", m: ["Freelance · Real clients · Ongoing","Solo"], t: "Story-Led Brand Identity", y: "2024–2026", c: "Five identities, Flora, Peucha, Thantara, Kaikraft and Fello, each built from the brand's story before any visual took shape.", tags: ["Brand"], img: "Brand boards", file: "brand", count: 5 },
+  { n: "04", m: ["BA thesis","Solo"], t: "AquaRealm", y: "2021", c: "A portable fish tank for people living with depression, with three settings: Rainwash, Rockery and Reverie.", tags: ["Concept", "Objects"], img: "Fish tank", file: "aqua", count: 5 },
+  { n: "05", m: ["MA project","Solo"], t: "Sustainable Ideas for Bored People", y: "2023", c: "A card game that gets kids playing outdoors and challenges them to live with less.", tags: ["Concept", "Illustration"], img: "Card game", file: "cards", count: 5 },
+  { n: "06", m: ["Team of 3 design students"], t: "Knock Knock Supernova", y: "2020", c: "An installation for the Planetaria exhibition at The National Gallery. Tap the glass sphere and it projects moving supernova patterns.", tags: ["Objects"], img: "Projected supernova", file: "supernova", count: 3 },
+  { n: "07", m: ["Solo"], t: "Disney Land of Journey", y: "2020", c: "A hand-drawn pop-up bedtime storybook based on five of the seven Disney parks.", tags: ["Print", "Illustration"], img: "Storybook cover", file: "disney", count: 5 },
+  { n: "08", m: ["Solo"], t: "Building Motif", y: "2019", c: "Black and white photographs of line, shape and pattern in architecture, with light and shadow across the facades.", tags: ["Photography"], img: "Balconies photograph", file: "motif", count: 7 }
 ];
 const filters = ["All", "Interface", "Brand", "Concept", "Print", "Objects", "Illustration", "Photography"];
 const grid = document.getElementById("grid"), chips = document.getElementById("chips"), count = document.getElementById("count");
@@ -412,7 +407,7 @@ grid.innerHTML = projects.map((p, i) => {
     <hr>
     <div class="row">
       <span class="mono muted">${p.n}</span>
-      <div><h3>${p.t}</h3><p>${p.c}</p><span class="mono muted">${p.tags.join(", ")} · ${p.y}</span>${p.m ? `<span class="mono meta">${p.m}</span>` : ""}</div>
+      <div><h3>${p.t}</h3><p>${p.c}</p><span class="mono muted">${p.tags.join(", ")} · ${p.y}</span>${p.m ? `<span class="mono meta">${p.m.join("<br>")}</span>` : ""}</div>
     </div>
   </article>`;
 }).join("");
@@ -457,14 +452,6 @@ grid.querySelectorAll(".slider").forEach((sl, k) => {
     pp.setAttribute("aria-label", userPaused ? "Resume automatic scrolling" : "Pause automatic scrolling");
   });
   start();
-});
-
-const certbtn = document.getElementById("certbtn"), certs = document.getElementById("certs");
-certbtn.addEventListener("click", () => {
-  const open = certs.hidden;
-  certs.hidden = !open;
-  certbtn.setAttribute("aria-expanded", open);
-  document.getElementById("certicon").textContent = open ? "−" : "+";
 });
 
 const lb = document.getElementById("lb");

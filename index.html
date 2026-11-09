@@ -177,7 +177,7 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
 #cur::before, #cur::after { content: ""; position: absolute; background: var(--accent); }
 #cur::before { left: -13px; top: -1px; width: 26px; height: 2px; }
 #cur::after { left: -1px; top: -13px; width: 2px; height: 26px; }
-#stamps { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 5; transition: opacity .25s; }
+#stamps { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 5; transition: opacity .1s; }
 #stamps.clearing { opacity: 0; }
 #cur .tip { position: absolute; left: 22px; top: 22px; white-space: nowrap; font: 500 12px/1.45 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; background: var(--bg); color: var(--fg); border: 1px solid var(--fg); padding: 8px 10px; opacity: 0; transition: opacity .2s; }
 #cur .tip.show { opacity: 1; }
@@ -496,7 +496,7 @@ chips.addEventListener("click", e => {
   const clearStamps = () => {
     if (reduce) { layer.textContent = ""; return; }
     layer.classList.add("clearing");
-    setTimeout(() => { layer.textContent = ""; layer.classList.remove("clearing"); }, 260);
+    setTimeout(() => { layer.textContent = ""; layer.classList.remove("clearing"); }, 110);
   };
   const shake = (x, t) => {
     const dx = x - ext;

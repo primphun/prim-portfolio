@@ -178,15 +178,15 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
 #cur::before { left: -13px; top: -1px; width: 26px; height: 2px; }
 #cur::after { left: -1px; top: -13px; width: 2px; height: 26px; }
 #stamps { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 5; }
-#stamps .s { position: absolute; width: 24px; height: 24px; color: var(--accent); }
+#stamps .s { position: absolute; width: 20px; height: 20px; color: var(--accent); }
 #stamps .s::before, #stamps .s::after { content: ""; position: absolute; background: currentColor; }
-#stamps .s-plus::before { left: 0; top: 11px; width: 24px; height: 2px; }
-#stamps .s-plus::after { left: 11px; top: 0; width: 2px; height: 24px; }
-#stamps .s-x::before, #stamps .s-x::after { left: -5px; top: 11px; width: 34px; height: 2px; }
+#stamps .s-plus::before { left: 0; top: 8px; width: 20px; height: 4px; }
+#stamps .s-plus::after { left: 8px; top: 0; width: 4px; height: 20px; }
+#stamps .s-x::before, #stamps .s-x::after { left: -4px; top: 8px; width: 28px; height: 4px; }
 #stamps .s-x::before { transform: rotate(45deg); }
 #stamps .s-x::after { transform: rotate(-45deg); }
 #stamps .s-sq { background: currentColor; }
-#stamps .s-ring { border: 2px solid currentColor; border-radius: 50%; }
+#stamps .s-ring { border: 4px solid currentColor; border-radius: 50%; }
 @media (prefers-reduced-motion: no-preference) { #stamps .s { animation: pop .28s cubic-bezier(.2,1.4,.4,1); } }
 @keyframes pop { from { scale: 0.2; opacity: 0; } }
 </style>

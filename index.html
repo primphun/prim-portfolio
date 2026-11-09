@@ -1,5 +1,19 @@
 <title>Prim Portfolio</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Portfolio of Prim Phunnapa Supakijsilp, a multidisciplinary designer in Bangkok. UX/UI design, brand identity, publications and illustration.">
+<meta name="theme-color" content="#F3F4F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Prim Phunnapa Supakijsilp, multidisciplinary designer">
+<meta property="og:description" content="UX/UI design, brand identity, publications and illustration. Based in Bangkok.">
+<!-- Replace with the full address once the site has a domain, e.g. https://example.com/images/og.jpg -->
+<meta property="og:image" content="images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/icon-192.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cstyle%3Epath%7Bstroke:%23121315%7D@media (prefers-color-scheme:dark)%7Bpath%7Bstroke:%23F3F4F2%7D%7D%3C/style%3E%3Cpath d='M16 3V29M4.74 9.5L27.26 22.5M4.74 22.5L27.26 9.5' fill='none' stroke-width='4.5'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap">
@@ -51,11 +65,15 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   border-bottom: 1px solid var(--rule);
   display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px;
 }
-.bar .word { font-weight: 700; font-size: 20px; letter-spacing: -0.02em; text-decoration: none; }
+.bar .word { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; }
+.bar .pb { width: 34px; height: 34px; flex: none; display: inline-flex; align-items: center; justify-content: center; color: var(--fg); }
+.bar .pb svg { width: 100%; height: 100%; display: block; }
+.bar .wn { display: flex; flex-direction: column; font-weight: 700; font-size: 13px; line-height: 1; letter-spacing: -0.02em; }
 .bar .coords { flex: 1; text-align: center; color: var(--muted); }
 .bar nav { display: flex; gap: 4px; }
 .bar nav a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; padding: 0 10px; font-size: 15px; font-weight: 500; }
 .bar nav a:hover { color: var(--accent); }
+@media (max-width: 420px) { .bar .wn { display: none; } }
 @media (max-width: 760px) { .bar .coords { display: none; } .bar nav a { padding: 0 8px; font-size: 14px; } }
 
 /* hero */
@@ -120,6 +138,13 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .small .item h3 { font-size: clamp(20px, 2.2cqw, 28px); letter-spacing: -0.02em; }
 .small .item { padding: 14px 0; }
 .small { padding-bottom: 96px; }
+.quiet { padding-bottom: 64px; }
+.quiet .item h3 { font-size: clamp(18px, 1.8cqw, 22px); }
+.quiet .item p { font-size: 15px; }
+.quiet .more { border-color: var(--rule-soft); color: var(--muted); }
+.quiet .more:hover { color: var(--fg); border-color: var(--fg); }
+.quiet .more[aria-expanded="true"] { color: var(--bg); border-color: var(--fg); }
+#beyond .head h2 { font-size: clamp(22px, 2.4cqw, 32px); }
 .tl { text-decoration: none; }
 .tl:hover { color: var(--accent); }
 .tl span { font-family: var(--mono); font-size: 0.6em; }
@@ -137,14 +162,17 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .portrait { aspect-ratio: 3 / 4; background: var(--fill); max-width: 100%; overflow: hidden; }
 .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
 .about p.bio { margin: 0 0 32px; font-size: clamp(20px, 2.2cqw, 30px); line-height: 1.25; letter-spacing: -0.015em; font-weight: 400; max-width: 26em; }
-.kv { display: grid; grid-template-columns: 140px 1fr; gap: 0 16px; border-top: 1px solid var(--rule); margin: 0; }
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 0 16px; border-top: 1px solid var(--rule); margin: 0; }
 .kv dt, .kv dd { padding: 12px 0; border-bottom: 1px solid var(--rule-soft); margin: 0; }
 .kv dt { color: var(--muted); padding-top: 15px; }
+.about > div { min-width: 0; }
+.kvh { margin: 0 0 10px; font-weight: 400; }
+.meta { display: block; margin-top: 8px; }
+.kvh2 { margin-top: 32px; }
+.kv dd b { font-weight: 600; }
 .todo { color: var(--accent); }
-.certbtn { margin-top: 24px; gap: 12px; justify-content: space-between; min-width: 220px; }
-.certs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 24px; margin-top: 24px; }
-.certs[hidden] { display: none; }
-.cert { margin: 0; min-width: 0; }
+.certs { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x proximity; padding: 4px 0 16px; margin-top: 8px; scrollbar-width: thin; }
+.cert { margin: 0; flex: none; width: min(260px, 72vw); scroll-snap-align: start; }
 .certimg { display: block; width: 100%; aspect-ratio: 4 / 3; background: var(--fill); border: 1px solid var(--rule-soft); border-radius: 0; padding: 0; cursor: zoom-in; overflow: hidden; }
 .certimg img { width: 100%; height: 100%; object-fit: contain; display: block; background: #fff; }
 .certimg:hover { border-color: var(--fg); }
@@ -168,11 +196,38 @@ footer { border-top: 1px solid var(--rule); display: flex; justify-content: spac
 footer a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
 footer a:hover { color: var(--accent); }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* stamp cursor: a red crosshair; each click leaves a mark on the page */
+.page { position: relative; }
+html.stamp-on, html.stamp-on * { cursor: none !important; }
+#cur { position: fixed; left: 0; top: 0; z-index: 1000; pointer-events: none; opacity: 0; will-change: transform; }
+#cur.on { opacity: 1; }
+#cur::before, #cur::after { content: ""; position: absolute; background: var(--accent); }
+#cur::before { left: -13px; top: -1px; width: 26px; height: 2px; }
+#cur::after { left: -1px; top: -13px; width: 2px; height: 26px; }
+#stamps { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 5; transition: opacity .1s; }
+#stamps.clearing { opacity: 0; }
+#cur .tip { position: absolute; left: 22px; top: 22px; white-space: nowrap; font: 500 12px/1.45 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; background: var(--bg); color: var(--fg); border: 1px solid var(--fg); padding: 8px 10px; opacity: 0; transition: opacity .2s; }
+#cur .tip.show { opacity: 1; }
+#cur .tip.fx { left: auto; right: 22px; }
+#cur .tip.fy { top: auto; bottom: 22px; }
+#stamps .s { position: absolute; width: 20px; height: 20px; color: var(--accent); }
+#stamps .s::before, #stamps .s::after { content: ""; position: absolute; background: currentColor; }
+#stamps .s-plus::before { left: 0; top: 8px; width: 20px; height: 4px; }
+#stamps .s-plus::after { left: 8px; top: 0; width: 4px; height: 20px; }
+#stamps .s-ast { background: linear-gradient(currentColor, currentColor) center / 4px 100% no-repeat; }
+#stamps .s-ast::before, #stamps .s-ast::after { left: 0; top: 8px; width: 20px; height: 4px; }
+#stamps .s-ast::before { transform: rotate(30deg); }
+#stamps .s-ast::after { transform: rotate(-30deg); }
+#stamps .s-sq { background: linear-gradient(currentColor, currentColor) center / 14px 14px no-repeat; }
+#stamps .s-ring { border: 4px solid currentColor; border-radius: 50%; }
+@media (prefers-reduced-motion: no-preference) { #stamps .s { animation: pop .28s cubic-bezier(.2,1.4,.4,1); } }
+@keyframes pop { from { scale: 0.2; opacity: 0; } }
 </style>
 
 <div class="page">
   <header class="bar pad">
-    <a class="word" href="#top">Prim<span class="dot">.</span></a>
+    <a class="word" href="#top" aria-label="Prim Phunnapa Supakijsilp, back to top"><span class="pb" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="4.5"><path d="M16 3V29M4.74 9.5L27.26 22.5M4.74 22.5L27.26 9.5"/></svg></span><span class="wn" aria-hidden="true"><span>Phunnapa</span><span>Supakijsilp</span></span></a>
     <span class="coords mono">Bangkok · 13.76° N, 100.50° E</span>
     <nav aria-label="Sections">
       <a href="#work">Work</a><a href="#practice">Practice</a><a href="#about">About</a><a href="#contact">Contact</a>
@@ -182,18 +237,19 @@ footer a:hover { color: var(--accent); }
   <main id="top">
     <section class="hero pad" aria-label="Introduction">
       <div class="meta mono muted"><span>Portfolio 2026</span><span>Multidisciplinary designer</span></div>
-      <h1>Prim Phunnapa<br>Supakijsilp<span class="dot">.</span></h1>
+      <h1>Prim<br>Phunnapa<br>Supakijsilp<span class="dot">.</span></h1>
     </section>
 
     <section class="statement pad">
-      <p class="lead">I'm a UX/UI designer who also creates brand identities, publications and illustrations, and makes videos about the work.</p>
+      <p class="lead">I'm a multidisciplinary designer. Day to day I design interfaces at IBM Digital Talent for Business. I also create brand identities, publications and illustrations, and make videos about the work.</p>
       <div class="cta">
         <a class="btn fill" href="#work">See selected work</a>
         <a class="btn" href="#contact">Get in touch</a>
+        <a class="btn" href="Phunnapa-CV.pdf" download>Download CV</a>
       </div>
       <div class="avail mono">Open to freelance projects and new roles</div>
       <div class="roles mono muted">
-        <span>UX/UI Designer, IBM Digital Talent for Business</span>
+        <span>UX/UI design, IBM Digital Talent for Business</span>
         <span>Founder, phunnie.studio</span>
       </div>
     </section>
@@ -209,26 +265,11 @@ footer a:hover { color: var(--accent); }
     <section id="practice" aria-labelledby="practice-h">
       <div class="head pad"><h2 id="practice-h">Practice</h2><span class="mono muted">What you can hire me for</span></div>
       <div class="pad list">
-        <div class="item"><h3>Interface design</h3><p>Websites, member portals and product screens, designed with a human-centred, lean approach.</p></div>
-        <div class="item"><h3>Brand identity</h3><p>Identities built from the brand's story first, then name, mark, colour and voice.</p></div>
-        <div class="item"><h3>Speculative and concept design</h3><p>Research-led ideas for services, objects and social systems, taken as far as a prototype.</p></div>
-        <div class="item"><h3>Illustration</h3><p>Hand-drawn and digital illustration for editorial, products, games and events.</p></div>
-        <div class="item"><h3>Publication and print</h3><p>Books, pop-ups, cards and printed campaigns, from layout to production.</p></div>
-      </div>
-      <div class="head pad" style="border-top-color:var(--rule-soft)"><h2 style="font-size:clamp(24px,3cqw,40px)">Beyond design</h2></div>
-      <div class="pad small">
-        <div class="item"><h3><a class="tl" href="https://www.instagram.com/phunnie.studio/" target="_blank" rel="noopener">Live portrait illustration <span aria-hidden="true">↗</span></a></h3><p>Portraits and doodles drawn on the spot at events.</p>
-          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip1" data-n="3">Show photos (3) <span aria-hidden="true">+</span></button>
-          <div class="strip" id="strip1" tabindex="0" hidden aria-label="Live portrait illustration photos"><img src="images/beyond/live-1.jpg" alt="Live portrait illustration at an event, 1 of 3" loading="lazy"><img src="images/beyond/live-2.jpg" alt="Live portrait illustration at an event, 2 of 3" loading="lazy"><img src="images/beyond/live-3.jpg" alt="Live portrait illustration at an event, 3 of 3" loading="lazy"></div></div>
-        <div class="item"><h3><a class="tl" href="https://youtube.com/@primphun" target="_blank" rel="noopener">YouTube channel <span aria-hidden="true">↗</span></a></h3><p>Thai-language art vlogs, travel and storytelling.</p>
-          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip2" data-n="4">Show photos (4) <span aria-hidden="true">+</span></button>
-          <div class="strip" id="strip2" tabindex="0" hidden aria-label="YouTube channel photos"><img src="images/beyond/yt-1.jpg" alt="Frame from the YouTube channel, 1 of 4" loading="lazy"><img src="images/beyond/yt-2.jpg" alt="Frame from the YouTube channel, 2 of 4" loading="lazy"><img src="images/beyond/yt-3.jpg" alt="Frame from the YouTube channel, 3 of 4" loading="lazy"><img src="images/beyond/yt-4.jpg" alt="Frame from the YouTube channel, 4 of 4" loading="lazy"></div></div>
-        <div class="item"><h3><a class="tl" href="https://drive.google.com/drive/u/4/folders/1c8fskxa-eBVMLGldd6-tgOmlA636GQVG" target="_blank" rel="noopener">Freelance modeling <span aria-hidden="true">↗</span></a></h3><p>Fashion, editorial and commercial projects.</p>
-          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip3" data-n="8">Show photos (8) <span aria-hidden="true">+</span></button>
-          <div class="strip" id="strip3" tabindex="0" hidden aria-label="Freelance modeling photos"><img src="images/beyond/model-1.jpg" alt="Freelance modeling photo, 1 of 8" loading="lazy"><img src="images/beyond/model-2.jpg" alt="Freelance modeling photo, 2 of 8" loading="lazy"><img src="images/beyond/model-3.jpg" alt="Freelance modeling photo, 3 of 8" loading="lazy"><img src="images/beyond/model-4.jpg" alt="Freelance modeling photo, 4 of 8" loading="lazy"><img src="images/beyond/model-5.jpg" alt="Freelance modeling photo, 5 of 8" loading="lazy"><img src="images/beyond/model-6.jpg" alt="Freelance modeling photo, 6 of 8" loading="lazy"><img src="images/beyond/model-7.jpg" alt="Freelance modeling photo, 7 of 8" loading="lazy"><img src="images/beyond/model-8.jpg" alt="Freelance modeling photo, 8 of 8" loading="lazy"></div></div>
-        <div class="item"><h3><a class="tl" href="https://youtu.be/h474BanaQks" target="_blank" rel="noopener">Artist, TH 52 Arena <span aria-hidden="true">↗</span></a></h3><p>Competitor on TH 52 Arena, a survival show on ONE31.</p>
-          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip4" data-n="6">Show photos (6) <span aria-hidden="true">+</span></button>
-          <div class="strip" id="strip4" tabindex="0" hidden aria-label="Artist, TH 52 Arena photos"><img src="images/beyond/th52-1.jpg" alt="TH 52 Arena, 1 of 6" loading="lazy"><img src="images/beyond/th52-2.jpg" alt="TH 52 Arena, 2 of 6" loading="lazy"><img src="images/beyond/th52-3.jpg" alt="TH 52 Arena, 3 of 6" loading="lazy"><img src="images/beyond/th52-4.jpg" alt="TH 52 Arena, 4 of 6" loading="lazy"><img src="images/beyond/th52-5.jpg" alt="TH 52 Arena, 5 of 6" loading="lazy"><img src="images/beyond/th52-6.jpg" alt="TH 52 Arena, 6 of 6" loading="lazy"></div></div>
+        <div class="item"><h3>Interface design</h3><p>Websites, a member portal and booking screens, designed with a human-centred, lean approach.</p></div>
+        <div class="item"><h3>Brand identity</h3><p>Identities built from the brand's story before any visual takes shape, for real clients.</p></div>
+        <div class="item"><h3>Speculative and concept design</h3><p>Concepts for objects and social issues, from a social currency for lonely young people to a portable fish tank.</p></div>
+        <div class="item"><h3>Illustration</h3><p>Illustration, from a hand-drawn pop-up storybook to live portraits drawn at events.</p></div>
+        <div class="item"><h3>Publication and print</h3><p>A pop-up storybook, a publication and product packaging.</p></div>
       </div>
     </section>
 
@@ -237,19 +278,26 @@ footer a:hover { color: var(--accent); }
       <div class="pad about">
         <div class="portrait"><img src="images/portrait.jpg" alt="Prim smiling, sitting cross-legged on a grey studio floor in a white top and blue jeans" loading="lazy"></div>
         <div>
-          <p class="bio">I'm a UX/UI designer at IBM Digital Talent for Business, and I run phunnie.studio on the side. My work moves between screens, brand identities, publications and illustration.</p>
+          <p class="bio">I'm a multidisciplinary designer. At IBM Digital Talent for Business I work across UX and UI, and I run phunnie.studio on the side. My work moves between screens, brand identities, publications and illustration.</p>
+          <h3 class="mono muted kvh">Experience</h3>
           <dl class="kv">
-            <dt class="mono">Now</dt><dd>UX/UI Designer at IBM Digital Talent for Business, since April 2024</dd>
+            <dt class="mono">Apr 2024 – Now</dt><dd><b>IBM Digital Talent for Business</b><br>UI Designer · Full-time, Bangkok</dd>
+            <dt class="mono">Nov 2023 – Jan 2024</dt><dd><b>Now To Vow</b><br>UI Designer · Internship, London</dd>
+            <dt class="mono">Jun 2021 – May 2022</dt><dd><b>Greydient Lab</b><br>Associate Designer · Full-time</dd>
+            <dt class="mono">Jun – Jul 2020</dt><dd><b>Wongnai.com</b><br>Creative · Internship</dd>
+          </dl>
+          <h3 class="mono muted kvh kvh2">Profile</h3>
+          <dl class="kv">
             <dt class="mono">Studio</dt><dd>phunnie.studio, illustration since 2020, including live portraits at events</dd>
-            <dt class="mono">Education</dt><dd>MA Design for Change, University of Edinburgh (GPA 4.0)<br>BA Communication Design, Chulalongkorn University (First Class Honours)</dd>
+            <dt class="mono">Education</dt><dd>MA Design for Change, University of Edinburgh (GPA 4.0) <span class="muted">· 2022–2023</span><br>BA Communication Design, Chulalongkorn University (First Class Honours) <span class="muted">· 2017–2021</span><br>Exchange year, East Central High School, Indiana, USA <span class="muted">· 2015–2016</span></dd>
             <dt class="mono">Certified</dt><dd>NN/g UX Certified</dd>
             <dt class="mono">Based in</dt><dd>Bangkok, Thailand</dd>
           </dl>
-          <button class="btn certbtn" type="button" id="certbtn" aria-expanded="false" aria-controls="certs">View certificates (14) <span aria-hidden="true" id="certicon">+</span></button>
-          <div class="certs" id="certs" hidden>
+          <h3 class="mono muted kvh kvh2">Certificates (14)</h3>
+          <div class="certs" id="certs" tabindex="0" aria-label="Certificates, scroll sideways">
             <figure class="cert">
-              <button class="certimg" type="button" data-src="images/certs/nng.jpg" data-cap="Certificate in User Experience, Nielsen Norman Group · 31 Mar 2026"><img src="images/certs/nng.jpg" alt="Certificate: Certificate in User Experience, Nielsen Norman Group" loading="lazy"></button>
-              <figcaption><strong>Certificate in User Experience</strong><span class="mono muted">Nielsen Norman Group · 31 Mar 2026</span></figcaption>
+              <button class="certimg" type="button" data-src="images/certs/nng.jpg" data-cap="Certificate in User Experience, Nielsen Norman Group · 31 Mar 2026 · Credential ID 2002849"><img src="images/certs/nng.jpg" alt="Certificate: Certificate in User Experience, Nielsen Norman Group" loading="lazy"></button>
+              <figcaption><strong>Certificate in User Experience</strong><span class="mono muted">Nielsen Norman Group · 31 Mar 2026 · Credential ID 2002849</span></figcaption>
             </figure>
             <figure class="cert">
               <button class="certimg" type="button" data-src="images/certs/ai.jpg" data-cap="Google AI Essentials, Google, Coursera · 16 Apr 2026"><img src="images/certs/ai.jpg" alt="Certificate: Google AI Essentials, Google, Coursera" loading="lazy"></button>
@@ -308,12 +356,31 @@ footer a:hover { color: var(--accent); }
       </div>
     </section>
 
+    <section id="beyond" aria-labelledby="beyond-h">
+      <div class="head pad"><h2 id="beyond-h">Beyond design</h2><span class="mono muted">What else I do</span></div>
+      <div class="pad small quiet">
+        <div class="item"><h3><a class="tl" href="https://www.instagram.com/phunnie.studio/" target="_blank" rel="noopener">Live portrait illustration <span aria-hidden="true">↗</span></a></h3><p>Portraits and doodles drawn on the spot at events.</p>
+          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip1" data-n="3">Show photos (3) <span aria-hidden="true">+</span></button>
+          <div class="strip" id="strip1" tabindex="0" hidden aria-label="Live portrait illustration photos"><img src="images/beyond/live-1.jpg" alt="Live portrait illustration at an event, 1 of 3" loading="lazy"><img src="images/beyond/live-2.jpg" alt="Live portrait illustration at an event, 2 of 3" loading="lazy"><img src="images/beyond/live-3.jpg" alt="Live portrait illustration at an event, 3 of 3" loading="lazy"></div></div>
+        <div class="item"><h3><a class="tl" href="https://youtube.com/@primphun" target="_blank" rel="noopener">YouTube channel <span aria-hidden="true">↗</span></a></h3><p>Thai-language art vlogs, travel and storytelling.</p>
+          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip2" data-n="4">Show photos (4) <span aria-hidden="true">+</span></button>
+          <div class="strip" id="strip2" tabindex="0" hidden aria-label="YouTube channel photos"><img src="images/beyond/yt-1.jpg" alt="Frame from the YouTube channel, 1 of 4" loading="lazy"><img src="images/beyond/yt-2.jpg" alt="Frame from the YouTube channel, 2 of 4" loading="lazy"><img src="images/beyond/yt-3.jpg" alt="Frame from the YouTube channel, 3 of 4" loading="lazy"><img src="images/beyond/yt-4.jpg" alt="Frame from the YouTube channel, 4 of 4" loading="lazy"></div></div>
+        <div class="item"><h3><a class="tl" href="https://drive.google.com/drive/u/4/folders/1c8fskxa-eBVMLGldd6-tgOmlA636GQVG" target="_blank" rel="noopener">Freelance modeling <span aria-hidden="true">↗</span></a></h3><p>Fashion, editorial and commercial projects.</p>
+          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip3" data-n="8">Show photos (8) <span aria-hidden="true">+</span></button>
+          <div class="strip" id="strip3" tabindex="0" hidden aria-label="Freelance modeling photos"><img src="images/beyond/model-1.jpg" alt="Freelance modeling photo, 1 of 8" loading="lazy"><img src="images/beyond/model-2.jpg" alt="Freelance modeling photo, 2 of 8" loading="lazy"><img src="images/beyond/model-3.jpg" alt="Freelance modeling photo, 3 of 8" loading="lazy"><img src="images/beyond/model-4.jpg" alt="Freelance modeling photo, 4 of 8" loading="lazy"><img src="images/beyond/model-5.jpg" alt="Freelance modeling photo, 5 of 8" loading="lazy"><img src="images/beyond/model-6.jpg" alt="Freelance modeling photo, 6 of 8" loading="lazy"><img src="images/beyond/model-7.jpg" alt="Freelance modeling photo, 7 of 8" loading="lazy"><img src="images/beyond/model-8.jpg" alt="Freelance modeling photo, 8 of 8" loading="lazy"></div></div>
+        <div class="item"><h3><a class="tl" href="https://youtu.be/h474BanaQks" target="_blank" rel="noopener">Artist, TH 52 Arena <span aria-hidden="true">↗</span></a></h3><p>Competitor on TH 52 Arena, a survival show on ONE31.</p>
+          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip4" data-n="6">Show photos (6) <span aria-hidden="true">+</span></button>
+          <div class="strip" id="strip4" tabindex="0" hidden aria-label="Artist, TH 52 Arena photos"><img src="images/beyond/th52-1.jpg" alt="TH 52 Arena, 1 of 6" loading="lazy"><img src="images/beyond/th52-2.jpg" alt="TH 52 Arena, 2 of 6" loading="lazy"><img src="images/beyond/th52-3.jpg" alt="TH 52 Arena, 3 of 6" loading="lazy"><img src="images/beyond/th52-4.jpg" alt="TH 52 Arena, 4 of 6" loading="lazy"><img src="images/beyond/th52-5.jpg" alt="TH 52 Arena, 5 of 6" loading="lazy"><img src="images/beyond/th52-6.jpg" alt="TH 52 Arena, 6 of 6" loading="lazy"></div></div>
+      </div>
+    </section>
+
     <section id="contact" class="contact" aria-labelledby="contact-h">
       <div class="head pad"><span class="mono muted">Contact</span><span class="mono muted">Freelance and full-time</span></div>
       <div class="pad"><h2 id="contact-h">Work with me<span class="dot">.</span></h2></div>
       <div class="pad">
         <div class="links">
           <a href="mailto:primphunnapa@gmail.com"><span class="mono muted">Email</span><span class="email">primphunnapa@gmail.com</span><span class="arrow" aria-hidden="true">→</span></a>
+          <a href="Phunnapa-CV.pdf" download><span class="mono muted">CV</span><span>Download PDF</span><span class="arrow" aria-hidden="true">↓</span></a>
           <a href="https://www.instagram.com/phunnie.studio/" target="_blank" rel="noopener"><span class="mono muted">Instagram</span><span>@phunnie.studio</span><span class="arrow" aria-hidden="true">↗</span></a>
           <a href="https://youtube.com/@primphun" target="_blank" rel="noopener"><span class="mono muted">YouTube</span><span>@primphun</span><span class="arrow" aria-hidden="true">↗</span></a>
           <a href="https://www.linkedin.com/in/primphunnapa/" target="_blank" rel="noopener"><span class="mono muted">LinkedIn</span><span>in/primphunnapa</span><span class="arrow" aria-hidden="true">↗</span></a>
@@ -327,18 +394,20 @@ footer a:hover { color: var(--accent); }
     <span>© 2020–2026 Phunnapa S. · Bangkok</span>
     <a href="#top">Back to top ↑</a>
   </footer>
+  <div id="stamps" aria-hidden="true"></div>
 </div>
+<div id="cur" aria-hidden="true"><span class="tip">Click to leave a mark<br>Shake to clear</span></div>
 
 <script>
 const projects = [
-  { n: "01", t: "School of X", y: "2021–2022", c: "A website and Member's Portal for a design community, made with a human-centred, lean approach.", tags: ["Interface", "Illustration"], img: "Phone screens", file: "sox", count: 6 },
-  { n: "02", t: "The Minister of Loneliness", y: "2023", c: "Speculative design on loneliness among UK youth aged 16 to 24, with a social currency called LOOVE, an Instagram campaign and a publication. (MA dissertation, University of Edinburgh.)", tags: ["Concept", "Illustration"], img: "Pill illustration", file: "loneliness", count: 6 },
-  { n: "03", t: "Story-Led Brand Identity", y: "2024–2026", c: "Five identities, Flora, Peucha, Thantara, Kaikraft and Fello, each built from the brand's story before any visual took shape.", tags: ["Brand"], img: "Brand boards", file: "brand", count: 5 },
-  { n: "04", t: "AquaRealm", y: "2021", c: "A portable fish tank for people living with depression, with three settings: Rainwash, Rockery and Reverie.", tags: ["Concept", "Objects"], img: "Fish tank", file: "aqua", count: 5 },
-  { n: "05", t: "Sustainable Ideas for Bored People", y: "2023", c: "A card game that gets kids playing outdoors and challenges them to live with less.", tags: ["Concept", "Illustration"], img: "Card game", file: "cards", count: 5 },
-  { n: "06", t: "Knock Knock Supernova", y: "2020", c: "An installation for the Planetaria exhibition at The National Gallery. Tap the glass sphere and it projects moving supernova patterns.", tags: ["Objects"], img: "Projected supernova", file: "supernova", count: 3 },
-  { n: "07", t: "Disney Land of Journey", y: "2020", c: "A hand-drawn pop-up bedtime storybook based on five of the seven Disney parks.", tags: ["Print", "Illustration"], img: "Storybook cover", file: "disney", count: 5 },
-  { n: "08", t: "Building Motif", y: "2019", c: "Black and white photographs of line, shape and pattern in architecture, with light and shadow across the facades.", tags: ["Photography"], img: "Balconies photograph", file: "motif", count: 7 }
+  { n: "01", m: ["Launched · Used by the Singapore government","Team of 2 designers"], t: "School of X", y: "2021–2022", c: "A website and Member's Portal for a design community, made with a human-centred, lean approach.", tags: ["Interface", "Illustration"], img: "Phone screens", file: "sox", count: 6 },
+  { n: "02", m: ["UI and graphic design · 3-month internship"], t: "Now To Vow", y: "2023–2024", c: "A London start-up's website for last-minute wedding planning and booking: a meal builder, a WhatsApp availability request and an event poster.", tags: ["Interface"], img: "App screens", file: "ntv", count: 3 },
+  { n: "03", m: ["Solo"], t: "The Minister of Loneliness", y: "2023", c: "Speculative design on loneliness among UK youth aged 16 to 24, with a social currency called LOOVE, an Instagram campaign and a publication. (MA dissertation, University of Edinburgh.)", tags: ["Concept", "Illustration"], img: "Pill illustration", file: "loneliness", count: 6 },
+  { n: "04", m: ["Freelance · Real clients · Ongoing","Solo"], t: "Story-Led Brand Identity", y: "2024–2026", c: "Five identities, Flora, Peucha, Thantara, Kaikraft and Fello, each built from the brand's story before any visual took shape.", tags: ["Brand"], img: "Brand boards", file: "brand", count: 5 },
+  { n: "05", m: ["BA thesis","Solo"], t: "AquaRealm", y: "2021", c: "A portable fish tank for people living with depression, with three settings: Rainwash, Rockery and Reverie.", tags: ["Concept", "Objects"], img: "Fish tank", file: "aqua", count: 5 },
+  { n: "06", m: ["Solo"], t: "mysterymystory", y: "BA project", c: "Three boxes for children, one for each fear: blood, medicine and vegetables, each with missions to play through.", tags: ["Objects", "Print"], img: "Mystery boxes", file: "mystory", count: 3 },
+  { n: "07", m: ["Team of 3 design students"], t: "Knock Knock Supernova", y: "2020", c: "An installation for the Planetaria exhibition at The National Gallery. Tap the glass sphere and it projects moving supernova patterns.", tags: ["Objects"], img: "Projected supernova", file: "supernova", count: 3 },
+  { n: "08", m: ["Solo"], t: "Disney Land of Journey", y: "2020", c: "A hand-drawn pop-up bedtime storybook based on five of the seven Disney parks.", tags: ["Print", "Illustration"], img: "Storybook cover", file: "disney", count: 5 }
 ];
 const filters = ["All", "Interface", "Brand", "Concept", "Print", "Objects", "Illustration", "Photography"];
 const grid = document.getElementById("grid"), chips = document.getElementById("chips"), count = document.getElementById("count");
@@ -356,7 +425,7 @@ grid.innerHTML = projects.map((p, i) => {
     <hr>
     <div class="row">
       <span class="mono muted">${p.n}</span>
-      <div><h3>${p.t}</h3><p>${p.c}</p><span class="mono muted">${p.tags.join(", ")} · ${p.y}</span></div>
+      <div><h3>${p.t}</h3><p>${p.c}</p><span class="mono muted">${p.tags.join(", ")} · ${p.y}</span>${p.m ? `<span class="mono meta">${p.m.join("<br>")}</span>` : ""}</div>
     </div>
   </article>`;
 }).join("");
@@ -387,7 +456,7 @@ grid.querySelectorAll(".slider").forEach((sl, k) => {
     const i = Math.round(t.scrollLeft / t.clientWidth);
     t.scrollTo({ left: i >= t.children.length - 1 ? 0 : (i + 1) * t.clientWidth, behavior: "smooth" });
   };
-  const start = () => { if (!timer) timer = setInterval(tick, 4200 + k * 350); };
+  const start = () => { if (!timer) timer = setInterval(tick, 2400 + k * 200); };
   new IntersectionObserver(es => { visible = es[0].isIntersecting; }, { threshold: 0.4 }).observe(sl);
   const hold = v => () => { held = v; };
   sl.addEventListener("mouseenter", hold(true)); sl.addEventListener("mouseleave", hold(false));
@@ -403,16 +472,8 @@ grid.querySelectorAll(".slider").forEach((sl, k) => {
   start();
 });
 
-const certbtn = document.getElementById("certbtn"), certs = document.getElementById("certs");
-certbtn.addEventListener("click", () => {
-  const open = certs.hidden;
-  certs.hidden = !open;
-  certbtn.setAttribute("aria-expanded", open);
-  document.getElementById("certicon").textContent = open ? "−" : "+";
-});
-
 const lb = document.getElementById("lb");
-certs.addEventListener("click", e => {
+document.addEventListener("click", e => {
   const b = e.target.closest(".certimg"); if (!b) return;
   document.getElementById("lbimg").src = b.dataset.src;
   document.getElementById("lbimg").alt = b.dataset.cap;
@@ -441,4 +502,68 @@ chips.addEventListener("click", e => {
   });
   count.textContent = `${shown} project${shown === 1 ? "" : "s"} · Selected`;
 });
+</script>
+
+<script>
+/* Stamp cursor. Only for a mouse or trackpad; touch and keyboard users are unaffected. */
+(() => {
+  if (!matchMedia("(pointer: fine) and (hover: hover)").matches) return;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const root = document.documentElement, cur = document.getElementById("cur"), layer = document.getElementById("stamps"), tip = cur.querySelector(".tip");
+  const shapes = ["plus", "ast", "sq", "ring"], MAX = 150;
+  const modalOpen = () => !!document.querySelector("dialog[open]");
+
+  // One-time hint at the cursor, once per browser session.
+  let tipSeen = false, tipOn = false;
+  try { tipSeen = sessionStorage.getItem("stampTip") === "1"; } catch (e) {}
+  const showTip = () => { if (tipSeen || tipOn) return; tipOn = true; tip.classList.add("show"); setTimeout(hideTip, 6000); };
+  const hideTip = () => {
+    if (!tipOn) return;
+    tipOn = false; tipSeen = true; tip.classList.remove("show");
+    try { sessionStorage.setItem("stampTip", "1"); } catch (e) {}
+  };
+
+  // Shake left and right to clear: four quick reversals of at least 60px within 0.8s.
+  let dir = 0, ext = 0, hits = [];
+  const clearStamps = () => {
+    if (reduce) { layer.textContent = ""; return; }
+    layer.classList.add("clearing");
+    setTimeout(() => { layer.textContent = ""; layer.classList.remove("clearing"); }, 110);
+  };
+  const shake = (x, t) => {
+    const dx = x - ext;
+    if (dir === 0) { if (Math.abs(dx) > 4) { dir = Math.sign(dx); ext = x; } return; }
+    if (dir * dx > 0) { ext = x; return; }
+    if (Math.abs(dx) >= 60) {
+      dir = -dir; ext = x; hits.push(t); hits = hits.filter(h => t - h < 800);
+      if (hits.length >= 4) { hits = []; if (layer.children.length) clearStamps(); }
+    }
+  };
+
+  addEventListener("pointermove", e => {
+    if (e.pointerType === "touch") return;
+    const off = modalOpen();
+    root.classList.toggle("stamp-on", !off);
+    cur.classList.toggle("on", !off);
+    cur.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    if (off) return;
+    if (tipOn || !tipSeen) {
+      tip.classList.toggle("fx", e.clientX > innerWidth - 260);
+      tip.classList.toggle("fy", e.clientY > innerHeight - 90);
+      showTip();
+    }
+    shake(e.clientX, e.timeStamp);
+  }, { passive: true });
+  root.addEventListener("pointerleave", () => cur.classList.remove("on"));
+  addEventListener("pointerdown", e => {
+    if (e.pointerType === "touch" || e.button !== 0 || modalOpen()) return;
+    hideTip();
+    const r = layer.getBoundingClientRect(), s = document.createElement("span");
+    s.className = "s s-" + shapes[Math.floor(Math.random() * shapes.length)];
+    s.style.left = (e.clientX - r.left) + "px"; s.style.top = (e.clientY - r.top) + "px";
+    s.style.transform = `translate(-50%, -50%) rotate(${Math.round((Math.random() - 0.5) * 50)}deg)`;
+    layer.appendChild(s);
+    while (layer.children.length > MAX) layer.removeChild(layer.firstChild);
+  });
+})();
 </script>

@@ -154,6 +154,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .strip[hidden] { display: none; }
 .strip { grid-column: 1 / -1; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x proximity; padding: 8px 0 12px; scrollbar-width: thin; }
 .strip img { height: clamp(180px, 22cqw, 300px); width: auto; flex: none; scroll-snap-align: start; background: var(--fill); display: block; }
+.btns { grid-column: 1 / -1; display: flex; gap: 12px; flex-wrap: wrap; }
+.btns .more { grid-column: auto; }
+a.more { text-decoration: none; }
+.strip.pages img { height: clamp(320px, 40cqw, 560px); }
 .sub { padding-bottom: 12px; }
 @media (max-width: 760px) { .item { grid-template-columns: 1fr; gap: 6px; } }
 
@@ -317,8 +321,8 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
           <button class="more mono" type="button" aria-expanded="false" aria-controls="strip2" data-n="4">Show photos (4) <span aria-hidden="true">+</span></button>
           <div class="strip" id="strip2" tabindex="0" hidden aria-label="YouTube channel photos"><img src="images/beyond/yt-1.jpg" alt="Frame from the YouTube channel, 1 of 4" loading="lazy"><img src="images/beyond/yt-2.jpg" alt="Frame from the YouTube channel, 2 of 4" loading="lazy"><img src="images/beyond/yt-3.jpg" alt="Frame from the YouTube channel, 3 of 4" loading="lazy"><img src="images/beyond/yt-4.jpg" alt="Frame from the YouTube channel, 4 of 4" loading="lazy"></div></div>
         <div class="item"><h3><a class="tl" href="https://drive.google.com/drive/u/4/folders/1c8fskxa-eBVMLGldd6-tgOmlA636GQVG" target="_blank" rel="noopener">Freelance modeling <span aria-hidden="true">↗</span></a></h3><p>Fashion, editorial and commercial projects.</p>
-          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip3" data-n="11">Show photos (11) <span aria-hidden="true">+</span></button>
-          <div class="strip" id="strip3" tabindex="0" hidden aria-label="Freelance modeling photos"><img src="images/beyond/model-1.jpg" alt="Freelance modeling photo, 1 of 11" loading="lazy"><img src="images/beyond/model-2.jpg" alt="Freelance modeling photo, 2 of 11" loading="lazy"><img src="images/beyond/model-3.jpg" alt="Freelance modeling photo, 3 of 11" loading="lazy"><img src="images/beyond/model-4.jpg" alt="Freelance modeling photo, 4 of 11" loading="lazy"><img src="images/beyond/model-5.jpg" alt="Freelance modeling photo, 5 of 11" loading="lazy"><img src="images/beyond/model-6.jpg" alt="Freelance modeling photo, 6 of 11" loading="lazy"><img src="images/beyond/model-7.jpg" alt="Freelance modeling photo, 7 of 11" loading="lazy"><img src="images/beyond/model-8.jpg" alt="Freelance modeling photo, 8 of 11" loading="lazy"><img src="images/beyond/model-9.jpg" alt="Freelance modeling photo, 9 of 11" loading="lazy"><img src="images/beyond/model-10.jpg" alt="Freelance modeling photo, 10 of 11" loading="lazy"><img src="images/beyond/model-11.jpg" alt="Freelance modeling photo, 11 of 11" loading="lazy"></div></div>
+          <div class="btns"><button class="more mono" type="button" aria-expanded="false" aria-controls="strip3" data-n="7" data-what="pages">Show pages (7) <span aria-hidden="true">+</span></button><a class="more mono" href="Phunnapa-Model-Portfolio.pdf" download>Download PDF <span aria-hidden="true">↓</span></a></div>
+          <div class="strip pages" id="strip3" tabindex="0" hidden aria-label="Model portfolio pages"><img src="images/beyond/model-1.jpg" alt="Model portfolio, page 1 of 7" loading="lazy"><img src="images/beyond/model-2.jpg" alt="Model portfolio, page 2 of 7" loading="lazy"><img src="images/beyond/model-3.jpg" alt="Model portfolio, page 3 of 7" loading="lazy"><img src="images/beyond/model-4.jpg" alt="Model portfolio, page 4 of 7" loading="lazy"><img src="images/beyond/model-5.jpg" alt="Model portfolio, page 5 of 7" loading="lazy"><img src="images/beyond/model-6.jpg" alt="Model portfolio, page 6 of 7" loading="lazy"><img src="images/beyond/model-7.jpg" alt="Model portfolio, page 7 of 7" loading="lazy"></div></div>
         <div class="item"><h3><a class="tl" href="https://youtu.be/h474BanaQks" target="_blank" rel="noopener">Artist, The 52 Arena <span aria-hidden="true">↗</span></a></h3><p>Competitor on The 52 Arena, a survival show on ONE31.</p>
           <button class="more mono" type="button" aria-expanded="false" aria-controls="strip4" data-n="6">Show photos (6) <span aria-hidden="true">+</span></button>
           <div class="strip" id="strip4" tabindex="0" hidden aria-label="Artist, The 52 Arena photos"><img src="images/beyond/th52-1.jpg" alt="The 52 Arena, 1 of 6" loading="lazy"><img src="images/beyond/th52-2.jpg" alt="The 52 Arena, 2 of 6" loading="lazy"><img src="images/beyond/th52-3.jpg" alt="The 52 Arena, 3 of 6" loading="lazy"><img src="images/beyond/th52-4.jpg" alt="The 52 Arena, 4 of 6" loading="lazy"><img src="images/beyond/th52-5.jpg" alt="The 52 Arena, 5 of 6" loading="lazy"><img src="images/beyond/th52-6.jpg" alt="The 52 Arena, 6 of 6" loading="lazy"></div></div>
@@ -352,7 +356,7 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
 <script>
 const projects = [
   { n: "01", m: ["Launched · Used by the Singapore government","Team of 2 designers"], t: "School of X", y: "2021–2022", c: "A website and Member's Portal for a design community, made with a human-centred, lean approach.", tags: ["Interface", "Illustration"], img: "Phone screens", file: "sox", count: 6 },
-  { n: "02", m: ["Product design · Branding · Vibe coding", "Solo"], t: "Record Record", y: "2026", c: "A vinyl collection app I designed and vibe-coded as a working HTML app: spin a record from your crate, browse the sleeves, and log the shop, condition and size of each one.", tags: ["Interface", "Brand"], img: "Record Record app screens and brand", file: "record", count: 3 },
+  { n: "02", m: ["Product design · Branding · Vibe coding", "Solo"], t: "RecordRecord", y: "2026", c: "A vinyl collection app I designed and vibe-coded as a working HTML app: spin a record from your crate, browse the sleeves, and log the shop, condition and size of each one.", tags: ["Interface", "Brand"], img: "RecordRecord app screens and brand", file: "record", count: 3 },
   { n: "03", m: ["Solo"], t: "The Minister of Loneliness", y: "2023", c: "Speculative design on loneliness among UK youth aged 16 to 24, with a social currency called LOOVE (laser-cut and painted wooden tokens), an Instagram campaign and a publication. (MA dissertation, University of Edinburgh.)", tags: ["Concept", "Illustration", "Objects"], img: "Pill illustration", file: "loneliness", count: 9 },
   { n: "04", m: ["Freelance · Real clients · Ongoing","Solo"], t: "Story-Led Brand Identity", y: "2024–2026", c: "Five identities, Flora, Peucha, Thantara, Kaikraft and Fello, each built from the brand's story before any visual took shape.", tags: ["Brand"], img: "Brand boards", file: "brand", count: 5 },
   { n: "05", m: ["BA thesis","Solo"], t: "AquaRealm", y: "2021", c: "A portable fish tank for people living with depression, with three settings: Rainwash, Rockery and Reverie.", tags: ["Concept", "Objects"], img: "Fish tank", file: "aqua", count: 5 },
@@ -439,7 +443,8 @@ document.querySelectorAll(".more").forEach(b => b.addEventListener("click", () =
   const strip = document.getElementById(b.getAttribute("aria-controls")), open = strip.hidden;
   strip.hidden = !open;
   b.setAttribute("aria-expanded", open);
-  b.innerHTML = open ? 'Hide photos <span aria-hidden="true">−</span>' : `Show photos (${b.dataset.n}) <span aria-hidden="true">+</span>`;
+  const what = b.dataset.what || "photos";
+  b.innerHTML = open ? `Hide ${what} <span aria-hidden="true">−</span>` : `Show ${what} (${b.dataset.n}) <span aria-hidden="true">+</span>`;
 }));
 
 chips.innerHTML = filters.map((f, i) => `<button class="chip" type="button" aria-pressed="${i === 0}" data-f="${f}">${f}</button>`).join("");

@@ -158,6 +158,13 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .btns .more { grid-column: auto; }
 a.more { text-decoration: none; }
 .strip.pages img { height: clamp(320px, 40cqw, 560px); }
+.stripwrap { position: relative; grid-column: 1 / -1; min-width: 0; }
+.stripwrap:has(> .strip[hidden]) { display: none; }
+.snav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border: 1px solid var(--fg); background: var(--bg); color: var(--fg); font: 500 16px var(--mono); cursor: pointer; z-index: 2; padding: 0; }
+.snav.prev { left: 8px; }
+.snav.next { right: 8px; }
+.snav[hidden] { display: none; }
+.snav:hover { background: var(--fg); color: var(--bg); }
 .sub { padding-bottom: 12px; }
 @media (max-width: 760px) { .item { grid-template-columns: 1fr; gap: 6px; } }
 
@@ -317,12 +324,15 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
     <section id="beyond" aria-labelledby="beyond-h">
       <div class="head pad"><h2 id="beyond-h">Beyond design</h2><span class="mono muted">What else I do</span></div>
       <div class="pad small quiet">
+        <div class="item"><h3>Study abroad alumni consultant</h3><p>University of Edinburgh alumna advising students on studying in the UK, including at StudyIn University Fairs in Bangkok.</p>
+          <button class="more mono" type="button" aria-expanded="false" aria-controls="strip5" data-n="5">Show photos (5) <span aria-hidden="true">+</span></button>
+          <div class="strip" id="strip5" tabindex="0" hidden aria-label="Study abroad alumni consultant photos"><img src="images/beyond/alumni-1.jpg" alt="At the University of Edinburgh stand at an StudyIn university fair, 1 of 5" loading="lazy"><img src="images/beyond/alumni-2.jpg" alt="Holding the StudyIn University Fair 2023 booklet, name card reading P'Prim, Alumni, 2 of 5" loading="lazy"><img src="images/beyond/alumni-3.jpg" alt="On the alumni panel at the StudyIn University Fair 2023, 3 of 5" loading="lazy"><img src="images/beyond/alumni-4.jpg" alt="At the StudyIn Alumni Corner table for the University of Edinburgh, 4 of 5" loading="lazy"><img src="images/beyond/alumni-5.jpg" alt="StudyIn advertisement for the University Fair 2026 featuring alumni advice, 5 of 5" loading="lazy"></div></div>
         <div class="item"><h3><a class="tl" href="https://youtube.com/@primphun" target="_blank" rel="noopener">YouTube channel: primphun <span aria-hidden="true">↗</span></a></h3><p>Vlogs in both Thai and English: art, travel and storytelling.</p>
           <button class="more mono" type="button" aria-expanded="false" aria-controls="strip2" data-n="4">Show photos (4) <span aria-hidden="true">+</span></button>
           <div class="strip" id="strip2" tabindex="0" hidden aria-label="YouTube channel photos"><img src="images/beyond/yt-1.jpg" alt="Frame from the YouTube channel, 1 of 4" loading="lazy"><img src="images/beyond/yt-2.jpg" alt="Frame from the YouTube channel, 2 of 4" loading="lazy"><img src="images/beyond/yt-3.jpg" alt="Frame from the YouTube channel, 3 of 4" loading="lazy"><img src="images/beyond/yt-4.jpg" alt="Frame from the YouTube channel, 4 of 4" loading="lazy"></div></div>
         <div class="item"><h3><a class="tl" href="https://drive.google.com/drive/u/4/folders/1c8fskxa-eBVMLGldd6-tgOmlA636GQVG" target="_blank" rel="noopener">Freelance modeling <span aria-hidden="true">↗</span></a></h3><p>Fashion, editorial and commercial projects.</p>
-          <div class="btns"><button class="more mono" type="button" aria-expanded="false" aria-controls="strip3" data-n="7" data-what="pages">Show pages (7) <span aria-hidden="true">+</span></button><a class="more mono" href="Phunnapa-Model-Portfolio.pdf" download>Download PDF <span aria-hidden="true">↓</span></a></div>
-          <div class="strip pages" id="strip3" tabindex="0" hidden aria-label="Model portfolio pages"><img src="images/beyond/model-1.jpg" alt="Model portfolio, page 1 of 7" loading="lazy"><img src="images/beyond/model-2.jpg" alt="Model portfolio, page 2 of 7" loading="lazy"><img src="images/beyond/model-3.jpg" alt="Model portfolio, page 3 of 7" loading="lazy"><img src="images/beyond/model-4.jpg" alt="Model portfolio, page 4 of 7" loading="lazy"><img src="images/beyond/model-5.jpg" alt="Model portfolio, page 5 of 7" loading="lazy"><img src="images/beyond/model-6.jpg" alt="Model portfolio, page 6 of 7" loading="lazy"><img src="images/beyond/model-7.jpg" alt="Model portfolio, page 7 of 7" loading="lazy"></div></div>
+          <div class="btns"><button class="more mono" type="button" aria-expanded="false" aria-controls="strip3" data-n="8" data-what="pages">Show pages (8) <span aria-hidden="true">+</span></button><a class="more mono" href="Phunnapa-Model-Portfolio.pdf" download>Download PDF <span aria-hidden="true">↓</span></a></div>
+          <div class="strip pages" id="strip3" tabindex="0" hidden aria-label="Model portfolio pages"><img src="images/beyond/model-1.jpg" alt="Model portfolio, page 1 of 8" loading="lazy"><img src="images/beyond/model-2.jpg" alt="Model portfolio, page 2 of 8" loading="lazy"><img src="images/beyond/model-3.jpg" alt="Model portfolio, page 3 of 8" loading="lazy"><img src="images/beyond/model-4.jpg" alt="Model portfolio, page 4 of 8" loading="lazy"><img src="images/beyond/model-5.jpg" alt="Model portfolio, page 5 of 8" loading="lazy"><img src="images/beyond/model-6.jpg" alt="Model portfolio, page 6 of 8" loading="lazy"><img src="images/beyond/model-7.jpg" alt="Model portfolio, page 7 of 8" loading="lazy"><img src="images/beyond/model-8.jpg" alt="Model portfolio, page 8 of 8" loading="lazy"></div></div>
         <div class="item"><h3><a class="tl" href="https://youtu.be/h474BanaQks" target="_blank" rel="noopener">Artist, The 52 Arena <span aria-hidden="true">↗</span></a></h3><p>Competitor on The 52 Arena, a survival show on ONE31.</p>
           <button class="more mono" type="button" aria-expanded="false" aria-controls="strip4" data-n="6">Show photos (6) <span aria-hidden="true">+</span></button>
           <div class="strip" id="strip4" tabindex="0" hidden aria-label="Artist, The 52 Arena photos"><img src="images/beyond/th52-1.jpg" alt="The 52 Arena, 1 of 6" loading="lazy"><img src="images/beyond/th52-2.jpg" alt="The 52 Arena, 2 of 6" loading="lazy"><img src="images/beyond/th52-3.jpg" alt="The 52 Arena, 3 of 6" loading="lazy"><img src="images/beyond/th52-4.jpg" alt="The 52 Arena, 4 of 6" loading="lazy"><img src="images/beyond/th52-5.jpg" alt="The 52 Arena, 5 of 6" loading="lazy"><img src="images/beyond/th52-6.jpg" alt="The 52 Arena, 6 of 6" loading="lazy"></div></div>
@@ -446,6 +456,32 @@ document.querySelectorAll(".more").forEach(b => b.addEventListener("click", () =
   const what = b.dataset.what || "photos";
   b.innerHTML = open ? `Hide ${what} <span aria-hidden="true">−</span>` : `Show ${what} (${b.dataset.n}) <span aria-hidden="true">+</span>`;
 }));
+
+// Arrow buttons for the sideways photo strips, so mouse users can reach the last picture.
+document.querySelectorAll(".strip").forEach(strip => {
+  const wrap = document.createElement("div");
+  wrap.className = "stripwrap";
+  strip.parentNode.insertBefore(wrap, strip);
+  wrap.appendChild(strip);
+  const mk = (dir, label, arrow) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "snav " + dir; b.textContent = arrow; b.setAttribute("aria-label", label);
+    b.addEventListener("click", () => strip.scrollBy({ left: (dir === "next" ? 1 : -1) * strip.clientWidth * 0.8, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));
+    wrap.appendChild(b);
+    return b;
+  };
+  const prev = mk("prev", "Scroll left", "←"), next = mk("next", "Scroll right", "→");
+  const sync = () => {
+    const max = strip.scrollWidth - strip.clientWidth;
+    prev.hidden = strip.scrollLeft < 8;
+    next.hidden = max < 8 || strip.scrollLeft > max - 8;
+  };
+  strip.addEventListener("scroll", sync, { passive: true });
+  addEventListener("resize", sync);
+  new MutationObserver(sync).observe(strip, { attributes: true, attributeFilter: ["hidden"] });
+  strip.querySelectorAll("img").forEach(im => im.addEventListener("load", sync));
+  sync();
+});
 
 chips.innerHTML = filters.map((f, i) => `<button class="chip" type="button" aria-pressed="${i === 0}" data-f="${f}">${f}</button>`).join("");
 chips.addEventListener("click", e => {

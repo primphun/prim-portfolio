@@ -158,6 +158,13 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .btns .more { grid-column: auto; }
 a.more { text-decoration: none; }
 .strip.pages img { height: clamp(320px, 40cqw, 560px); }
+.stripwrap { position: relative; grid-column: 1 / -1; min-width: 0; }
+.stripwrap:has(> .strip[hidden]) { display: none; }
+.snav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border: 1px solid var(--fg); background: var(--bg); color: var(--fg); font: 500 16px var(--mono); cursor: pointer; z-index: 2; padding: 0; }
+.snav.prev { left: 8px; }
+.snav.next { right: 8px; }
+.snav[hidden] { display: none; }
+.snav:hover { background: var(--fg); color: var(--bg); }
 .sub { padding-bottom: 12px; }
 @media (max-width: 760px) { .item { grid-template-columns: 1fr; gap: 6px; } }
 
@@ -449,6 +456,32 @@ document.querySelectorAll(".more").forEach(b => b.addEventListener("click", () =
   const what = b.dataset.what || "photos";
   b.innerHTML = open ? `Hide ${what} <span aria-hidden="true">−</span>` : `Show ${what} (${b.dataset.n}) <span aria-hidden="true">+</span>`;
 }));
+
+// Arrow buttons for the sideways photo strips, so mouse users can reach the last picture.
+document.querySelectorAll(".strip").forEach(strip => {
+  const wrap = document.createElement("div");
+  wrap.className = "stripwrap";
+  strip.parentNode.insertBefore(wrap, strip);
+  wrap.appendChild(strip);
+  const mk = (dir, label, arrow) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "snav " + dir; b.textContent = arrow; b.setAttribute("aria-label", label);
+    b.addEventListener("click", () => strip.scrollBy({ left: (dir === "next" ? 1 : -1) * strip.clientWidth * 0.8, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));
+    wrap.appendChild(b);
+    return b;
+  };
+  const prev = mk("prev", "Scroll left", "←"), next = mk("next", "Scroll right", "→");
+  const sync = () => {
+    const max = strip.scrollWidth - strip.clientWidth;
+    prev.hidden = strip.scrollLeft < 8;
+    next.hidden = max < 8 || strip.scrollLeft > max - 8;
+  };
+  strip.addEventListener("scroll", sync, { passive: true });
+  addEventListener("resize", sync);
+  new MutationObserver(sync).observe(strip, { attributes: true, attributeFilter: ["hidden"] });
+  strip.querySelectorAll("img").forEach(im => im.addEventListener("load", sync));
+  sync();
+});
 
 chips.innerHTML = filters.map((f, i) => `<button class="chip" type="button" aria-pressed="${i === 0}" data-f="${f}">${f}</button>`).join("");
 chips.addEventListener("click", e => {

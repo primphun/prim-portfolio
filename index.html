@@ -239,7 +239,14 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .shootstrip:focus-within .mph:not(:focus-visible) img, .compgrid:focus-within .mph:not(:focus-visible) img { opacity: .35; filter: grayscale(.6); }
 @media (prefers-reduced-motion: reduce) { .mph img { transition: none; } }
 @media (max-width: 760px) { .mgrid { columns: 2; column-gap: 12px; } .mph { margin-bottom: 12px; } }
-#model-compcard .kv { margin-bottom: 40px; max-width: 760px; }
+#model-compcard .kv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 24px; max-width: 760px; margin-bottom: 24px; }
+#model-compcard .kv > div { padding: 10px 0 12px; border-bottom: 1px solid var(--rule-soft); }
+#model-compcard .kv dt, #model-compcard .kv dd { border: 0; }
+#model-compcard .kv dt { padding: 0 0 4px; font-size: 11px; }
+#model-compcard .kv dd { padding: 0; font-size: 15px; }
+#model-compcard .head { padding-bottom: 16px; }
+#model-compcard .compgrid { padding-bottom: 40px; }
+@media (max-width: 600px) { #model-compcard .kv { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .btns { grid-column: 1 / -1; display: flex; gap: 12px; flex-wrap: wrap; }
 .btns .more { grid-column: auto; }
 a.more { text-decoration: none; }
@@ -464,12 +471,12 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
       <div class="head pad"><h2 id="model-compcard-h">Compcard</h2></div>
       <div class="pad about-details">
         <dl class="kv">
-          <dt class="mono">Based in</dt><dd>Bangkok, Thailand</dd>
-          <dt class="mono">Height</dt><dd>162 cm</dd>
-          <dt class="mono">Bust</dt><dd>82 cm (32")</dd>
-          <dt class="mono">Waist</dt><dd>64 cm (25")</dd>
-          <dt class="mono">Hips</dt><dd>87 cm (34")</dd>
-          <dt class="mono">Shoes</dt><dd>23.5</dd>
+          <div><dt class="mono">Based in</dt><dd>Bangkok, Thailand</dd></div>
+          <div><dt class="mono">Height</dt><dd>162 cm</dd></div>
+          <div><dt class="mono">Bust</dt><dd>82 cm (32")</dd></div>
+          <div><dt class="mono">Waist</dt><dd>64 cm (25")</dd></div>
+          <div><dt class="mono">Hips</dt><dd>87 cm (34")</dd></div>
+          <div><dt class="mono">Shoes</dt><dd>23.5</dd></div>
         </dl>
       </div>
       <div class="pad">

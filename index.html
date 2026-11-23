@@ -182,7 +182,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .strip .mph { width: auto; margin: 0; flex: none; scroll-snap-align: start; }
 .strip .mph img { width: auto; max-width: none; }
 .shoots-end { padding-bottom: 72px; }
-.shoot-lone { padding-bottom: 56px; }
+.compcard-actions { margin-bottom: 20px; }
+.compgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 980px; padding-bottom: 72px; }
+.compgrid .mph { margin: 0; border: 1px solid var(--rule-soft); }
+@media (max-width: 600px) { .compgrid { grid-template-columns: 1fr; } }
 .shoot-ph { display: grid; place-items: center; height: 160px; border: 1px solid var(--rule-soft); }
 .trusted { border-top: 1px solid var(--rule); padding-top: 18px; padding-bottom: 28px; display: flex; align-items: baseline; gap: 16px 32px; flex-wrap: wrap; }
 .trusted ul { display: flex; flex-wrap: wrap; gap: 4px 32px; margin: 0; padding: 0; list-style: none; }
@@ -426,7 +429,13 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
 
     <section id="model-compcard" aria-labelledby="model-compcard-h">
       <div class="head pad"><h2 id="model-compcard-h">Compcard</h2><span class="mono muted">Nov 2025 · Boone.studio</span></div>
-      <div class="pad shoot-lone"><div class="strip shootstrip" tabindex="0" aria-label="Compcard photos"><button class="mph" type="button" data-src="images/model/ph-1.jpg" data-cap="Portrait, white top and jeans"><img src="images/model/ph-1.jpg" alt="Portrait, white top and jeans" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-2.jpg" data-cap="Portrait, black turtleneck"><img src="images/model/ph-2.jpg" alt="Portrait, black turtleneck" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-3.jpg" data-cap="Studio, black turtleneck and trousers"><img src="images/model/ph-3.jpg" alt="Studio, black turtleneck and trousers" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-4.jpg" data-cap="Studio, white top and jeans, seated"><img src="images/model/ph-4.jpg" alt="Studio, white top and jeans, seated" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-5.jpg" data-cap="Studio, seated on the floor in jeans"><img src="images/model/ph-5.jpg" alt="Studio, seated on the floor in jeans" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-6.jpg" data-cap="Studio, white crop top and green shorts"><img src="images/model/ph-6.jpg" alt="Studio, white crop top and green shorts" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-7.jpg" data-cap="Full length, black outfit"><img src="images/model/ph-7.jpg" alt="Full length, black outfit" loading="lazy"></button></div></div>
+      <div class="pad">
+        <div class="cta compcard-actions"><a class="btn fill" href="Phunnapa-Compcard.pdf" download>Download compcard (PDF)</a></div>
+        <div class="compgrid">
+          <button class="mph" type="button" data-src="images/model/compcard-1.jpg" data-cap="Compcard, page 1 of 2"><img src="images/model/compcard-1.jpg" alt="Compcard page 1 of 2: four studio photos in a white top and jeans, with measurements and contact details" loading="lazy"></button>
+          <button class="mph" type="button" data-src="images/model/compcard-2.jpg" data-cap="Compcard, page 2 of 2"><img src="images/model/compcard-2.jpg" alt="Compcard page 2 of 2: four studio photos in a white crop top and green shorts, with measurements and contact details" loading="lazy"></button>
+        </div>
+      </div>
     </section>
 
     <section id="model-photos" aria-labelledby="model-photos-h">
@@ -476,6 +485,7 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
           <a href="mailto:primphunnapa@gmail.com"><span class="mono muted">Email</span><span class="email">primphunnapa@gmail.com</span><span class="arrow" aria-hidden="true">→</span></a>
           <div class="li"><span class="mono muted">Line ID</span><span>primphunnapa</span><span class="arrow" aria-hidden="true"></span></div>
           <a href="https://www.instagram.com/p.pnp/" target="_blank" rel="noopener"><span class="mono muted">Instagram</span><span>@p.pnp</span><span class="arrow" aria-hidden="true">↗</span></a>
+          <a href="Phunnapa-Compcard.pdf" download><span class="mono muted">Compcard</span><span>Download PDF</span><span class="arrow" aria-hidden="true">↓</span></a>
           <a href="Phunnapa-Model-Portfolio.pdf" download><span class="mono muted">Portfolio</span><span>Download PDF</span><span class="arrow" aria-hidden="true">↓</span></a>
         </div>
       </div>

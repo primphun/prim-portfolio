@@ -171,6 +171,17 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .strip[hidden] { display: none; }
 .strip { grid-column: 1 / -1; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x proximity; padding: 8px 0 12px; scrollbar-width: thin; }
 .strip img { height: clamp(180px, 22cqw, 300px); width: auto; flex: none; scroll-snap-align: start; background: var(--fill); display: block; }
+.shoot { border-top: 1px solid var(--rule-soft); padding-top: 20px; padding-bottom: 28px; }
+.shoot:first-of-type { border-top: 1px solid var(--rule); }
+.shoot-row { display: grid; grid-template-columns: 48px 1fr; gap: 8px; margin-bottom: 12px; }
+.shoot h3 { margin: 0; font-size: clamp(22px, 2.4cqw, 32px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 600; }
+.shoot-meta { margin: 6px 0 0; }
+.shoot-count { display: block; margin-top: 6px; }
+.shootstrip { padding-top: 0; }
+.strip.shootstrip img { height: clamp(260px, 32cqw, 460px); }
+.strip .mph { width: auto; margin: 0; flex: none; scroll-snap-align: start; }
+.strip .mph img { width: auto; max-width: none; }
+.shoots-end { padding-bottom: 72px; }
 .mgrid { columns: 3; column-gap: 16px; padding-bottom: 96px; }
 .mph { display: block; width: 100%; margin: 0 0 16px; padding: 0; border: 0; background: var(--fill); cursor: zoom-in; break-inside: avoid; }
 .mph img { display: block; width: 100%; height: auto; }
@@ -270,7 +281,7 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
       <a href="#work">Work</a><a href="#practice">Practice</a><a href="#about">About</a><a href="#contact">Contact</a>
     </nav>
     <nav aria-label="Model sections" id="nav-model" hidden>
-      <a href="#model-photos">Photos</a><a href="#model-details">Details</a><a href="#model-contact">Contact</a>
+      <a href="#model-photos">Shoots</a><a href="#model-details">Details</a><a href="#model-contact">Contact</a>
     </nav>
     <div class="mode" role="group" aria-label="Portfolio">
       <button class="ml mono" type="button" data-mode="design" aria-pressed="true" tabindex="-1" aria-hidden="true">Design</button>
@@ -396,7 +407,7 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
     <section class="statement pad">
       <p class="lead">Bangkok-based model with a background in design.</p>
       <div class="cta">
-        <a class="btn fill" href="#model-photos">See photos</a>
+        <a class="btn fill" href="#model-photos">See shoots</a>
         <a class="btn" href="#model-contact">Get in touch</a>
         <a class="btn" href="Phunnapa-Model-Portfolio.pdf" download>Download PDF</a>
       </div>
@@ -404,29 +415,28 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
     </section>
 
     <section id="model-photos" aria-labelledby="model-photos-h">
-      <div class="head pad"><h2 id="model-photos-h">Photos</h2><span class="mono muted">18 photos</span></div>
-      <div class="pad">
-        <div class="mgrid">
-        <button class="mph" type="button" data-src="images/model/ph-1.jpg" data-cap="Portrait, white top and jeans"><img src="images/model/ph-1.jpg" alt="Portrait, white top and jeans" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-2.jpg" data-cap="Portrait, black turtleneck"><img src="images/model/ph-2.jpg" alt="Portrait, black turtleneck" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-3.jpg" data-cap="Studio, black turtleneck and trousers"><img src="images/model/ph-3.jpg" alt="Studio, black turtleneck and trousers" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-4.jpg" data-cap="Studio, white top and jeans, seated"><img src="images/model/ph-4.jpg" alt="Studio, white top and jeans, seated" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-5.jpg" data-cap="Studio, seated on the floor in jeans"><img src="images/model/ph-5.jpg" alt="Studio, seated on the floor in jeans" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-6.jpg" data-cap="Studio, white crop top and green shorts"><img src="images/model/ph-6.jpg" alt="Studio, white crop top and green shorts" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-7.jpg" data-cap="Full length, black outfit"><img src="images/model/ph-7.jpg" alt="Full length, black outfit" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-8.jpg" data-cap="Full length, school-style outfit on a blue background"><img src="images/model/ph-8.jpg" alt="Full length, school-style outfit on a blue background" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-9.jpg" data-cap="Full length, cream blouse by a white door"><img src="images/model/ph-9.jpg" alt="Full length, cream blouse by a white door" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-10.jpg" data-cap="Colour, seated on a chair against blue"><img src="images/model/ph-10.jpg" alt="Colour, seated on a chair against blue" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-11.jpg" data-cap="Colour, on the floor against blue"><img src="images/model/ph-11.jpg" alt="Colour, on the floor against blue" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-12.jpg" data-cap="Outdoor, yellow socks with flower toys"><img src="images/model/ph-12.jpg" alt="Outdoor, yellow socks with flower toys" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-13.jpg" data-cap="Outdoor, sitting on a road with a book"><img src="images/model/ph-13.jpg" alt="Outdoor, sitting on a road with a book" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-14.jpg" data-cap="Outdoor, on a red bench in the grass"><img src="images/model/ph-14.jpg" alt="Outdoor, on a red bench in the grass" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-15.jpg" data-cap="Editorial, floral robe by a wooden bath"><img src="images/model/ph-15.jpg" alt="Editorial, floral robe by a wooden bath" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-16.jpg" data-cap="Editorial, floral robe holding ballet flats"><img src="images/model/ph-16.jpg" alt="Editorial, floral robe holding ballet flats" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-17.jpg" data-cap="Editorial, grey blazer by a changing room"><img src="images/model/ph-17.jpg" alt="Editorial, grey blazer by a changing room" loading="lazy"></button>
-        <button class="mph" type="button" data-src="images/model/ph-18.jpg" data-cap="Editorial, cream blouse on a wicker chair"><img src="images/model/ph-18.jpg" alt="Editorial, cream blouse on a wicker chair" loading="lazy"></button>
-        </div>
-      </div>
+      <div class="head pad"><h2 id="model-photos-h">Shoots</h2><span class="mono muted">5 shoots · 18 photos</span></div>
+      <article class="shoot pad">
+        <div class="shoot-row"><span class="mono muted">01</span><div><h3>Studio</h3><span class="mono muted shoot-count">7 photos</span></div></div>
+        <div class="strip shootstrip" tabindex="0" aria-label="Studio photos"><button class="mph" type="button" data-src="images/model/ph-1.jpg" data-cap="Portrait, white top and jeans"><img src="images/model/ph-1.jpg" alt="Portrait, white top and jeans" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-2.jpg" data-cap="Portrait, black turtleneck"><img src="images/model/ph-2.jpg" alt="Portrait, black turtleneck" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-3.jpg" data-cap="Studio, black turtleneck and trousers"><img src="images/model/ph-3.jpg" alt="Studio, black turtleneck and trousers" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-4.jpg" data-cap="Studio, white top and jeans, seated"><img src="images/model/ph-4.jpg" alt="Studio, white top and jeans, seated" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-5.jpg" data-cap="Studio, seated on the floor in jeans"><img src="images/model/ph-5.jpg" alt="Studio, seated on the floor in jeans" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-6.jpg" data-cap="Studio, white crop top and green shorts"><img src="images/model/ph-6.jpg" alt="Studio, white crop top and green shorts" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-7.jpg" data-cap="Full length, black outfit"><img src="images/model/ph-7.jpg" alt="Full length, black outfit" loading="lazy"></button></div>
+      </article>
+      <article class="shoot pad">
+        <div class="shoot-row"><span class="mono muted">02</span><div><h3>Colour</h3><span class="mono muted shoot-count">3 photos</span></div></div>
+        <div class="strip shootstrip" tabindex="0" aria-label="Colour photos"><button class="mph" type="button" data-src="images/model/ph-8.jpg" data-cap="Full length, school-style outfit on a blue background"><img src="images/model/ph-8.jpg" alt="Full length, school-style outfit on a blue background" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-10.jpg" data-cap="Colour, seated on a chair against blue"><img src="images/model/ph-10.jpg" alt="Colour, seated on a chair against blue" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-11.jpg" data-cap="Colour, on the floor against blue"><img src="images/model/ph-11.jpg" alt="Colour, on the floor against blue" loading="lazy"></button></div>
+      </article>
+      <article class="shoot pad">
+        <div class="shoot-row"><span class="mono muted">03</span><div><h3>Outdoor</h3><span class="mono muted shoot-count">3 photos</span></div></div>
+        <div class="strip shootstrip" tabindex="0" aria-label="Outdoor photos"><button class="mph" type="button" data-src="images/model/ph-12.jpg" data-cap="Outdoor, yellow socks with flower toys"><img src="images/model/ph-12.jpg" alt="Outdoor, yellow socks with flower toys" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-13.jpg" data-cap="Outdoor, sitting on a road with a book"><img src="images/model/ph-13.jpg" alt="Outdoor, sitting on a road with a book" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-14.jpg" data-cap="Outdoor, on a red bench in the grass"><img src="images/model/ph-14.jpg" alt="Outdoor, on a red bench in the grass" loading="lazy"></button></div>
+      </article>
+      <article class="shoot pad">
+        <div class="shoot-row"><span class="mono muted">04</span><div><h3>Editorial 01</h3><span class="mono muted shoot-count">2 photos</span></div></div>
+        <div class="strip shootstrip" tabindex="0" aria-label="Editorial 01 photos"><button class="mph" type="button" data-src="images/model/ph-15.jpg" data-cap="Editorial, floral robe by a wooden bath"><img src="images/model/ph-15.jpg" alt="Editorial, floral robe by a wooden bath" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-16.jpg" data-cap="Editorial, floral robe holding ballet flats"><img src="images/model/ph-16.jpg" alt="Editorial, floral robe holding ballet flats" loading="lazy"></button></div>
+      </article>
+      <article class="shoot pad">
+        <div class="shoot-row"><span class="mono muted">05</span><div><h3>Editorial 02</h3><span class="mono muted shoot-count">3 photos</span></div></div>
+        <div class="strip shootstrip" tabindex="0" aria-label="Editorial 02 photos"><button class="mph" type="button" data-src="images/model/ph-9.jpg" data-cap="Full length, cream blouse by a white door"><img src="images/model/ph-9.jpg" alt="Full length, cream blouse by a white door" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-17.jpg" data-cap="Editorial, grey blazer by a changing room"><img src="images/model/ph-17.jpg" alt="Editorial, grey blazer by a changing room" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-18.jpg" data-cap="Editorial, cream blouse on a wicker chair"><img src="images/model/ph-18.jpg" alt="Editorial, cream blouse on a wicker chair" loading="lazy"></button></div>
+      </article>
+      <div class="shoots-end"></div>
     </section>
 
     <section id="model-details" aria-labelledby="model-details-h">
@@ -604,6 +614,7 @@ document.querySelectorAll(".strip").forEach(strip => {
       sw.setAttribute("aria-checked", String(m === "model"));
       document.title = titles[m];
       if (!first) live.textContent = m === "model" ? "Showing the model portfolio" : "Showing the design portfolio";
+      dispatchEvent(new Event("resize"));
     }
     if (first && location.hash.length > 1) {
       const t = document.getElementById(location.hash.slice(1));

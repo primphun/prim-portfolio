@@ -60,6 +60,11 @@ a { color: inherit; }
 .muted { color: var(--muted); }
 .pad { padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px)); }
 section[id] { scroll-margin-top: 64px; }
+.fab { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px)); z-index: 30; display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 20px; background: var(--accent); color: var(--on-accent); border: 1px solid var(--accent); text-decoration: none; font-weight: 600; font-size: 15px; box-shadow: 0 6px 20px rgba(18, 19, 21, .22); transition: opacity .2s ease, transform .2s ease, background .15s ease, color .15s ease; }
+.fab:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+.fab.off { opacity: 0; transform: translateY(12px); pointer-events: none; visibility: hidden; transition: opacity .2s ease, transform .2s ease, visibility 0s .2s; }
+@media (max-width: 420px) { .fab { padding: 0 16px; min-height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .fab, .fab.off { transition: none; } }
 .sronly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .dot { color: var(--accent); }
 
@@ -512,6 +517,7 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
   </footer>
   <div id="stamps" aria-hidden="true"></div>
 </div>
+<a class="fab" id="fab" href="#contact" hidden>Work with me <span aria-hidden="true">↓</span></a>
 <div id="cur" aria-hidden="true"><span class="tip">Click to leave a mark</span></div>
 
 <script>
@@ -643,7 +649,14 @@ document.querySelectorAll(".strip").forEach(strip => {
   const live = document.getElementById("mode-live");
   const titles = { design: "Prim Portfolio", model: "Prim Phunnapa Supakijsilp · Model portfolio" };
   const DEFAULT = document.documentElement.dataset.default === "model" ? "model" : "design";
-  const wanted = () => /^#model(-|$)/.test(location.hash) ? "model" : location.hash === "#design" ? "design" : DEFAULT;
+  const wanted = () => {
+    const h = location.hash;
+    if (/^#model(-|$)/.test(h)) return "model";
+    if (h === "#design") return "design";
+    const t = h.length > 1 ? document.getElementById(h.slice(1)) : null;
+    if (t && views.design.contains(t)) return "design";
+    return DEFAULT;
+  };
   let current = null;
   const ccBody = document.getElementById("compcard-body"), ccBtn = document.querySelector('[aria-controls="compcard-body"]');
   const openCompcard = () => {
@@ -685,6 +698,28 @@ document.querySelectorAll(".strip").forEach(strip => {
     window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
   });
   apply(wanted(), true);
+
+  // Floating "Work with me": follows the portfolio that is showing, appears after a little scrolling, hides when the contact section is on screen.
+  const fab = document.getElementById("fab");
+  const contacts = { design: document.getElementById("contact"), model: document.getElementById("model-contact") };
+  const seen = { design: false, model: false };
+  const targets = { design: "#contact", model: "#model-contact" };
+  const syncFab = () => {
+    fab.hidden = false;
+    fab.setAttribute("href", targets[current]);
+    const off = scrollY < 360 || seen[current] || document.querySelector("dialog[open]");
+    fab.classList.toggle("off", !!off);
+    if (off) fab.setAttribute("tabindex", "-1"); else fab.removeAttribute("tabindex");
+  };
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(es => { es.forEach(e => { seen[e.target === contacts.design ? "design" : "model"] = e.isIntersecting; }); syncFab(); }, { threshold: 0.15 })
+      .observe(contacts.design);
+    new IntersectionObserver(es => { es.forEach(e => { seen.model = e.isIntersecting; }); syncFab(); }, { threshold: 0.15 }).observe(contacts.model);
+  }
+  addEventListener("scroll", syncFab, { passive: true });
+  addEventListener("resize", syncFab);
+  new MutationObserver(syncFab).observe(views.model, { attributes: true, attributeFilter: ["hidden"] });
+  syncFab();
 })();
 
 

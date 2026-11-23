@@ -182,6 +182,11 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .strip .mph { width: auto; margin: 0; flex: none; scroll-snap-align: start; }
 .strip .mph img { width: auto; max-width: none; }
 .shoots-end { padding-bottom: 72px; }
+.shoot-lone { padding-bottom: 56px; }
+.shoot-ph { display: grid; place-items: center; height: 160px; border: 1px solid var(--rule-soft); }
+.trusted { border-top: 1px solid var(--rule); padding-top: 18px; padding-bottom: 28px; display: flex; align-items: baseline; gap: 16px 32px; flex-wrap: wrap; }
+.trusted ul { display: flex; flex-wrap: wrap; gap: 4px 32px; margin: 0; padding: 0; list-style: none; }
+.trusted li { font-size: clamp(20px, 2.4cqw, 32px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.2; }
 .mgrid { columns: 3; column-gap: 16px; padding-bottom: 96px; }
 .mph { display: block; width: 100%; margin: 0 0 16px; padding: 0; border: 0; background: var(--fill); cursor: zoom-in; break-inside: avoid; }
 .mph img { display: block; width: 100%; height: auto; }
@@ -281,7 +286,7 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
       <a href="#work">Work</a><a href="#practice">Practice</a><a href="#about">About</a><a href="#contact">Contact</a>
     </nav>
     <nav aria-label="Model sections" id="nav-model" hidden>
-      <a href="#model-photos">Shoots</a><a href="#model-details">Details</a><a href="#model-contact">Contact</a>
+      <a href="#model-compcard">Compcard</a><a href="#model-photos">Shoots</a><a href="#model-details">Details</a><a href="#model-contact">Contact</a>
     </nav>
     <div class="mode" role="group" aria-label="Portfolio">
       <button class="ml mono" type="button" data-mode="design" aria-pressed="true" tabindex="-1" aria-hidden="true">Design</button>
@@ -414,27 +419,37 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
       <div class="avail mono">Open to freelance modeling work</div>
     </section>
 
+    <section class="trusted pad" aria-label="Trusted by">
+      <span class="mono muted">Trusted by</span>
+      <ul><li>Peucha</li><li>OMAKASEN</li><li>Sud.performance</li></ul>
+    </section>
+
+    <section id="model-compcard" aria-labelledby="model-compcard-h">
+      <div class="head pad"><h2 id="model-compcard-h">Compcard</h2><span class="mono muted">Nov 2025 · Boone.studio</span></div>
+      <div class="pad shoot-lone"><div class="strip shootstrip" tabindex="0" aria-label="Compcard photos"><button class="mph" type="button" data-src="images/model/ph-1.jpg" data-cap="Portrait, white top and jeans"><img src="images/model/ph-1.jpg" alt="Portrait, white top and jeans" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-2.jpg" data-cap="Portrait, black turtleneck"><img src="images/model/ph-2.jpg" alt="Portrait, black turtleneck" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-3.jpg" data-cap="Studio, black turtleneck and trousers"><img src="images/model/ph-3.jpg" alt="Studio, black turtleneck and trousers" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-4.jpg" data-cap="Studio, white top and jeans, seated"><img src="images/model/ph-4.jpg" alt="Studio, white top and jeans, seated" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-5.jpg" data-cap="Studio, seated on the floor in jeans"><img src="images/model/ph-5.jpg" alt="Studio, seated on the floor in jeans" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-6.jpg" data-cap="Studio, white crop top and green shorts"><img src="images/model/ph-6.jpg" alt="Studio, white crop top and green shorts" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-7.jpg" data-cap="Full length, black outfit"><img src="images/model/ph-7.jpg" alt="Full length, black outfit" loading="lazy"></button></div></div>
+    </section>
+
     <section id="model-photos" aria-labelledby="model-photos-h">
-      <div class="head pad"><h2 id="model-photos-h">Shoots</h2><span class="mono muted">5 shoots · 18 photos</span></div>
+      <div class="head pad"><h2 id="model-photos-h">Shoots</h2><span class="mono muted">5 shoots</span></div>
       <article class="shoot pad">
-        <div class="shoot-row"><span class="mono muted">01</span><div><h3>Studio</h3><span class="mono muted shoot-count">7 photos</span></div></div>
-        <div class="strip shootstrip" tabindex="0" aria-label="Studio photos"><button class="mph" type="button" data-src="images/model/ph-1.jpg" data-cap="Portrait, white top and jeans"><img src="images/model/ph-1.jpg" alt="Portrait, white top and jeans" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-2.jpg" data-cap="Portrait, black turtleneck"><img src="images/model/ph-2.jpg" alt="Portrait, black turtleneck" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-3.jpg" data-cap="Studio, black turtleneck and trousers"><img src="images/model/ph-3.jpg" alt="Studio, black turtleneck and trousers" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-4.jpg" data-cap="Studio, white top and jeans, seated"><img src="images/model/ph-4.jpg" alt="Studio, white top and jeans, seated" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-5.jpg" data-cap="Studio, seated on the floor in jeans"><img src="images/model/ph-5.jpg" alt="Studio, seated on the floor in jeans" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-6.jpg" data-cap="Studio, white crop top and green shorts"><img src="images/model/ph-6.jpg" alt="Studio, white crop top and green shorts" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-7.jpg" data-cap="Full length, black outfit"><img src="images/model/ph-7.jpg" alt="Full length, black outfit" loading="lazy"></button></div>
+        <div class="shoot-row"><span class="mono muted">01</span><div><h3>Peucha</h3><p class="mono muted shoot-meta">Nov 2026</p></div></div>
+        <div class="shoot-ph mono muted">Photos coming soon</div>
       </article>
       <article class="shoot pad">
-        <div class="shoot-row"><span class="mono muted">02</span><div><h3>Colour</h3><span class="mono muted shoot-count">3 photos</span></div></div>
-        <div class="strip shootstrip" tabindex="0" aria-label="Colour photos"><button class="mph" type="button" data-src="images/model/ph-8.jpg" data-cap="Full length, school-style outfit on a blue background"><img src="images/model/ph-8.jpg" alt="Full length, school-style outfit on a blue background" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-10.jpg" data-cap="Colour, seated on a chair against blue"><img src="images/model/ph-10.jpg" alt="Colour, seated on a chair against blue" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-11.jpg" data-cap="Colour, on the floor against blue"><img src="images/model/ph-11.jpg" alt="Colour, on the floor against blue" loading="lazy"></button></div>
+        <div class="shoot-row"><span class="mono muted">02</span><div><h3>Sud.performance x phunnie.studio</h3><p class="mono muted shoot-meta">Collab · Nov 2026 · Suan Benjakitti</p><span class="mono muted shoot-count">3 photos</span></div></div>
+        <div class="strip shootstrip" tabindex="0" aria-label="Sud.performance x phunnie.studio photos"><button class="mph" type="button" data-src="images/model/ph-12.jpg" data-cap="Yellow socks with flower toys"><img src="images/model/ph-12.jpg" alt="Yellow socks with flower toys" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-13.jpg" data-cap="Sitting on a road with a book"><img src="images/model/ph-13.jpg" alt="Sitting on a road with a book" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-14.jpg" data-cap="On a red bench in the grass"><img src="images/model/ph-14.jpg" alt="On a red bench in the grass" loading="lazy"></button></div>
       </article>
       <article class="shoot pad">
-        <div class="shoot-row"><span class="mono muted">03</span><div><h3>Outdoor</h3><span class="mono muted shoot-count">3 photos</span></div></div>
-        <div class="strip shootstrip" tabindex="0" aria-label="Outdoor photos"><button class="mph" type="button" data-src="images/model/ph-12.jpg" data-cap="Outdoor, yellow socks with flower toys"><img src="images/model/ph-12.jpg" alt="Outdoor, yellow socks with flower toys" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-13.jpg" data-cap="Outdoor, sitting on a road with a book"><img src="images/model/ph-13.jpg" alt="Outdoor, sitting on a road with a book" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-14.jpg" data-cap="Outdoor, on a red bench in the grass"><img src="images/model/ph-14.jpg" alt="Outdoor, on a red bench in the grass" loading="lazy"></button></div>
+        <div class="shoot-row"><span class="mono muted">03</span><div><h3>Peucha</h3><p class="mono muted shoot-meta">Sep 2026 · Boone.studio</p><span class="mono muted shoot-count">3 photos</span></div></div>
+        <div class="strip shootstrip" tabindex="0" aria-label="Peucha photos"><button class="mph" type="button" data-src="images/model/ph-9.jpg" data-cap="Full length, cream blouse by a white door"><img src="images/model/ph-9.jpg" alt="Full length, cream blouse by a white door" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-17.jpg" data-cap="Grey blazer by a changing room"><img src="images/model/ph-17.jpg" alt="Grey blazer by a changing room" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-18.jpg" data-cap="Cream blouse on a wicker chair"><img src="images/model/ph-18.jpg" alt="Cream blouse on a wicker chair" loading="lazy"></button></div>
       </article>
       <article class="shoot pad">
-        <div class="shoot-row"><span class="mono muted">04</span><div><h3>Editorial 01</h3><span class="mono muted shoot-count">2 photos</span></div></div>
-        <div class="strip shootstrip" tabindex="0" aria-label="Editorial 01 photos"><button class="mph" type="button" data-src="images/model/ph-15.jpg" data-cap="Editorial, floral robe by a wooden bath"><img src="images/model/ph-15.jpg" alt="Editorial, floral robe by a wooden bath" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-16.jpg" data-cap="Editorial, floral robe holding ballet flats"><img src="images/model/ph-16.jpg" alt="Editorial, floral robe holding ballet flats" loading="lazy"></button></div>
+        <div class="shoot-row"><span class="mono muted">04</span><div><h3>OMAKASEN x Peucha</h3><p class="mono muted shoot-meta">Collab · Jul 2025 · OMAKASEN</p><span class="mono muted shoot-count">2 photos</span></div></div>
+        <div class="strip shootstrip" tabindex="0" aria-label="OMAKASEN x Peucha photos"><button class="mph" type="button" data-src="images/model/ph-15.jpg" data-cap="Floral robe by a wooden bath"><img src="images/model/ph-15.jpg" alt="Floral robe by a wooden bath" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-16.jpg" data-cap="Floral robe holding ballet flats"><img src="images/model/ph-16.jpg" alt="Floral robe holding ballet flats" loading="lazy"></button></div>
       </article>
       <article class="shoot pad">
-        <div class="shoot-row"><span class="mono muted">05</span><div><h3>Editorial 02</h3><span class="mono muted shoot-count">3 photos</span></div></div>
-        <div class="strip shootstrip" tabindex="0" aria-label="Editorial 02 photos"><button class="mph" type="button" data-src="images/model/ph-9.jpg" data-cap="Full length, cream blouse by a white door"><img src="images/model/ph-9.jpg" alt="Full length, cream blouse by a white door" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-17.jpg" data-cap="Editorial, grey blazer by a changing room"><img src="images/model/ph-17.jpg" alt="Editorial, grey blazer by a changing room" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-18.jpg" data-cap="Editorial, cream blouse on a wicker chair"><img src="images/model/ph-18.jpg" alt="Editorial, cream blouse on a wicker chair" loading="lazy"></button></div>
+        <div class="shoot-row"><span class="mono muted">05</span><div><h3>Peucha</h3><p class="mono muted shoot-meta">Apr 2024</p><span class="mono muted shoot-count">3 photos</span></div></div>
+        <div class="strip shootstrip" tabindex="0" aria-label="Peucha photos"><button class="mph" type="button" data-src="images/model/ph-8.jpg" data-cap="Full length, school-style outfit on a blue background"><img src="images/model/ph-8.jpg" alt="Full length, school-style outfit on a blue background" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-10.jpg" data-cap="Seated on a chair against blue"><img src="images/model/ph-10.jpg" alt="Seated on a chair against blue" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-11.jpg" data-cap="On the floor against blue"><img src="images/model/ph-11.jpg" alt="On the floor against blue" loading="lazy"></button></div>
       </article>
       <div class="shoots-end"></div>
     </section>

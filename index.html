@@ -173,7 +173,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .strip img { height: clamp(180px, 22cqw, 300px); width: auto; flex: none; scroll-snap-align: start; background: var(--fill); display: block; }
 .shoot { border-top: 1px solid var(--rule-soft); padding-top: 20px; padding-bottom: 28px; }
 .shoot:first-of-type { border-top: 1px solid var(--rule); }
-.shoot-row { display: grid; grid-template-columns: 48px 1fr; gap: 8px; margin-bottom: 12px; }
+.shoot-row { display: grid; grid-template-columns: 48px 1fr auto; gap: 8px 16px; align-items: start; margin-bottom: 12px; }
+.shoot-logos { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
 .shoot h3 { margin: 0; font-size: clamp(22px, 2.4cqw, 32px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 600; }
 .shoot-meta { margin: 6px 0 0; }
 .shoot-count { display: block; margin-top: 6px; }
@@ -187,9 +188,13 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .compgrid .mph { margin: 0; border: 1px solid var(--rule-soft); }
 @media (max-width: 600px) { .compgrid { grid-template-columns: 1fr; } }
 .shoot-ph { display: grid; place-items: center; height: 160px; border: 1px solid var(--rule-soft); }
-.trusted { border-top: 1px solid var(--rule); padding-top: 18px; padding-bottom: 28px; display: flex; align-items: baseline; gap: 16px 32px; flex-wrap: wrap; }
-.trusted ul { display: flex; flex-wrap: wrap; gap: 4px 32px; margin: 0; padding: 0; list-style: none; }
-.trusted li { font-size: clamp(20px, 2.4cqw, 32px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.2; }
+.trusted { border-top: 1px solid var(--rule); padding-top: 24px; padding-bottom: 40px; display: flex; align-items: center; gap: 16px 40px; flex-wrap: wrap; }
+.trusted ul { display: flex; align-items: center; flex-wrap: wrap; gap: 20px 48px; margin: 0; padding: 0; list-style: none; }
+.logo { display: block; height: var(--lh, 32px); width: auto; max-width: none; }
+.trusted .logo { height: calc(var(--lh, 32px) * 1.25); }
+@media (max-width: 600px) { .logo { height: calc(var(--lh, 32px) * 0.8); } .trusted .logo { height: var(--lh, 32px); } .shoot-row { grid-template-columns: 40px 1fr; } .shoot-logos { grid-column: 2; justify-content: flex-start; } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .logo { filter: invert(1); } }
+:root[data-theme="dark"] .logo { filter: invert(1); }
 .mgrid { columns: 3; column-gap: 16px; padding-bottom: 96px; }
 .mph { display: block; width: 100%; margin: 0 0 16px; padding: 0; border: 0; background: var(--fill); cursor: zoom-in; break-inside: avoid; }
 .mph img { display: block; width: 100%; height: auto; }
@@ -422,16 +427,14 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
       <div class="avail mono">Open to freelance modeling work</div>
     </section>
 
-    <section class="trusted pad" aria-label="Trusted by">
-      <span class="mono muted">Trusted by</span>
-      <ul><li>Peucha</li><li>OMAKASEN</li><li>Sud.performance</li></ul>
-    </section>
-
     <section id="model-compcard" aria-labelledby="model-compcard-h">
       <div class="head pad"><h2 id="model-compcard-h">Compcard</h2><span class="mono muted">Nov 2025 · Boone.studio</span></div>
       <div class="pad">
-        <div class="cta compcard-actions"><a class="btn fill" href="Phunnapa-Compcard.pdf" download>Download compcard (PDF)</a></div>
-        <div class="compgrid">
+        <div class="btns compcard-actions">
+          <button class="more mono" type="button" aria-expanded="false" aria-controls="compcard-body" data-what="compcard">Show compcard <span aria-hidden="true">+</span></button>
+          <a class="more mono" href="Phunnapa-Compcard.pdf" download>Download PDF <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="compgrid" id="compcard-body" hidden>
           <button class="mph" type="button" data-src="images/model/compcard-1.jpg" data-cap="Compcard, page 1 of 2"><img src="images/model/compcard-1.jpg" alt="Compcard page 1 of 2: four studio photos in a white top and jeans, with measurements and contact details" loading="lazy"></button>
           <button class="mph" type="button" data-src="images/model/compcard-2.jpg" data-cap="Compcard, page 2 of 2"><img src="images/model/compcard-2.jpg" alt="Compcard page 2 of 2: four studio photos in a white crop top and green shorts, with measurements and contact details" loading="lazy"></button>
         </div>
@@ -441,23 +444,23 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
     <section id="model-photos" aria-labelledby="model-photos-h">
       <div class="head pad"><h2 id="model-photos-h">Shoots</h2><span class="mono muted">5 shoots</span></div>
       <article class="shoot pad">
-        <div class="shoot-row"><span class="mono muted">01</span><div><h3>Peucha</h3><p class="mono muted shoot-meta">Nov 2026</p></div></div>
+        <div class="shoot-row"><span class="mono muted">01</span><div><h3>Peucha</h3><p class="mono muted shoot-meta">Nov 2026</p></div><div class="shoot-logos"><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:24px" loading="lazy"></div></div>
         <div class="shoot-ph mono muted">Photos coming soon</div>
       </article>
       <article class="shoot pad">
-        <div class="shoot-row"><span class="mono muted">02</span><div><h3>Sud.performance x phunnie.studio</h3><p class="mono muted shoot-meta">Collab · Nov 2026 · Suan Benjakitti</p><span class="mono muted shoot-count">3 photos</span></div></div>
+        <div class="shoot-row"><span class="mono muted">02</span><div><h3>Sud.performance x phunnie.studio</h3><p class="mono muted shoot-meta">Collab · Nov 2026 · Suan Benjakitti</p><span class="mono muted shoot-count">3 photos</span></div><div class="shoot-logos"><img class="logo" src="images/logos/sud.png" alt="Sud.performance" style="--lh:32px" loading="lazy"><img class="logo" src="images/logos/phunnie.png" alt="phunnie.studio" style="--lh:30px" loading="lazy"></div></div>
         <div class="strip shootstrip" tabindex="0" aria-label="Sud.performance x phunnie.studio photos"><button class="mph" type="button" data-src="images/model/ph-12.jpg" data-cap="Yellow socks with flower toys"><img src="images/model/ph-12.jpg" alt="Yellow socks with flower toys" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-13.jpg" data-cap="Sitting on a road with a book"><img src="images/model/ph-13.jpg" alt="Sitting on a road with a book" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-14.jpg" data-cap="On a red bench in the grass"><img src="images/model/ph-14.jpg" alt="On a red bench in the grass" loading="lazy"></button></div>
       </article>
       <article class="shoot pad">
-        <div class="shoot-row"><span class="mono muted">03</span><div><h3>Peucha</h3><p class="mono muted shoot-meta">Sep 2026 · Boone.studio</p><span class="mono muted shoot-count">3 photos</span></div></div>
+        <div class="shoot-row"><span class="mono muted">03</span><div><h3>Peucha</h3><p class="mono muted shoot-meta">Sep 2026 · Boone.studio</p><span class="mono muted shoot-count">3 photos</span></div><div class="shoot-logos"><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:24px" loading="lazy"></div></div>
         <div class="strip shootstrip" tabindex="0" aria-label="Peucha photos"><button class="mph" type="button" data-src="images/model/ph-9.jpg" data-cap="Full length, cream blouse by a white door"><img src="images/model/ph-9.jpg" alt="Full length, cream blouse by a white door" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-17.jpg" data-cap="Grey blazer by a changing room"><img src="images/model/ph-17.jpg" alt="Grey blazer by a changing room" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-18.jpg" data-cap="Cream blouse on a wicker chair"><img src="images/model/ph-18.jpg" alt="Cream blouse on a wicker chair" loading="lazy"></button></div>
       </article>
       <article class="shoot pad">
-        <div class="shoot-row"><span class="mono muted">04</span><div><h3>OMAKASEN x Peucha</h3><p class="mono muted shoot-meta">Collab · Jul 2025 · OMAKASEN</p><span class="mono muted shoot-count">2 photos</span></div></div>
+        <div class="shoot-row"><span class="mono muted">04</span><div><h3>OMAKASEN x Peucha</h3><p class="mono muted shoot-meta">Collab · Jul 2025 · OMAKASEN</p><span class="mono muted shoot-count">2 photos</span></div><div class="shoot-logos"><img class="logo" src="images/logos/omakasen.png" alt="OMAKASEN" style="--lh:46px" loading="lazy"><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:24px" loading="lazy"></div></div>
         <div class="strip shootstrip" tabindex="0" aria-label="OMAKASEN x Peucha photos"><button class="mph" type="button" data-src="images/model/ph-15.jpg" data-cap="Floral robe by a wooden bath"><img src="images/model/ph-15.jpg" alt="Floral robe by a wooden bath" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-16.jpg" data-cap="Floral robe holding ballet flats"><img src="images/model/ph-16.jpg" alt="Floral robe holding ballet flats" loading="lazy"></button></div>
       </article>
       <article class="shoot pad">
-        <div class="shoot-row"><span class="mono muted">05</span><div><h3>Peucha</h3><p class="mono muted shoot-meta">Apr 2024</p><span class="mono muted shoot-count">3 photos</span></div></div>
+        <div class="shoot-row"><span class="mono muted">05</span><div><h3>Peucha</h3><p class="mono muted shoot-meta">Apr 2024</p><span class="mono muted shoot-count">3 photos</span></div><div class="shoot-logos"><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:24px" loading="lazy"></div></div>
         <div class="strip shootstrip" tabindex="0" aria-label="Peucha photos"><button class="mph" type="button" data-src="images/model/ph-8.jpg" data-cap="Full length, school-style outfit on a blue background"><img src="images/model/ph-8.jpg" alt="Full length, school-style outfit on a blue background" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-10.jpg" data-cap="Seated on a chair against blue"><img src="images/model/ph-10.jpg" alt="Seated on a chair against blue" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-11.jpg" data-cap="On the floor against blue"><img src="images/model/ph-11.jpg" alt="On the floor against blue" loading="lazy"></button></div>
       </article>
       <div class="shoots-end"></div>
@@ -489,6 +492,11 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
           <a href="Phunnapa-Model-Portfolio.pdf" download><span class="mono muted">Portfolio</span><span>Download PDF</span><span class="arrow" aria-hidden="true">↓</span></a>
         </div>
       </div>
+    </section>
+
+    <section class="trusted pad" aria-label="Trusted by">
+      <span class="mono muted">Trusted by</span>
+      <ul><li><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:24px" loading="lazy"></li><li><img class="logo" src="images/logos/omakasen.png" alt="OMAKASEN" style="--lh:46px" loading="lazy"></li><li><img class="logo" src="images/logos/sud.png" alt="Sud.performance" style="--lh:32px" loading="lazy"></li></ul>
     </section>
   </main>
   <dialog id="lb" aria-label="Certificate"><img id="lbimg" alt=""><div class="lbbar"><span class="mono muted" id="lbcap"></span><button class="btn" type="button" id="lbclose">Close</button></div></dialog>
@@ -593,7 +601,7 @@ document.querySelectorAll(".more").forEach(b => b.addEventListener("click", () =
   strip.hidden = !open;
   b.setAttribute("aria-expanded", open);
   const what = b.dataset.what || "photos";
-  b.innerHTML = open ? `Hide ${what} <span aria-hidden="true">−</span>` : `Show ${what} (${b.dataset.n}) <span aria-hidden="true">+</span>`;
+  b.innerHTML = open ? `Hide ${what} <span aria-hidden="true">−</span>` : `Show ${what}${b.dataset.n ? ` (${b.dataset.n})` : ""} <span aria-hidden="true">+</span>`;
 }));
 
 // Arrow buttons for the sideways photo strips, so mouse users can reach the last picture.
@@ -631,6 +639,14 @@ document.querySelectorAll(".strip").forEach(strip => {
   const titles = { design: document.title, model: "Prim Model Portfolio" };
   const wanted = () => /^#model(-|$)/.test(location.hash) ? "model" : "design";
   let current = null;
+  const ccBody = document.getElementById("compcard-body"), ccBtn = document.querySelector('[aria-controls="compcard-body"]');
+  const openCompcard = () => {
+    if (!ccBody.hidden) return;
+    ccBody.hidden = false;
+    ccBtn.setAttribute("aria-expanded", "true");
+    ccBtn.innerHTML = 'Hide compcard <span aria-hidden="true">−</span>';
+  };
+  document.querySelectorAll('a[href="#model-compcard"]').forEach(a => a.addEventListener("click", openCompcard));
   const apply = (m, first) => {
     if (m !== current) {
       current = m;
@@ -641,6 +657,7 @@ document.querySelectorAll(".strip").forEach(strip => {
       if (!first) live.textContent = m === "model" ? "Showing the model portfolio" : "Showing the design portfolio";
       dispatchEvent(new Event("resize"));
     }
+    if (location.hash === "#model-compcard") openCompcard();
     if (first && location.hash.length > 1) {
       const t = document.getElementById(location.hash.slice(1));
       if (t) t.scrollIntoView();

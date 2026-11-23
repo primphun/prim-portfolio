@@ -174,7 +174,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .shoot { border-top: 1px solid var(--rule-soft); padding-top: 20px; padding-bottom: 28px; }
 .shoot:first-of-type { border-top: 1px solid var(--rule); }
 .shoot-row { display: grid; grid-template-columns: 48px 1fr auto; gap: 8px 16px; align-items: start; margin-bottom: 12px; }
-.shoot-logos { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+.shoot-logos { display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap; justify-content: flex-end; align-self: start; margin-top: 2px; }
 .shoot h3 { margin: 0; font-size: clamp(22px, 2.4cqw, 32px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 600; }
 .shoot-meta { margin: 6px 0 0; }
 .shoot-count { display: block; margin-top: 6px; }
@@ -193,8 +193,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .trusted { border-top: 1px solid var(--rule); padding-top: 24px; padding-bottom: 40px; display: flex; align-items: center; gap: 16px 40px; flex-wrap: wrap; }
 .trusted ul { display: flex; align-items: center; flex-wrap: wrap; gap: 20px 48px; margin: 0; padding: 0; list-style: none; }
 .logo { display: block; height: var(--lh, 32px); width: auto; max-width: none; }
-.trusted .logo { height: calc(var(--lh, 32px) * 1.25); }
-@media (max-width: 600px) { .logo { height: calc(var(--lh, 32px) * 0.8); } .trusted .logo { height: var(--lh, 32px); } .shoot-row { grid-template-columns: 40px 1fr; } .shoot-logos { grid-column: 2; justify-content: flex-start; } }
+.trusted .logo { height: calc(var(--lh, 32px) * 1.1); }
+@media (max-width: 600px) { .logo { height: calc(var(--lh, 32px) * 0.9); } .trusted .logo { height: var(--lh, 32px); } .shoot-row { grid-template-columns: 40px 1fr auto; gap: 8px 10px; } }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .logo { filter: invert(1); } }
 :root[data-theme="dark"] .logo { filter: invert(1); }
 .mgrid { columns: 3; column-gap: 16px; padding-bottom: 96px; }
@@ -446,23 +446,23 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
     <section id="model-photos" aria-labelledby="model-photos-h">
       <div class="head pad"><h2 id="model-photos-h">Shoots</h2><span class="mono muted">5 shoots</span></div>
       <article class="shoot pad">
-        <div class="shoot-row"><span class="mono muted">01</span><div><h3>Peucha</h3><p class="mono muted shoot-meta">Nov 2026</p></div><div class="shoot-logos"><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:24px" loading="lazy"></div></div>
+        <div class="shoot-row"><span class="mono muted">01</span><div><h3>Peucha</h3><p class="mono muted shoot-meta">Nov 2026</p></div><div class="shoot-logos"><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:16px" loading="lazy"></div></div>
         <button class="mph single" type="button" data-src="images/model/peucha-nov26.jpg" data-cap="Peucha, Nov 2026: a selection from the shoot"><img src="images/model/peucha-nov26.jpg" alt="Peucha, Nov 2026: a collage of about thirty photos from the shoot, styled in soft colours in a pastel home set with shoes" loading="lazy"></button>
       </article>
       <article class="shoot pad">
-        <div class="shoot-row"><span class="mono muted">02</span><div><h3>Sud.performance x phunnie.studio</h3><p class="mono muted shoot-meta">Collab · Nov 2026 · Suan Benjakitti</p><span class="mono muted shoot-count">3 photos</span></div><div class="shoot-logos"><img class="logo" src="images/logos/sud.png" alt="Sud.performance" style="--lh:32px" loading="lazy"><img class="logo" src="images/logos/phunnie.png" alt="phunnie.studio" style="--lh:30px" loading="lazy"></div></div>
+        <div class="shoot-row"><span class="mono muted">02</span><div><h3>Sud.performance x phunnie.studio</h3><p class="mono muted shoot-meta">Collab · Nov 2026 · Suan Benjakitti</p><span class="mono muted shoot-count">3 photos</span></div><div class="shoot-logos"><img class="logo" src="images/logos/sud.png" alt="Sud.performance" style="--lh:22px" loading="lazy"><img class="logo" src="images/logos/phunnie.png" alt="phunnie.studio" style="--lh:20px" loading="lazy"></div></div>
         <div class="strip shootstrip" tabindex="0" aria-label="Sud.performance x phunnie.studio photos"><button class="mph" type="button" data-src="images/model/ph-12.jpg" data-cap="Yellow socks with flower toys"><img src="images/model/ph-12.jpg" alt="Yellow socks with flower toys" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-13.jpg" data-cap="Sitting on a road with a book"><img src="images/model/ph-13.jpg" alt="Sitting on a road with a book" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-14.jpg" data-cap="On a red bench in the grass"><img src="images/model/ph-14.jpg" alt="On a red bench in the grass" loading="lazy"></button></div>
       </article>
       <article class="shoot pad">
-        <div class="shoot-row"><span class="mono muted">03</span><div><h3>Peucha</h3><p class="mono muted shoot-meta">Sep 2026 · Boone.studio</p><span class="mono muted shoot-count">3 photos</span></div><div class="shoot-logos"><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:24px" loading="lazy"></div></div>
+        <div class="shoot-row"><span class="mono muted">03</span><div><h3>Peucha</h3><p class="mono muted shoot-meta">Sep 2026 · Boone.studio</p><span class="mono muted shoot-count">3 photos</span></div><div class="shoot-logos"><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:16px" loading="lazy"></div></div>
         <div class="strip shootstrip" tabindex="0" aria-label="Peucha photos"><button class="mph" type="button" data-src="images/model/ph-9.jpg" data-cap="Full length, cream blouse by a white door"><img src="images/model/ph-9.jpg" alt="Full length, cream blouse by a white door" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-17.jpg" data-cap="Grey blazer by a changing room"><img src="images/model/ph-17.jpg" alt="Grey blazer by a changing room" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-18.jpg" data-cap="Cream blouse on a wicker chair"><img src="images/model/ph-18.jpg" alt="Cream blouse on a wicker chair" loading="lazy"></button></div>
       </article>
       <article class="shoot pad">
-        <div class="shoot-row"><span class="mono muted">04</span><div><h3>OMAKASEN x Peucha</h3><p class="mono muted shoot-meta">Collab · Jul 2025 · OMAKASEN</p><span class="mono muted shoot-count">2 photos</span></div><div class="shoot-logos"><img class="logo" src="images/logos/omakasen.png" alt="OMAKASEN" style="--lh:46px" loading="lazy"><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:24px" loading="lazy"></div></div>
+        <div class="shoot-row"><span class="mono muted">04</span><div><h3>OMAKASEN x Peucha</h3><p class="mono muted shoot-meta">Collab · Jul 2025 · OMAKASEN</p><span class="mono muted shoot-count">2 photos</span></div><div class="shoot-logos"><img class="logo" src="images/logos/omakasen.png" alt="OMAKASEN" style="--lh:30px" loading="lazy"><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:16px" loading="lazy"></div></div>
         <div class="strip shootstrip" tabindex="0" aria-label="OMAKASEN x Peucha photos"><button class="mph" type="button" data-src="images/model/ph-15.jpg" data-cap="Floral robe by a wooden bath"><img src="images/model/ph-15.jpg" alt="Floral robe by a wooden bath" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-16.jpg" data-cap="Floral robe holding ballet flats"><img src="images/model/ph-16.jpg" alt="Floral robe holding ballet flats" loading="lazy"></button></div>
       </article>
       <article class="shoot pad">
-        <div class="shoot-row"><span class="mono muted">05</span><div><h3>Peucha</h3><p class="mono muted shoot-meta">Apr 2024</p><span class="mono muted shoot-count">3 photos</span></div><div class="shoot-logos"><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:24px" loading="lazy"></div></div>
+        <div class="shoot-row"><span class="mono muted">05</span><div><h3>Peucha</h3><p class="mono muted shoot-meta">Apr 2024</p><span class="mono muted shoot-count">3 photos</span></div><div class="shoot-logos"><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:16px" loading="lazy"></div></div>
         <div class="strip shootstrip" tabindex="0" aria-label="Peucha photos"><button class="mph" type="button" data-src="images/model/ph-8.jpg" data-cap="Full length, school-style outfit on a blue background"><img src="images/model/ph-8.jpg" alt="Full length, school-style outfit on a blue background" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-10.jpg" data-cap="Seated on a chair against blue"><img src="images/model/ph-10.jpg" alt="Seated on a chair against blue" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-11.jpg" data-cap="On the floor against blue"><img src="images/model/ph-11.jpg" alt="On the floor against blue" loading="lazy"></button></div>
       </article>
       <div class="shoots-end"></div>
@@ -498,7 +498,7 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
 
     <section class="trusted pad" aria-label="Trusted by">
       <span class="mono muted">Trusted by</span>
-      <ul><li><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:24px" loading="lazy"></li><li><img class="logo" src="images/logos/omakasen.png" alt="OMAKASEN" style="--lh:46px" loading="lazy"></li><li><img class="logo" src="images/logos/sud.png" alt="Sud.performance" style="--lh:32px" loading="lazy"></li></ul>
+      <ul><li><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:16px" loading="lazy"></li><li><img class="logo" src="images/logos/omakasen.png" alt="OMAKASEN" style="--lh:30px" loading="lazy"></li><li><img class="logo" src="images/logos/sud.png" alt="Sud.performance" style="--lh:22px" loading="lazy"></li></ul>
     </section>
   </main>
   <dialog id="lb" aria-label="Certificate"><img id="lbimg" alt=""><div class="lbbar"><span class="mono muted" id="lbcap"></span><button class="btn" type="button" id="lbclose">Close</button></div></dialog>

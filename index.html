@@ -237,7 +237,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 @media (hover: hover) {
   .shootstrip:hover .mph:not(:hover) img, .compgrid:hover .mph:not(:hover) img { opacity: .35; filter: grayscale(.6); }
 }
-.shootstrip:focus-within .mph:not(:focus-visible) img, .compgrid:focus-within .mph:not(:focus-visible) img { opacity: .35; filter: grayscale(.6); }
+.shootstrip:has(.mph:focus-visible) .mph:not(:focus-visible) img, .compgrid:has(.mph:focus-visible) .mph:not(:focus-visible) img { opacity: .35; filter: grayscale(.6); }
+/* While dragging, no spotlight: the pictures slide under a still mouse and would flicker. */
+.shootstrip.dragging .mph img, .compgrid.dragging .mph img { opacity: 1 !important; filter: none !important; transition: none; }
+.strip.dragging .mph { pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .mph img { transition: none; } }
 @media (max-width: 760px) { .mgrid { columns: 2; column-gap: 12px; } .mph { margin-bottom: 12px; } }
 #model-compcard .kv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 24px; max-width: 760px; margin-bottom: 24px; }

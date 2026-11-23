@@ -206,10 +206,24 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .mgrid { columns: 3; column-gap: 16px; padding-bottom: 96px; }
 .mph { display: block; width: 100%; margin: 0 0 16px; padding: 0; border: 0; background: var(--fill); cursor: zoom-in; break-inside: avoid; }
 .mph img { display: block; width: 100%; height: auto; }
-.mph img { transition: filter .25s ease; }
-@media (hover: hover) { .mph:hover img { filter: grayscale(1); } }
-.mph:focus-visible img { filter: grayscale(1); }
-@media (prefers-reduced-motion: reduce) { .mph img { transition: none; } }
+.mph { position: relative; overflow: hidden; }
+.mph::after { content: ""; position: absolute; inset: 0; border: 0 solid var(--accent); transition: border-width .15s ease; pointer-events: none; z-index: 1; }
+.mph .plus { position: absolute; right: 10px; top: 10px; width: 28px; height: 28px; background: var(--accent); opacity: 0; transition: opacity .15s ease; z-index: 2; pointer-events: none; }
+.mph .plus::before, .mph .plus::after { content: ""; position: absolute; left: 50%; top: 50%; background: var(--on-accent); transform: translate(-50%, -50%); }
+.mph .plus::before { width: 14px; height: 2px; }
+.mph .plus::after { width: 2px; height: 14px; }
+.mph .cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; padding: 10px 12px; background: var(--fg); color: var(--bg); text-align: left; line-height: 1.35; transform: translateY(100%); transition: transform .25s ease; pointer-events: none; }
+.mph .cap > span:first-child { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; text-transform: none; letter-spacing: 0.02em; }
+.mph .cap .go { white-space: nowrap; flex: none; }
+@media (hover: hover) {
+  .mph:hover::after { border-width: 5px; }
+  .mph:hover .plus { opacity: 1; }
+  .mph:hover .cap { transform: none; }
+}
+.mph:focus-visible::after { border-width: 5px; }
+.mph:focus-visible .plus { opacity: 1; }
+.mph:focus-visible .cap { transform: none; }
+@media (prefers-reduced-motion: reduce) { .mph::after, .mph .plus, .mph .cap { transition: none; } }
 @media (max-width: 760px) { .mgrid { columns: 2; column-gap: 12px; } .mph { margin-bottom: 12px; } }
 #model-details .kv { margin-bottom: 96px; max-width: 760px; }
 .btns { grid-column: 1 / -1; display: flex; gap: 12px; flex-wrap: wrap; }
@@ -683,6 +697,18 @@ document.querySelectorAll(".strip").forEach(strip => {
   });
   apply(wanted(), true);
 })();
+
+// Photo buttons: a caption bar and a plus that show on hover or keyboard focus (decorative, the image already has alt text).
+document.querySelectorAll(".mph").forEach(b => {
+  const cap = document.createElement("span");
+  cap.className = "cap mono"; cap.setAttribute("aria-hidden", "true");
+  const t = document.createElement("span"); t.textContent = b.dataset.cap || "";
+  const go = document.createElement("span"); go.className = "go"; go.textContent = "Enlarge +";
+  cap.append(t, go);
+  const plus = document.createElement("span");
+  plus.className = "plus"; plus.setAttribute("aria-hidden", "true");
+  b.append(plus, cap);
+});
 
 chips.innerHTML = filters.map((f, i) => `<button class="chip" type="button" aria-pressed="${i === 0}" data-f="${f}">${f}</button>`).join("");
 chips.addEventListener("click", e => {

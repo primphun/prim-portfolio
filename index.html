@@ -56,6 +56,7 @@ a { color: inherit; }
 .muted { color: var(--muted); }
 .pad { padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px)); }
 section[id] { scroll-margin-top: 64px; }
+.sronly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .dot { color: var(--accent); }
 
 /* top bar */
@@ -70,6 +71,15 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .bar .pb svg { width: 100%; height: 100%; display: block; }
 .bar .wn { display: flex; flex-direction: column; font-weight: 700; font-size: 13px; line-height: 1; letter-spacing: -0.02em; }
 .bar .coords { flex: 1; text-align: center; color: var(--muted); }
+.bar .mode { display: flex; gap: 4px; }
+.bar .mode .chip { padding: 0 14px; }
+.bar nav[hidden] { display: none; }
+@media (max-width: 600px) {
+  .bar { flex-wrap: wrap; row-gap: 0; }
+  .bar .word { flex: 1; }
+  .bar nav { order: 3; width: 100%; justify-content: space-between; }
+  section[id] { scroll-margin-top: 112px; }
+}
 .bar nav { display: flex; gap: 4px; }
 .bar nav a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; padding: 0 10px; font-size: 15px; font-weight: 500; }
 .bar nav a:hover { color: var(--accent); }
@@ -154,6 +164,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .strip[hidden] { display: none; }
 .strip { grid-column: 1 / -1; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x proximity; padding: 8px 0 12px; scrollbar-width: thin; }
 .strip img { height: clamp(180px, 22cqw, 300px); width: auto; flex: none; scroll-snap-align: start; background: var(--fill); display: block; }
+.mgrid { columns: 3; column-gap: 16px; padding-bottom: 96px; }
+.mph { display: block; width: 100%; margin: 0 0 16px; padding: 0; border: 0; background: var(--fill); cursor: zoom-in; break-inside: avoid; }
+.mph img { display: block; width: 100%; height: auto; }
+.mph:hover img { opacity: 0.88; }
+@media (max-width: 760px) { .mgrid { columns: 2; column-gap: 12px; } .mph { margin-bottom: 12px; } }
+#model-details .kv { margin-bottom: 96px; max-width: 760px; }
 .btns { grid-column: 1 / -1; display: flex; gap: 12px; flex-wrap: wrap; }
 .btns .more { grid-column: auto; }
 a.more { text-decoration: none; }
@@ -190,6 +206,7 @@ a.more { text-decoration: none; }
 dialog#lb { border: 1px solid var(--fg); background: var(--bg); color: var(--fg); padding: 16px; width: min(1100px, 94vw); max-height: 94vh; border-radius: 0; }
 dialog#lb::backdrop { background: rgba(0,0,0,.7); }
 dialog#lb img { display: block; width: 100%; max-height: 78vh; object-fit: contain; background: #fff; }
+dialog#lb img.auto { width: auto; max-width: 100%; margin: 0 auto; }
 dialog#lb .lbbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 12px; }
 .cert figcaption { display: flex; flex-direction: column; gap: 2px; border-top: 1px solid var(--rule); margin-top: 12px; padding-top: 10px; font-size: 16px; }
 @media (max-width: 760px) { .about { grid-template-columns: 1fr; } .portrait { max-width: 360px; } .kv { grid-template-columns: 100px 1fr; } }
@@ -242,10 +259,17 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
   <header class="bar pad">
     <a class="word" href="#top" aria-label="Prim Phunnapa Supakijsilp, back to top"><span class="pb" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="4.5"><path d="M16 3V29M4.74 9.5L27.26 22.5M4.74 22.5L27.26 9.5"/></svg></span><span class="wn" aria-hidden="true"><span>Phunnapa</span><span>Supakijsilp</span></span></a>
     <span class="coords mono">Bangkok · 13.76° N, 100.50° E</span>
-    <nav aria-label="Sections">
+    <nav aria-label="Sections" id="nav-design">
       <a href="#work">Work</a><a href="#practice">Practice</a><a href="#about">About</a><a href="#contact">Contact</a>
     </nav>
+    <nav aria-label="Model sections" id="nav-model" hidden>
+      <a href="#model-photos">Photos</a><a href="#model-details">Details</a><a href="#model-contact">Contact</a>
+    </nav>
+    <div class="mode" role="group" aria-label="Portfolio">
+      <button class="chip" type="button" data-mode="design" aria-pressed="true">Design</button><button class="chip" type="button" data-mode="model" aria-pressed="false">Model</button>
+    </div>
   </header>
+  <div class="sronly" id="mode-live" aria-live="polite"></div>
 
   <main id="top">
     <section class="hero pad" aria-label="Introduction">
@@ -353,6 +377,76 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
       </div>
     </section>
   </main>
+
+  <main id="model-view" hidden>
+    <section class="hero pad" aria-label="Introduction">
+      <div class="meta mono muted"><span>Model portfolio 2026</span><span>Bangkok</span></div>
+      <h1>Prim<br>Phunnapa<br>Supakijsilp<span class="dot">.</span></h1>
+    </section>
+
+    <section class="statement pad">
+      <p class="lead">Bangkok-based model with a background in design.</p>
+      <div class="cta">
+        <a class="btn fill" href="#model-photos">See photos</a>
+        <a class="btn" href="#model-contact">Get in touch</a>
+        <a class="btn" href="Phunnapa-Model-Portfolio.pdf" download>Download PDF</a>
+      </div>
+      <div class="avail mono">Open to freelance modeling work</div>
+    </section>
+
+    <section id="model-photos" aria-labelledby="model-photos-h">
+      <div class="head pad"><h2 id="model-photos-h">Photos</h2><span class="mono muted">18 photos</span></div>
+      <div class="pad">
+        <div class="mgrid">
+        <button class="mph" type="button" data-src="images/model/ph-1.jpg" data-cap="Portrait, white top and jeans"><img src="images/model/ph-1.jpg" alt="Portrait, white top and jeans" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-2.jpg" data-cap="Portrait, black turtleneck"><img src="images/model/ph-2.jpg" alt="Portrait, black turtleneck" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-3.jpg" data-cap="Studio, black turtleneck and trousers"><img src="images/model/ph-3.jpg" alt="Studio, black turtleneck and trousers" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-4.jpg" data-cap="Studio, white top and jeans, seated"><img src="images/model/ph-4.jpg" alt="Studio, white top and jeans, seated" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-5.jpg" data-cap="Studio, seated on the floor in jeans"><img src="images/model/ph-5.jpg" alt="Studio, seated on the floor in jeans" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-6.jpg" data-cap="Studio, white crop top and green shorts"><img src="images/model/ph-6.jpg" alt="Studio, white crop top and green shorts" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-7.jpg" data-cap="Full length, black outfit"><img src="images/model/ph-7.jpg" alt="Full length, black outfit" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-8.jpg" data-cap="Full length, school-style outfit on a blue background"><img src="images/model/ph-8.jpg" alt="Full length, school-style outfit on a blue background" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-9.jpg" data-cap="Full length, cream blouse by a white door"><img src="images/model/ph-9.jpg" alt="Full length, cream blouse by a white door" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-10.jpg" data-cap="Colour, seated on a chair against blue"><img src="images/model/ph-10.jpg" alt="Colour, seated on a chair against blue" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-11.jpg" data-cap="Colour, on the floor against blue"><img src="images/model/ph-11.jpg" alt="Colour, on the floor against blue" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-12.jpg" data-cap="Outdoor, yellow socks with flower toys"><img src="images/model/ph-12.jpg" alt="Outdoor, yellow socks with flower toys" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-13.jpg" data-cap="Outdoor, sitting on a road with a book"><img src="images/model/ph-13.jpg" alt="Outdoor, sitting on a road with a book" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-14.jpg" data-cap="Outdoor, on a red bench in the grass"><img src="images/model/ph-14.jpg" alt="Outdoor, on a red bench in the grass" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-15.jpg" data-cap="Editorial, floral robe by a wooden bath"><img src="images/model/ph-15.jpg" alt="Editorial, floral robe by a wooden bath" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-16.jpg" data-cap="Editorial, floral robe holding ballet flats"><img src="images/model/ph-16.jpg" alt="Editorial, floral robe holding ballet flats" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-17.jpg" data-cap="Editorial, grey blazer by a changing room"><img src="images/model/ph-17.jpg" alt="Editorial, grey blazer by a changing room" loading="lazy"></button>
+        <button class="mph" type="button" data-src="images/model/ph-18.jpg" data-cap="Editorial, cream blouse on a wicker chair"><img src="images/model/ph-18.jpg" alt="Editorial, cream blouse on a wicker chair" loading="lazy"></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="model-details" aria-labelledby="model-details-h">
+      <div class="head pad"><h2 id="model-details-h">Details</h2><span class="mono muted">Measurements</span></div>
+      <div class="pad about-details">
+        <dl class="kv">
+          <dt class="mono">Based in</dt><dd>Bangkok, Thailand</dd>
+          <dt class="mono">Height</dt><dd>162 cm</dd>
+          <dt class="mono">Bust</dt><dd>82 cm (32")</dd>
+          <dt class="mono">Waist</dt><dd>64 cm (25")</dd>
+          <dt class="mono">Hips</dt><dd>87 cm (34")</dd>
+          <dt class="mono">Shoes</dt><dd>23.5</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section id="model-contact" class="contact" aria-labelledby="model-contact-h">
+      <div class="head pad"><span class="mono muted">Contact</span><span class="mono muted">Freelance modeling</span></div>
+      <div class="pad"><h2 id="model-contact-h">Work with me<span class="dot">.</span></h2></div>
+      <div class="pad">
+        <div class="links">
+          <a href="mailto:primphunnapa@gmail.com"><span class="mono muted">Email</span><span class="email">primphunnapa@gmail.com</span><span class="arrow" aria-hidden="true">→</span></a>
+          <div class="li"><span class="mono muted">Line ID</span><span>primphunnapa</span><span class="arrow" aria-hidden="true"></span></div>
+          <a href="https://www.instagram.com/p.pnp/" target="_blank" rel="noopener"><span class="mono muted">Instagram</span><span>@p.pnp</span><span class="arrow" aria-hidden="true">↗</span></a>
+          <a href="Phunnapa-Model-Portfolio.pdf" download><span class="mono muted">Portfolio</span><span>Download PDF</span><span class="arrow" aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
   <dialog id="lb" aria-label="Certificate"><img id="lbimg" alt=""><div class="lbbar"><span class="mono muted" id="lbcap"></span><button class="btn" type="button" id="lbclose">Close</button></div></dialog>
 
   <footer class="pad mono muted">
@@ -440,7 +534,8 @@ grid.querySelectorAll(".slider").forEach((sl, k) => {
 
 const lb = document.getElementById("lb");
 document.addEventListener("click", e => {
-  const b = e.target.closest(".certimg"); if (!b) return;
+  const b = e.target.closest(".certimg, .mph"); if (!b) return;
+  document.getElementById("lbimg").classList.toggle("auto", b.classList.contains("mph"));
   document.getElementById("lbimg").src = b.dataset.src;
   document.getElementById("lbimg").alt = b.dataset.cap;
   document.getElementById("lbcap").textContent = b.dataset.cap;
@@ -482,6 +577,44 @@ document.querySelectorAll(".strip").forEach(strip => {
   strip.querySelectorAll("img").forEach(im => im.addEventListener("load", sync));
   sync();
 });
+
+// Design / Model switch. Design is the default; #model (or #model-photos etc.) opens the model portfolio.
+(() => {
+  const views = { design: document.getElementById("top"), model: document.getElementById("model-view") };
+  const navs = { design: document.getElementById("nav-design"), model: document.getElementById("nav-model") };
+  const btns = [...document.querySelectorAll(".mode [data-mode]")];
+  const live = document.getElementById("mode-live");
+  const titles = { design: document.title, model: "Prim Model Portfolio" };
+  const wanted = () => /^#model(-|$)/.test(location.hash) ? "model" : "design";
+  let current = null;
+  const apply = (m, first) => {
+    if (m !== current) {
+      current = m;
+      for (const k in views) { views[k].hidden = k !== m; navs[k].hidden = k !== m; }
+      btns.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === m)));
+      document.title = titles[m];
+      if (!first) live.textContent = m === "model" ? "Showing the model portfolio" : "Showing the design portfolio";
+    }
+    if (first && location.hash.length > 1) {
+      const t = document.getElementById(location.hash.slice(1));
+      if (t) t.scrollIntoView();
+    }
+  };
+  btns.forEach(b => b.addEventListener("click", () => {
+    const m = b.dataset.mode;
+    try { history.replaceState(null, "", m === "model" ? "#model" : location.pathname + location.search); } catch (e) {}
+    apply(m);
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }));
+  addEventListener("hashchange", () => apply(wanted()));
+  // "Back to top" and the logo stay in whichever portfolio is showing
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href="#top"]'); if (!a) return;
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
+  apply(wanted(), true);
+})();
 
 chips.innerHTML = filters.map((f, i) => `<button class="chip" type="button" aria-pressed="${i === 0}" data-f="${f}">${f}</button>`).join("");
 chips.addEventListener("click", e => {

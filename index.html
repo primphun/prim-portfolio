@@ -177,6 +177,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .more { grid-column: 1 / -1; justify-self: start; min-height: 44px; padding: 0 16px; border: 1px solid var(--fg); border-radius: 0; background: transparent; color: var(--fg); cursor: pointer; display: inline-flex; gap: 10px; align-items: center; }
 .more:hover { background: var(--fill); }
 .more[aria-expanded="true"] { background: var(--fg); color: var(--bg); }
+@media (hover: hover) and (pointer: fine) { .strip, .certs { cursor: grab; } .strip.dragging, .certs.dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; } .strip.dragging .mph, .strip.dragging img { cursor: grabbing; } }
 .strip[hidden] { display: none; }
 .strip { grid-column: 1 / -1; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x proximity; padding: 8px 0 12px; scrollbar-width: thin; }
 .strip img { height: clamp(180px, 22cqw, 300px); width: auto; flex: none; scroll-snap-align: start; background: var(--fill); display: block; }
@@ -674,6 +675,26 @@ document.querySelectorAll(".strip").forEach(strip => {
   new MutationObserver(sync).observe(strip, { attributes: true, attributeFilter: ["hidden"] });
   strip.querySelectorAll("img").forEach(im => im.addEventListener("load", sync));
   sync();
+});
+
+// Drag to scroll for mouse users: hold and pull a strip sideways. A drag never counts as a click.
+document.querySelectorAll(".strip, .certs").forEach(el => {
+  let down = false, moved = false, x0 = 0, s0 = 0;
+  el.addEventListener("dragstart", e => e.preventDefault());
+  el.addEventListener("pointerdown", e => {
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
+    down = true; moved = false; x0 = e.clientX; s0 = el.scrollLeft;
+  });
+  addEventListener("pointermove", e => {
+    if (!down) return;
+    const dx = e.clientX - x0;
+    if (!moved && Math.abs(dx) > 5) { moved = true; el.classList.add("dragging"); }
+    if (moved) el.scrollLeft = s0 - dx;
+  });
+  const end = () => { if (down && moved) setTimeout(() => el.classList.remove("dragging"), 0); down = false; };
+  addEventListener("pointerup", end);
+  addEventListener("pointercancel", end);
+  el.addEventListener("click", e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
 });
 
 // Design / Model switch. Design is the default; #model (or #model-photos etc.) opens the model portfolio.

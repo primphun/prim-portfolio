@@ -207,12 +207,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .shoot-credits a:hover { color: var(--accent); }
 @media (max-width: 900px) {
   .shoot-row { grid-template-columns: 40px minmax(0, 1fr) auto; gap: 8px 14px; }
-  .shoot-row > span:first-child { grid-row: 1; }
-  .shoot-row > div:nth-child(2) { display: block; grid-column: 2; grid-row: 1; }
-  .shoot-row .shoot-meta { align-self: auto; }
-  .credits { display: grid; justify-items: end; align-content: start; gap: 6px; grid-column: 2 / 4; grid-row: 2; min-width: 0; }
-  .ctog { grid-column: auto; grid-row: auto; align-self: auto; }
-  .shoot-credits { grid-column: auto; grid-row: auto; justify-self: end; }
+}
 }
 .shootstrip { padding-top: 0; }
 .strip.shootstrip img { height: clamp(260px, 32cqw, 460px); }

@@ -187,6 +187,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .compgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 980px; padding-bottom: 72px; }
 .compgrid .mph { margin: 0; border: 1px solid var(--rule-soft); }
 @media (max-width: 600px) { .compgrid { grid-template-columns: 1fr; } }
+.mph.single { max-width: 1100px; margin: 0; }
+.mph.single img { width: 100%; height: auto; }
 .shoot-ph { display: grid; place-items: center; height: 160px; border: 1px solid var(--rule-soft); }
 .trusted { border-top: 1px solid var(--rule); padding-top: 24px; padding-bottom: 40px; display: flex; align-items: center; gap: 16px 40px; flex-wrap: wrap; }
 .trusted ul { display: flex; align-items: center; flex-wrap: wrap; gap: 20px 48px; margin: 0; padding: 0; list-style: none; }
@@ -445,7 +447,7 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
       <div class="head pad"><h2 id="model-photos-h">Shoots</h2><span class="mono muted">5 shoots</span></div>
       <article class="shoot pad">
         <div class="shoot-row"><span class="mono muted">01</span><div><h3>Peucha</h3><p class="mono muted shoot-meta">Nov 2026</p></div><div class="shoot-logos"><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:24px" loading="lazy"></div></div>
-        <div class="shoot-ph mono muted">Photos coming soon</div>
+        <button class="mph single" type="button" data-src="images/model/peucha-nov26.jpg" data-cap="Peucha, Nov 2026: a selection from the shoot"><img src="images/model/peucha-nov26.jpg" alt="Peucha, Nov 2026: a collage of about thirty photos from the shoot, styled in soft colours in a pastel home set with shoes" loading="lazy"></button>
       </article>
       <article class="shoot pad">
         <div class="shoot-row"><span class="mono muted">02</span><div><h3>Sud.performance x phunnie.studio</h3><p class="mono muted shoot-meta">Collab · Nov 2026 · Suan Benjakitti</p><span class="mono muted shoot-count">3 photos</span></div><div class="shoot-logos"><img class="logo" src="images/logos/sud.png" alt="Sud.performance" style="--lh:32px" loading="lazy"><img class="logo" src="images/logos/phunnie.png" alt="phunnie.studio" style="--lh:30px" loading="lazy"></div></div>

@@ -200,7 +200,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .mgrid { columns: 3; column-gap: 16px; padding-bottom: 96px; }
 .mph { display: block; width: 100%; margin: 0 0 16px; padding: 0; border: 0; background: var(--fill); cursor: zoom-in; break-inside: avoid; }
 .mph img { display: block; width: 100%; height: auto; }
-.mph:hover img { opacity: 0.88; }
+.mph img { transition: filter .25s ease; }
+@media (hover: hover) { .mph:hover img { filter: grayscale(1); } }
+.mph:focus-visible img { filter: grayscale(1); }
+@media (prefers-reduced-motion: reduce) { .mph img { transition: none; } }
 @media (max-width: 760px) { .mgrid { columns: 2; column-gap: 12px; } .mph { margin-bottom: 12px; } }
 #model-details .kv { margin-bottom: 96px; max-width: 760px; }
 .btns { grid-column: 1 / -1; display: flex; gap: 12px; flex-wrap: wrap; }

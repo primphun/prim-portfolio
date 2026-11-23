@@ -71,8 +71,15 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .bar .pb svg { width: 100%; height: 100%; display: block; }
 .bar .wn { display: flex; flex-direction: column; font-weight: 700; font-size: 13px; line-height: 1; letter-spacing: -0.02em; }
 .bar .coords { flex: 1; text-align: center; color: var(--muted); }
-.bar .mode { display: flex; gap: 4px; }
-.bar .mode .chip { padding: 0 14px; }
+.bar .mode { display: flex; align-items: center; gap: 4px; }
+.mode .ml { min-height: 44px; padding: 0 6px; border: 0; background: none; color: var(--muted); cursor: pointer; }
+.mode .ml[aria-pressed="true"] { color: var(--fg); font-weight: 500; }
+.mode .sw { position: relative; width: 56px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; }
+.mode .sw::before { content: ""; position: absolute; left: 0; right: 0; top: 8px; bottom: 8px; border: 1px solid var(--fg); background: var(--bg); transition: background .2s; }
+.mode .sw .knob { position: absolute; left: 4px; top: 12px; width: 20px; height: 20px; background: var(--fg); transition: transform .2s ease, background .2s; }
+.mode .sw[aria-checked="true"]::before { background: var(--fill); }
+.mode .sw[aria-checked="true"] .knob { transform: translateX(28px); background: var(--accent); }
+@media (prefers-reduced-motion: reduce) { .mode .sw::before, .mode .sw .knob { transition: none; } }
 .bar nav[hidden] { display: none; }
 @media (max-width: 600px) {
   .bar { flex-wrap: wrap; row-gap: 0; }
@@ -266,7 +273,9 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
       <a href="#model-photos">Photos</a><a href="#model-details">Details</a><a href="#model-contact">Contact</a>
     </nav>
     <div class="mode" role="group" aria-label="Portfolio">
-      <button class="chip" type="button" data-mode="design" aria-pressed="true">Design</button><button class="chip" type="button" data-mode="model" aria-pressed="false">Model</button>
+      <button class="ml mono" type="button" data-mode="design" aria-pressed="true" tabindex="-1" aria-hidden="true">Design</button>
+      <button class="sw" type="button" role="switch" aria-checked="false" aria-label="Show the model portfolio"><span class="knob"></span></button>
+      <button class="ml mono" type="button" data-mode="model" aria-pressed="false" tabindex="-1" aria-hidden="true">Model</button>
     </div>
   </header>
   <div class="sronly" id="mode-live" aria-live="polite"></div>
@@ -592,6 +601,7 @@ document.querySelectorAll(".strip").forEach(strip => {
       current = m;
       for (const k in views) { views[k].hidden = k !== m; navs[k].hidden = k !== m; }
       btns.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === m)));
+      sw.setAttribute("aria-checked", String(m === "model"));
       document.title = titles[m];
       if (!first) live.textContent = m === "model" ? "Showing the model portfolio" : "Showing the design portfolio";
     }
@@ -600,12 +610,14 @@ document.querySelectorAll(".strip").forEach(strip => {
       if (t) t.scrollIntoView();
     }
   };
-  btns.forEach(b => b.addEventListener("click", () => {
-    const m = b.dataset.mode;
+  const sw = document.querySelector(".mode .sw");
+  const go = m => {
     try { history.replaceState(null, "", m === "model" ? "#model" : location.pathname + location.search); } catch (e) {}
     apply(m);
     window.scrollTo({ top: 0, behavior: "auto" });
-  }));
+  };
+  btns.forEach(b => b.addEventListener("click", () => go(b.dataset.mode)));
+  sw.addEventListener("click", () => go(current === "model" ? "design" : "model"));
   addEventListener("hashchange", () => apply(wanted()));
   // "Back to top" and the logo stay in whichever portfolio is showing
   document.addEventListener("click", e => {

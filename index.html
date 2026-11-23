@@ -6,8 +6,8 @@
 <title>Prim Portfolio</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Portfolio of Prim Phunnapa Supakijsilp, a multidisciplinary designer in Bangkok. UX/UI design, brand identity, publications and illustration.">
-<meta name="theme-color" content="#F3F4F2" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F3F4F2">
+<meta name="color-scheme" content="only light">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Prim Phunnapa Supakijsilp, multidisciplinary designer">
 <meta property="og:description" content="UX/UI design, brand identity, publications and illustration. Based in Bangkok.">
@@ -36,11 +36,7 @@
   --sans: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
   --mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --gutter: clamp(16px, 4.4cqw, 64px);
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #121315; --fg: #F3F4F2; --muted: #A3A6AB; --rule: #F3F4F2; --rule-soft: #3B3D41; --fill: #1E1F22; --accent: #FF5A4D; --on-accent: #121315; color-scheme: dark;
-  }
+  color-scheme: only light;
 }
 :root[data-theme="dark"] {
   --bg: #121315; --fg: #F3F4F2; --muted: #A3A6AB; --rule: #F3F4F2; --rule-soft: #3B3D41; --fill: #1E1F22; --accent: #FF5A4D; --on-accent: #121315; color-scheme: dark;
@@ -206,7 +202,6 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .logo { display: block; height: var(--lh, 32px); width: auto; max-width: none; }
 .trusted .logo { height: calc(var(--lh, 32px) * 1.1); }
 @media (max-width: 600px) { .logo { height: calc(var(--lh, 32px) * 0.9); } .trusted .logo { height: var(--lh, 32px); } .shoot-row { grid-template-columns: 40px 1fr auto; gap: 8px 10px; } }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .logo { filter: invert(1); } }
 :root[data-theme="dark"] .logo { filter: invert(1); }
 .mgrid { columns: 3; column-gap: 16px; padding-bottom: 96px; }
 .mph { display: block; width: 100%; margin: 0 0 16px; padding: 0; border: 0; background: var(--fill); cursor: zoom-in; break-inside: avoid; }

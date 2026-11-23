@@ -177,6 +177,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .more { grid-column: 1 / -1; justify-self: start; min-height: 44px; padding: 0 16px; border: 1px solid var(--fg); border-radius: 0; background: transparent; color: var(--fg); cursor: pointer; display: inline-flex; gap: 10px; align-items: center; }
 .more:hover { background: var(--fill); }
 .more[aria-expanded="true"] { background: var(--fg); color: var(--bg); }
+@media (hover: hover) and (pointer: fine) { .strip, .certs { cursor: grab; } .strip.dragging, .certs.dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; } .strip.dragging .mph, .strip.dragging img { cursor: grabbing; } }
 .strip[hidden] { display: none; }
 .strip { grid-column: 1 / -1; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x proximity; padding: 8px 0 12px; scrollbar-width: thin; }
 .strip img { height: clamp(180px, 22cqw, 300px); width: auto; flex: none; scroll-snap-align: start; background: var(--fill); display: block; }
@@ -236,7 +237,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 @media (hover: hover) {
   .shootstrip:hover .mph:not(:hover) img, .compgrid:hover .mph:not(:hover) img { opacity: .35; filter: grayscale(.6); }
 }
-.shootstrip:focus-within .mph:not(:focus-visible) img, .compgrid:focus-within .mph:not(:focus-visible) img { opacity: .35; filter: grayscale(.6); }
+.shootstrip:has(.mph:focus-visible) .mph:not(:focus-visible) img, .compgrid:has(.mph:focus-visible) .mph:not(:focus-visible) img { opacity: .35; filter: grayscale(.6); }
+/* While dragging, no spotlight: the pictures slide under a still mouse and would flicker. */
+.shootstrip.dragging .mph img, .compgrid.dragging .mph img { opacity: 1 !important; filter: none !important; transition: none; }
+.strip.dragging .mph { pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .mph img { transition: none; } }
 @media (max-width: 760px) { .mgrid { columns: 2; column-gap: 12px; } .mph { margin-bottom: 12px; } }
 #model-compcard .kv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 24px; max-width: 760px; margin-bottom: 24px; }
@@ -503,7 +507,7 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
       </article>
       <article class="shoot pad">
         <div class="shoot-row"><span class="mono muted">03</span><div><h3>Peucha (Hideko 1 Inch Collection)</h3><p class="mono muted shoot-meta">Sep 2026 · Boone Home Studio</p></div><div class="shoot-side"><div class="shoot-logos"><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:16px" loading="lazy"></div><div class="credits"><button class="ctog mono" type="button" aria-expanded="false" aria-controls="credits-3"><span>Credits</span><span class="ctog-i" aria-hidden="true">+</span></button><dl class="shoot-credits" id="credits-3" hidden aria-label="Credits"><div><dt>Stylist</dt><dd><a href="https://www.instagram.com/stylebyoey/" target="_blank" rel="noopener">@stylebyoey</a></dd></div><div><dt>Location</dt><dd><a href="https://www.instagram.com/boone.homestudio/" target="_blank" rel="noopener">@boone.homestudio</a></dd></div></dl></div></div></div>
-        <div class="strip shootstrip" tabindex="0" aria-label="Peucha photos"><button class="mph" type="button" data-src="images/model/peucha-sep-1.jpg" data-cap="Sitting on a fluffy rug holding a book, red and pink top"><img src="images/model/peucha-sep-1.jpg" alt="Sitting on a fluffy rug holding a book, red and pink top" loading="lazy"></button><button class="mph" type="button" data-src="images/model/peucha-sep-2.jpg" data-cap="Reading on a clear chair beside a shelf of books"><img src="images/model/peucha-sep-2.jpg" alt="Reading on a clear chair beside a shelf of books" loading="lazy"></button><button class="mph" type="button" data-src="images/model/peucha-sep-3.jpg" data-cap="Stepping through a white glass door, adjusting a ballet flat"><img src="images/model/peucha-sep-3.jpg" alt="Stepping through a white glass door, adjusting a ballet flat" loading="lazy"></button><button class="mph" type="button" data-src="images/model/peucha-sep-4.jpg" data-cap="Sitting by a bed in a yellow sweater, arms folded on the knees"><img src="images/model/peucha-sep-4.jpg" alt="Sitting by a bed in a yellow sweater, arms folded on the knees" loading="lazy"></button><button class="mph" type="button" data-src="images/model/peucha-sep-5.jpg" data-cap="Leaning on the bed, yellow sweater, black ballet flats"><img src="images/model/peucha-sep-5.jpg" alt="Leaning on the bed, yellow sweater, black ballet flats" loading="lazy"></button><button class="mph" type="button" data-src="images/model/peucha-sep-6.jpg" data-cap="Leaning on the wall with a rotary phone, grey knit and polka-dot skirt"><img src="images/model/peucha-sep-6.jpg" alt="Leaning on the wall with a rotary phone, grey knit and polka-dot skirt" loading="lazy"></button><button class="mph" type="button" data-src="images/model/peucha-sep-7.jpg" data-cap="On a daybed by lace curtains, on the phone in glasses"><img src="images/model/peucha-sep-7.jpg" alt="On a daybed by lace curtains, on the phone in glasses" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-9.jpg" data-cap="Full length, cream blouse by a white door"><img src="images/model/ph-9.jpg" alt="Full length, cream blouse by a white door" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-18.jpg" data-cap="Cream blouse on a wicker chair"><img src="images/model/ph-18.jpg" alt="Cream blouse on a wicker chair" loading="lazy"></button><button class="mph" type="button" data-src="images/model/peucha-sep-8.jpg" data-cap="Kneeling on a clear folding chair, cream blouse, adjusting a ballet flat"><img src="images/model/peucha-sep-8.jpg" alt="Kneeling on a clear folding chair, cream blouse, adjusting a ballet flat" loading="lazy"></button></div>
+        <div class="strip shootstrip" tabindex="0" aria-label="Peucha photos"><button class="mph" type="button" data-src="images/model/peucha-sep-2.jpg" data-cap="Reading on a clear chair beside a shelf of books"><img src="images/model/peucha-sep-2.jpg" alt="Reading on a clear chair beside a shelf of books" loading="lazy"></button><button class="mph" type="button" data-src="images/model/peucha-sep-3.jpg" data-cap="Stepping through a white glass door, adjusting a ballet flat"><img src="images/model/peucha-sep-3.jpg" alt="Stepping through a white glass door, adjusting a ballet flat" loading="lazy"></button><button class="mph" type="button" data-src="images/model/peucha-sep-4.jpg" data-cap="Sitting by a bed in a yellow sweater, arms folded on the knees"><img src="images/model/peucha-sep-4.jpg" alt="Sitting by a bed in a yellow sweater, arms folded on the knees" loading="lazy"></button><button class="mph" type="button" data-src="images/model/peucha-sep-5.jpg" data-cap="Leaning on the bed, yellow sweater, black ballet flats"><img src="images/model/peucha-sep-5.jpg" alt="Leaning on the bed, yellow sweater, black ballet flats" loading="lazy"></button><button class="mph" type="button" data-src="images/model/peucha-sep-6.jpg" data-cap="Leaning on the wall with a rotary phone, grey knit and polka-dot skirt"><img src="images/model/peucha-sep-6.jpg" alt="Leaning on the wall with a rotary phone, grey knit and polka-dot skirt" loading="lazy"></button><button class="mph" type="button" data-src="images/model/peucha-sep-7.jpg" data-cap="On a daybed by lace curtains, on the phone in glasses"><img src="images/model/peucha-sep-7.jpg" alt="On a daybed by lace curtains, on the phone in glasses" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-9.jpg" data-cap="Full length, cream blouse by a white door"><img src="images/model/ph-9.jpg" alt="Full length, cream blouse by a white door" loading="lazy"></button><button class="mph" type="button" data-src="images/model/ph-18.jpg" data-cap="Cream blouse on a wicker chair"><img src="images/model/ph-18.jpg" alt="Cream blouse on a wicker chair" loading="lazy"></button></div>
       </article>
       <article class="shoot pad">
         <div class="shoot-row"><span class="mono muted">04</span><div><h3>OMAKASEN x Peucha</h3><p class="mono muted shoot-meta">Jul 2025 · OMAKASEN</p></div><div class="shoot-side"><div class="shoot-logos"><img class="logo" src="images/logos/omakasen.png" alt="OMAKASEN" style="--lh:30px" loading="lazy"><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:16px" loading="lazy"></div><div class="credits"><button class="ctog mono" type="button" aria-expanded="false" aria-controls="credits-4"><span>Credits</span><span class="ctog-i" aria-hidden="true">+</span></button><dl class="shoot-credits" id="credits-4" hidden aria-label="Credits"><div><dt>Stylist</dt><dd><a href="https://www.instagram.com/stylebyoey/" target="_blank" rel="noopener">@stylebyoey</a></dd></div><div><dt>Location</dt><dd><a href="https://www.instagram.com/omakasen.official/" target="_blank" rel="noopener">@omakasen.official</a></dd></div></dl></div></div></div>
@@ -674,6 +678,26 @@ document.querySelectorAll(".strip").forEach(strip => {
   new MutationObserver(sync).observe(strip, { attributes: true, attributeFilter: ["hidden"] });
   strip.querySelectorAll("img").forEach(im => im.addEventListener("load", sync));
   sync();
+});
+
+// Drag to scroll for mouse users: hold and pull a strip sideways. A drag never counts as a click.
+document.querySelectorAll(".strip, .certs").forEach(el => {
+  let down = false, moved = false, x0 = 0, s0 = 0;
+  el.addEventListener("dragstart", e => e.preventDefault());
+  el.addEventListener("pointerdown", e => {
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
+    down = true; moved = false; x0 = e.clientX; s0 = el.scrollLeft;
+  });
+  addEventListener("pointermove", e => {
+    if (!down) return;
+    const dx = e.clientX - x0;
+    if (!moved && Math.abs(dx) > 5) { moved = true; el.classList.add("dragging"); }
+    if (moved) el.scrollLeft = s0 - dx;
+  });
+  const end = () => { if (down && moved) setTimeout(() => el.classList.remove("dragging"), 0); down = false; };
+  addEventListener("pointerup", end);
+  addEventListener("pointercancel", end);
+  el.addEventListener("click", e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
 });
 
 // Design / Model switch. Design is the default; #model (or #model-photos etc.) opens the model portfolio.

@@ -239,7 +239,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .shootstrip:focus-within .mph:not(:focus-visible) img, .compgrid:focus-within .mph:not(:focus-visible) img { opacity: .35; filter: grayscale(.6); }
 @media (prefers-reduced-motion: reduce) { .mph img { transition: none; } }
 @media (max-width: 760px) { .mgrid { columns: 2; column-gap: 12px; } .mph { margin-bottom: 12px; } }
-#model-details .kv { margin-bottom: 96px; max-width: 760px; }
+#model-compcard .kv { margin-bottom: 40px; max-width: 760px; }
 .btns { grid-column: 1 / -1; display: flex; gap: 12px; flex-wrap: wrap; }
 .btns .more { grid-column: auto; }
 a.more { text-decoration: none; }
@@ -338,7 +338,7 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
       <a href="#work">Work</a><a href="#practice">Practice</a><a href="#about">About</a><a href="#contact">Contact</a>
     </nav>
     <nav aria-label="Model sections" id="nav-model" hidden>
-      <a href="#model-compcard">Compcard</a><a href="#model-photos">Shoots</a><a href="#model-details">Details</a><a href="#model-contact">Contact</a>
+      <a href="#model-compcard">Compcard</a><a href="#model-photos">Shoots</a><a href="#model-contact">Contact</a>
     </nav>
     <div class="mode" role="group" aria-label="Portfolio">
       <button class="ml mono" type="button" data-mode="design" aria-pressed="true" tabindex="-1" aria-hidden="true">Design</button>
@@ -462,6 +462,16 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
 
     <section id="model-compcard" aria-labelledby="model-compcard-h">
       <div class="head pad"><h2 id="model-compcard-h">Compcard</h2></div>
+      <div class="pad about-details">
+        <dl class="kv">
+          <dt class="mono">Based in</dt><dd>Bangkok, Thailand</dd>
+          <dt class="mono">Height</dt><dd>162 cm</dd>
+          <dt class="mono">Bust</dt><dd>82 cm (32")</dd>
+          <dt class="mono">Waist</dt><dd>64 cm (25")</dd>
+          <dt class="mono">Hips</dt><dd>87 cm (34")</dd>
+          <dt class="mono">Shoes</dt><dd>23.5</dd>
+        </dl>
+      </div>
       <div class="pad">
         <div class="btns compcard-actions">
           <button class="more mono" type="button" aria-expanded="false" aria-controls="compcard-body" data-what="compcard">Show compcard <span aria-hidden="true">+</span></button>
@@ -499,19 +509,6 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
       <div class="shoots-end"></div>
     </section>
 
-    <section id="model-details" aria-labelledby="model-details-h">
-      <div class="head pad"><h2 id="model-details-h">Details</h2><span class="mono muted">Measurements</span></div>
-      <div class="pad about-details">
-        <dl class="kv">
-          <dt class="mono">Based in</dt><dd>Bangkok, Thailand</dd>
-          <dt class="mono">Height</dt><dd>162 cm</dd>
-          <dt class="mono">Bust</dt><dd>82 cm (32")</dd>
-          <dt class="mono">Waist</dt><dd>64 cm (25")</dd>
-          <dt class="mono">Hips</dt><dd>87 cm (34")</dd>
-          <dt class="mono">Shoes</dt><dd>23.5</dd>
-        </dl>
-      </div>
-    </section>
     <section class="trusted pad" aria-label="Worked with">
       <span class="mono muted">Worked with</span>
       <ul><li><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:16px" loading="lazy"></li><li><img class="logo" src="images/logos/omakasen.png" alt="OMAKASEN" style="--lh:30px" loading="lazy"></li><li><img class="logo" src="images/logos/sud.png" alt="Sud.performance" style="--lh:22px" loading="lazy"></li></ul>

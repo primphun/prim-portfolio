@@ -206,11 +206,6 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .compgrid[hidden] { display: none; }
 .compgrid .mph { margin: 0; border: 1px solid var(--rule-soft); }
 @media (max-width: 600px) { .compgrid { grid-template-columns: 1fr; } }
-.soon { position: relative; overflow: hidden; background: var(--fill); }
-.soon img { display: block; width: 100%; height: auto; }
-.soon-layer { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 10px; text-align: center; background: rgba(243, 244, 242, .6); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
-.soon-title { font-size: clamp(32px, 6cqw, 84px); font-weight: 600; letter-spacing: -0.05em; line-height: 1; }
-.soon-sub { color: var(--muted); }
 .mph.single { max-width: none; margin: 0; }
 .mph.single img { width: 100%; height: auto; }
 .shoot-ph { display: grid; place-items: center; height: 160px; border: 1px solid var(--rule-soft); }
@@ -468,7 +463,7 @@ html.stamp-on, html.stamp-on * { cursor: none !important; }
       <div class="head pad"><h2 id="model-photos-h">Shoots</h2><span class="mono muted">5 shoots</span></div>
       <article class="shoot pad">
         <div class="shoot-row"><span class="mono muted">01</span><div><h3>Peucha 2027</h3><p class="mono muted shoot-meta">Nov 2026 · BONTÉ Studio</p></div><dl class="shoot-credits" aria-label="Credits"><div><dt>Photography</dt><dd><a href="https://www.instagram.com/pathomrong/" target="_blank" rel="noopener">@pathomrong</a></dd></div><div><dt>Stylist</dt><dd><a href="https://www.instagram.com/stylebyoey/" target="_blank" rel="noopener">@stylebyoey</a></dd></div><div><dt>Co-model</dt><dd><a href="https://www.instagram.com/toeibaiii_/" target="_blank" rel="noopener">@toeibaiii_</a></dd></div><div><dt>Location</dt><dd><a href="https://www.instagram.com/bontestudio.bkk/" target="_blank" rel="noopener">@bontestudio.bkk</a></dd></div></dl><div class="shoot-logos"><img class="logo" src="images/logos/peucha.png" alt="Peucha" style="--lh:16px" loading="lazy"></div></div>
-        <div class="soon" role="group" aria-label="Peucha 2027, coming soon"><img src="images/model/peucha-nov26.jpg" alt="" loading="lazy"><div class="soon-layer"><span class="soon-title">Coming soon</span><span class="mono soon-sub">Peucha 2027</span></div></div>
+        <button class="mph single" type="button" data-src="images/model/peucha-nov26.jpg" data-cap="Peucha, Nov 2026: a selection from the shoot"><img src="images/model/peucha-nov26.jpg" alt="Peucha, Nov 2026: a collage of about thirty photos from the shoot, styled in soft colours in a pastel home set with shoes" loading="lazy"></button>
       </article>
       <article class="shoot pad">
         <div class="shoot-row"><span class="mono muted">02</span><div><h3>These Socks Have Places to Go</h3><p class="mono muted shoot-meta">Sud.performance x phunnie.studio · Nov 2026 · Suan Benjakitti</p></div><dl class="shoot-credits" aria-label="Credits"><div><dt>Production</dt><dd><a href="https://www.instagram.com/merrimirth/" target="_blank" rel="noopener">@merrimirth</a></dd></div></dl><div class="shoot-logos"><img class="logo" src="images/logos/sud.png" alt="Sud.performance" style="--lh:22px" loading="lazy"><img class="logo" src="images/logos/phunnie.png" alt="phunnie.studio" style="--lh:20px" loading="lazy"></div></div>

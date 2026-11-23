@@ -273,11 +273,13 @@ a.more { text-decoration: none; }
 .certimg { display: block; width: 100%; aspect-ratio: 4 / 3; background: var(--fill); border: 1px solid var(--rule-soft); border-radius: 0; padding: 0; cursor: zoom-in; overflow: hidden; }
 .certimg img { width: 100%; height: 100%; object-fit: contain; display: block; background: #fff; }
 .certimg:hover { border-color: var(--fg); }
-dialog#lb { border: 1px solid var(--fg); background: var(--bg); color: var(--fg); padding: 16px; width: min(1100px, 94vw); max-height: 94vh; border-radius: 0; }
-dialog#lb::backdrop { background: rgba(0,0,0,.7); }
-dialog#lb img { display: block; width: 100%; max-height: 78vh; object-fit: contain; background: #fff; }
-dialog#lb img.auto { width: auto; max-width: 100%; margin: 0 auto; }
-dialog#lb .lbbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 12px; }
+dialog#lb { position: fixed; inset: 0; margin: 0; padding: 0; border: 0; width: 100vw; height: 100vh; height: 100dvh; max-width: none; max-height: none; background: #121315; color: #fff; overflow: hidden; }
+dialog#lb::backdrop { background: #121315; }
+dialog#lb img { display: block; width: 100%; height: 100%; max-width: none; max-height: none; object-fit: contain; background: transparent; cursor: zoom-out; }
+dialog#lb .lbbar { position: absolute; top: max(12px, env(safe-area-inset-top, 0px)); right: max(12px, env(safe-area-inset-right, 0px)); margin: 0; display: block; }
+dialog#lb #lbcap { display: none; }
+dialog#lb #lbclose { min-height: 44px; padding: 0 18px; background: rgba(18, 19, 21, .72); color: #fff; border: 1px solid rgba(255, 255, 255, .55); }
+dialog#lb #lbclose:hover { background: #fff; color: #121315; border-color: #fff; }
 .cert figcaption { display: flex; flex-direction: column; gap: 2px; border-top: 1px solid var(--rule); margin-top: 12px; padding-top: 10px; font-size: 16px; }
 @media (max-width: 760px) { .about { grid-template-columns: 1fr; } .portrait { max-width: 360px; } .kv { grid-template-columns: 100px 1fr; } }
 
@@ -624,10 +626,11 @@ document.addEventListener("click", e => {
   document.getElementById("lbimg").src = b.dataset.src;
   document.getElementById("lbimg").alt = b.dataset.cap;
   document.getElementById("lbcap").textContent = b.dataset.cap;
+  lb.setAttribute("aria-label", b.dataset.cap || "Image");
   lb.showModal();
 });
 document.getElementById("lbclose").onclick = () => lb.close();
-lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
+lb.addEventListener("click", () => lb.close());
 
 document.querySelectorAll(".ctog").forEach(b => b.addEventListener("click", () => {
   const dl = document.getElementById(b.getAttribute("aria-controls")), open = dl.hidden;
